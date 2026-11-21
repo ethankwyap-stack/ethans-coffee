@@ -1,0 +1,1568 @@
+/* ethan-site. Page job: SHOW (that sells). World: a coffee bar at night.
+   Look: espresso dark, cream line drawings (the latte art too).
+   Roles follow ~/design-taste/tokens.css: ground 60 / structure 30 / action 10. */
+
+:root {
+  color-scheme: dark;
+
+  /* GROUND: espresso */
+  --ground: #14100D;
+  --surface: #1D1814;
+  --surface-2: #272019;
+
+  /* STRUCTURE: cream ink, hairlines */
+  --ink: #F2E8DA;
+  --ink-soft: #B9AA97;
+  --line: #3A3026;
+
+  /* ACTION: crema. Only on things you click, plus the one headline word. */
+  --action: #E9A24D;
+  --action-hover: #F2B76B;
+  /* liquid metal buttons (Ethan, 2026-11-20; were coffee brown): black inside, a moving chrome rim */
+  --metal-black: #0B0A09;
+
+  /* SCENE: one warm lamp over the bar. Atmosphere only. */
+  --scene-glow: #C96B2C;
+
+  --font-display: ui-serif, "New York", Georgia, serif;
+  --font-body: ui-sans-serif, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+
+  --step--1: 0.875rem;
+  --step-0: 1rem;
+  --step-1: clamp(1.125rem, 1rem + 0.5vw, 1.25rem);
+  --step-2: clamp(1.75rem, 1.3rem + 2vw, 2.5rem);
+  --step-display: clamp(3rem, min(1.5rem + 7vw, 13vh), 6.5rem); /* 13vh: short laptop screens keep the street on one screen */
+
+  --gutter: 16px;
+  --radius: 14px;
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+html.in-room, html.in-room body { overflow: hidden; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, p, ul { margin: 0; }
+ul { padding: 0; list-style: none; }
+a { color: inherit; }
+img, video { display: block; max-width: 100%; }
+:focus-visible { outline: 2px solid var(--action); outline-offset: 3px; }
+
+/* ---------- top bar ---------- */
+
+.top {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 30;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 64px;
+  padding: 12px var(--gutter);
+  background: color-mix(in srgb, var(--ground) 82%, transparent);
+  backdrop-filter: blur(10px);
+}
+
+.top-name {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  text-decoration: none;
+}
+
+
+/* ---------- sections ---------- */
+
+section {
+  min-height: 100svh;
+  display: grid;
+  align-content: center;
+  padding: clamp(5rem, 12vh, 8rem) var(--gutter) 4rem;
+}
+
+.wrap { width: 100%; max-width: 1160px; margin-inline: auto; }
+
+/* ---------- the stage: one locked screen ----------
+   With JavaScript the page never scrolls. The four scenes sit on top of each other and main.js sets
+   data-at = past | here | next on each. A step forward: the old scene grows and fades (you walk past it),
+   the new one settles from slightly small. Without JavaScript none of this applies: a normal page. */
+
+.js, .js body { height: 100%; overflow: hidden; overscroll-behavior: none; }
+.js .stage { position: fixed; inset: 0; height: 100dvh; overflow: clip; } /* clip, not hidden: a typed #register made the browser scroll the stage sideways to the scene mid-pan */
+.js [data-scene] {
+  position: absolute;
+  inset: 0;
+  min-height: 0;
+  display: flex;               /* not grid + centre: a tall scene must scroll from its top, never lose it */
+  flex-direction: column;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  padding-bottom: 5rem;        /* room for the corner coffee button */
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.96);
+  transition: opacity 0.6s ease-out, transform 0.9s var(--ease-out), visibility 0s linear 0.9s;
+}
+.js [data-scene]::-webkit-scrollbar { display: none; }
+.js [data-scene] > .wrap { margin-block: auto; }
+.js [data-scene][data-at="past"] { transform: scale(1.08); }
+.js [data-scene][data-at="here"],
+.js .stage:not(.ready) > [data-scene]:first-child { /* before main.js runs: the street shows */
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: opacity 0.6s ease-out 0.15s, transform 0.9s var(--ease-out), visibility 0s;
+}
+.js .stage.instant [data-scene] { transition: none; }
+
+/* LinkedIn / GitHub / Instagram (PLAN-links.md): cream icons, whiter on hover (never orange), 44px tap boxes */
+.links { display: flex; justify-content: center; }
+.links a { display: grid; place-items: center; width: 44px; height: 44px; color: var(--ink); transition: color 0.15s; }
+.links a:hover { color: #fff; }
+.links svg { width: 22px; height: 22px; }
+
+/* the corner: the icons, on the inside and the counter only (not the street: Ethan's ask; the register has its own).
+   The small coffee button that sat here is gone (Ethan, 2026-11-19). right: the glyphs line up with the gutter. */
+.corner { display: none; }
+.js .corner {
+  position: fixed;
+  z-index: 15;
+  right: calc(var(--gutter) - 11px);
+  bottom: calc(var(--gutter) - 11px);
+  display: block;
+  transition: opacity 0.3s, translate 0.3s var(--ease-out);
+}
+.js:not([data-scene="inside"], [data-scene="bar"]) .corner-links { display: none; }
+.js[data-scene="register"] .corner {
+  opacity: 0;
+  translate: 0 12px;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+/* ---------- type ---------- */
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 1rem;
+}
+
+h1, h2, h3 { font-family: var(--font-display); font-weight: 500; }
+h1 { font-size: var(--step-display); line-height: 0.95; letter-spacing: -0.02em; }
+h2 { font-size: var(--step-2); line-height: 1.1; }
+h3 { font-size: var(--step-1); line-height: 1.2; }
+
+/* read by screen readers, not shown */
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+.lede { font-size: var(--step-1); color: var(--ink-soft); max-width: 36ch; margin-top: 1.5rem; }
+
+.button {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 14px 24px;
+  border-radius: 999px;
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.15s var(--ease-out);
+}
+.button:active { transform: scale(0.97); }
+
+/* Liquid metal (Ethan, 2026-11-20, after the 21st.dev "liquid metal button"; his recording is
+   assets/inbox/liquid-metal-ref-2026-11-20.mov): "Let's get coffee!", every "Back to the bar" and the tab row on top of a
+   room are BLACK inside with a chrome rim whose highlights flow round. CSS only, no WebGL: ::before = the chrome, a
+   conic gradient turned by ONE registered angle (--metal); ::after = two bright glints turning the other way, slower,
+   screened on top, so the highlights meet and part like liquid. Both are cut to a 2px ring by a mask. Reduced
+   motion: the rim stays, still. bits.mjs LM1-LM3. */
+@property --metal { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+.button, .back, .room-tabs {
+  position: relative; isolation: isolate;
+  border: 0; background: var(--metal-black);
+  box-shadow: 0 10px 24px -10px #000E, inset 0 1px 0 #FFFFFF1F, inset 0 -1px 0 #0000008C;
+}
+:is(.button, .back, .room-tabs)::before, :is(.button, .back, .room-tabs)::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; padding: 2px; border-radius: inherit; pointer-events: none;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+:is(.button, .back, .room-tabs)::before {
+  background: conic-gradient(from var(--metal), #70717A, #D9DAE0 8%, #FFFFFF 11%, #8D8E98 15%, #34343B 24%, #9A9BA6 34%,
+    #F4F4F8 40%, #B9CCFF 42%, #7A7B86 47%, #2B2B31 58%, #8B8C96 68%, #FFF4E0 76%, #FFC88E 78%, #A3A4AE 82%, #46464E 90%, #70717A);
+  transition: filter 0.2s;
+}
+:is(.button, .back, .room-tabs)::after {
+  --metal: 180deg;
+  background: conic-gradient(from calc(0deg - var(--metal)), #FFF0 0 20%, #FFFFFFD9 24%, #FFF0 28% 66%, #E6EEFFB3 70%, #FFF0 74%);
+  mix-blend-mode: screen;
+}
+:is(.button, .back, .room-tabs):hover::before { filter: brightness(1.3); }
+@media (prefers-reduced-motion: no-preference) {
+  :is(.button, .back, .room-tabs)::before { animation: metal-flow 3.4s linear infinite; }
+  :is(.button, .back, .room-tabs)::after { animation: metal-glint 5.5s linear infinite; }
+}
+@keyframes metal-flow { to { --metal: 360deg; } }
+@keyframes metal-glint { from { --metal: 180deg; } to { --metal: 540deg; } }
+/* Click Spark (main.js): the canvas over the page while the sparks fly; it never takes a click */
+canvas.sparks { position: fixed; inset: 0; z-index: 60; width: 100%; height: 100%; pointer-events: none; }
+
+
+/* ---------- 1. the street (outside the shop) ---------- */
+
+/* the stone shop front with the arched wooden door (assets/art/shopfront.mjs). The box keeps the drawing's exact
+   shape, so main.js can work out where the machine behind the door is from the box alone. */
+/* The house alone is the centre piece (Ethan's ask, 2026-11-17): as tall as the screen allows after the top bar
+   and the cue under it (--around). A scene taller than the screen eats the first scroll (its own text scrolls
+   first): the street must fit. */
+.js #street { --around: 9rem; padding-block: 4.75rem 0.75rem; }
+.storefront { position: relative; aspect-ratio: 1000 / 1120; width: min(100%, (100dvh - var(--around, 12rem)) * 1000 / 1120); margin-inline: auto; }
+.storefront > svg { display: block; width: 100%; height: 100%; }
+
+/* the one word on the street: a small cue under the house, with a drop falling under it like a slow drip */
+.step-cue {
+  position: relative;
+  display: block;
+  width: fit-content;
+  margin: 0.6rem auto 0;
+  padding: 6px 0 22px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink-soft);
+}
+.step-cue:hover, .step-cue:focus-visible { color: var(--action); }
+/* inside + counter (Ethan 2026-11-20): the cue takes the bottom of the scene's 5rem padding (so nothing grows or
+   scrolls); on phones it sits higher, above the corner icons it would otherwise cross. */
+.js :is(#inside, #bar) { padding-bottom: 1.6rem; }
+.js :is(#inside, #bar) > .step-cue { flex: none; margin-top: 0.4rem; }
+@media (max-width: 600px) { .js :is(#inside, #bar) { padding-bottom: 3.75rem; } }
+.step-cue::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 2px;
+  width: 1px;
+  height: 14px;
+  translate: -50% 0;
+  transform-origin: top;
+  background: linear-gradient(currentColor, transparent);
+}
+
+/* warm light from inside, showing through the crack where the two leaves meet. It breathes, calling you in. */
+.doors .seam {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 3%;
+  bottom: 1%;
+  width: 2px;
+  translate: -50% 0;
+  border-radius: 2px;
+  background: linear-gradient(transparent, #F4B66A 12%, #E0924A 88%, transparent);
+  box-shadow: 0 0 10px 2px rgb(224 146 74 / 0.55);
+  opacity: 0.6;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+#street[data-at="past"] .doors .seam { opacity: 0; animation: none; }
+
+/* the two door leaves: HTML boxes over the drawing (shopfront.mjs places them), so they can turn in real 3D.
+   Walking in they swing inward on their outer hinges at once. Walking out they wait for the camera to pull
+   back (0.85 s), then swing shut. The dark layer is the leaf turning away from the street light. */
+.doors { position: absolute; display: flex; perspective: 1100px; }
+.leaf { position: relative; flex: 1; transition: transform 0.8s cubic-bezier(.45, .05, .25, 1) 0.85s; }
+.leaf-l { transform-origin: 0 50%; }
+.leaf-r { transform-origin: 100% 50%; }
+.leaf svg { display: block; width: 100%; height: 100%; }
+.leaf::after { content: ""; position: absolute; inset: 0; background: #0d0907; opacity: 0; transition: opacity 0.8s 0.85s; }
+.shop .spill { opacity: 0.3; transition: opacity 0.8s 0.85s; }
+#street[data-at="past"] .leaf, #street[data-at="past"] .leaf::after, #street[data-at="past"] .shop .spill { transition-delay: 0s; }
+#street[data-at="past"] .leaf-l { transform: rotateY(76deg); }
+#street[data-at="past"] .leaf-r { transform: rotateY(-76deg); }
+#street[data-at="past"] .leaf::after { opacity: 0.5; }
+#street[data-at="past"] .shop .spill { opacity: 1; }
+.stage.instant .leaf, .stage.instant .leaf::after, .stage.instant .shop .spill { transition: none; }
+/* phones: room at the bottom for the rail and the corner coffee button */
+@media (max-width: 859px) {
+  .js [data-scene] { padding-top: 5rem; }
+  .js #street { --around: 13rem; padding-bottom: 5rem; }
+}
+
+/* the shop front draws itself when the page opens: lines one after another, then the words, the wood and the
+   machine fade in. Dash "1 3" with offset 1.02, not "1" with offset 1: round caps paint a dot on a zero-length dash. */
+@media (prefers-reduced-motion: no-preference) {
+  .js .storefront [pathLength] {
+    stroke-dasharray: 1 3;
+    stroke-dashoffset: 1.02;
+    animation: draw 1.2s cubic-bezier(.4, 0, .2, 1) forwards;
+    animation-delay: calc(var(--i) * 6ms + 150ms);
+  }
+  .js .shop text, .js .shop .shop-machine, .js .storefront .leaf .wood { animation: appear 0.8s ease-out 0.8s both; }
+  /* once the house has drawn itself: the cue shows and drips, the door crack breathes, the lanterns flicker.
+     Each lantern has its own length (--flick in shopfront.mjs), so the two never fall into step. */
+  /* cue-jump (Ethan 2026-11-20, his motion.dev "bounce easing" video): no scroll for ~3 s = a big hop that lands with
+     a bounce, every 3 s. It moves `transform`, the bob moves `translate`, so the two add up instead of fighting. */
+  .js #street .step-cue { animation: appear 0.8s ease-out 1.6s both, cue-bob 1.8s ease-in-out 2.4s infinite, cue-jump 3s 2.4s infinite; }
+  .js #street .step-cue::after { animation: drip 2.4s cubic-bezier(.5, 0, .75, 0) 2.4s infinite both; }
+  /* the same cue under the inside room and the counter: it starts when its scene arrives, not at page load */
+  .js :is(#inside, #bar)[data-at="here"] > .step-cue { animation: appear 0.6s ease-out 0.9s both, cue-bob 1.8s ease-in-out 1.5s infinite, cue-jump 3s 1.5s infinite; }
+  .js :is(#inside, #bar)[data-at="here"] > .step-cue::after { animation: drip 2.4s cubic-bezier(.5, 0, .75, 0) 1.5s infinite both; }
+  .js .doors .seam { animation: seam-breathe 3.6s ease-in-out 1.6s infinite alternate both; }
+  .js .lamp-glow { animation: lamp-flicker var(--flick, 5s) linear var(--off, 0s) infinite; }
+  /* the pendant lamp inside: its bulb glow, the pool on the table and the light on the wall flicker as one flame */
+  .js :is(.table-top, .wall-back)::after { animation: lamp-flicker 4.9s linear -2.3s infinite; }
+  /* the inside's words and the book wait until the street has faded, so they never sit on top of it mid-walk */
+  .js #inside[data-at="here"] :is(.eyebrow, h2, .book) { animation: appear 0.5s ease-out 1.1s both; }
+
+  /* the walk in: main.js measures both machines and sets these. Street → inside: the street grows around the
+     machine behind the door until it is the big one; the inside starts shrunk onto it and grows to normal.
+     Both use the same move, so they stay lined up. */
+  .js #street { transform-origin: var(--zoom-origin, 50% 50%); }
+  .js #inside { transform-origin: var(--zoom-origin, 50% 50%); }
+  .js #street[data-at="past"] { transform: var(--zoom, scale(1.08)); }
+  .js #inside[data-at="next"] { transform: var(--zoom, scale(0.96)); }
+  /* stepping in from the street (main.js sets data-door="in"): the doors swing first (0.5 s), then the camera
+     moves. The street and the scene arriving wait the same 0.5 s, so the machines stay lined up. */
+  .js .stage[data-door="in"] > #street[data-at="past"] {
+    transition: opacity 0.6s ease-out 0.8s, transform 0.9s var(--ease-out) 0.5s, visibility 0s linear 1.4s;
+  }
+  .js .stage[data-door="in"] > [data-scene][data-at="here"] {
+    /* visible only from 0.5 s: it is still see-through until 0.6 s anyway, and drawing the 3D room during the door
+       swing halved the frame rate, so the doors lagged (verify/zoom.mjs "doors open before the camera") */
+    transition: opacity 0.6s ease-out 0.6s, transform 0.9s var(--ease-out) 0.5s, visibility 0s linear 0.5s;
+  }
+
+  /* Inside ↔ Counter (main.js sets data-move="dolly"): you walk up to the counter, so the inside grows past you
+     from low down, where the counter is, and the counter comes up from further away. */
+  .js .stage[data-move="dolly"] > #inside { transform-origin: 50% 85%; }
+  .js .stage[data-move="dolly"] > #inside[data-at="past"] { transform: scale(1.4); }
+  .js #bar[data-at="next"] { transform: scale(0.82); }
+  /* Counter ↔ Register (data-move="pan"): the one sideways move. The camera pans right along the counter: the
+     counter slides off to the left, the register slides in from the right, both fully there the whole way. */
+  .js .stage[data-move="pan"]:not(.instant) > :is(#bar, #register) {
+    transition: transform 0.9s cubic-bezier(.55, .05, .25, 1), opacity 0.2s, visibility 0s linear 0.9s;
+  }
+  .js .stage[data-move="pan"]:not(.instant) > :is(#bar, #register)[data-at="here"] { transition-delay: 0s; }
+  .js .stage[data-move="pan"] > #bar[data-at="past"] { transform: translateX(-100%); opacity: 1; }
+  .js .stage[data-move="pan"] > #register[data-at="next"] { transform: translateX(100%); opacity: 1; }
+}
+@keyframes appear { from { opacity: 0; } }
+@keyframes cue-bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 7px; } }
+/* rest, hop up (slowing at the top), fall (speeding up), then two smaller bounces: each key has its own easing on
+   purpose here, a bounce really does stop at the floor and at each top */
+@keyframes cue-jump {
+  0%, 55% { transform: translateY(0); animation-timing-function: cubic-bezier(.2, .6, .35, 1); }
+  70% { transform: translateY(-30px); animation-timing-function: cubic-bezier(.55, 0, .85, .4); }
+  84% { transform: translateY(0); animation-timing-function: cubic-bezier(.2, .6, .35, 1); }
+  90% { transform: translateY(-9px); animation-timing-function: cubic-bezier(.55, 0, .85, .4); }
+  95% { transform: translateY(0); animation-timing-function: cubic-bezier(.2, .6, .35, 1); }
+  97.5% { transform: translateY(-2.5px); animation-timing-function: cubic-bezier(.55, 0, .85, .4); }
+  100% { transform: translateY(0); }
+}
+@keyframes drip { 0% { transform: scaleY(0); opacity: 1; } 45% { transform: scaleY(1); opacity: 1; } 100% { transform: translateY(10px) scaleY(0.2); opacity: 0; } }
+/* own names: @keyframes names are global, and a clash makes the later one win (the old Doom orb once took "flicker") */
+@keyframes seam-breathe { from { opacity: 0.25; } to { opacity: 0.95; } }
+/* a flame: mostly steady, small uneven dips, never a smooth loop */
+@keyframes lamp-flicker {
+  0%, 100% { opacity: 1; } 7% { opacity: 0.86; } 10% { opacity: 0.97; } 29% { opacity: 0.92; } 31% { opacity: 0.74; }
+  34% { opacity: 0.95; } 56% { opacity: 1; } 69% { opacity: 0.87; } 72% { opacity: 0.98; } 88% { opacity: 0.83; } 91% { opacity: 0.96; }
+}
+
+/* ---------- 2. inside: a real 3D room (PLAN-bookshelf.md) ----------
+   .room-pan = the camera's frame (fills the rest of the screen under the heading). .shop-room = the camera
+   (perspective; its origin is the one vanishing point). .world = the room, in room units --u.
+   World: 100u wide, 60u tall, 100u deep; the eye is 30u above the floor. z runs away from you (translateZ < 0).
+   Right: a table (x 34..98, top 15u high, z 6..26) with the machine (x 66..96, z 17) and the open book (x 36..65, z 8)
+   on it, a lamp over the machine. Left: a round rug on the floor (x 2..34) with the bookcase on it. --look = the world x
+   the camera faces: 50 on laptops (the whole room); on phones one stop at a time: 81 machine, 50.5 book, 18 rug + bookcase. */
+
+.inside { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.js #inside > .wrap { flex: 1; min-height: 0; max-width: none; }
+.room-pan { container-type: size; position: relative; width: calc(100% + 2 * var(--gutter)); margin-inline: calc(-1 * var(--gutter));
+  height: min(75vh, 60vw); margin-top: clamp(0.5rem, 2vh, 1.5rem); overflow: hidden;
+  /* the frame has no hard top or bottom edge: the room fades into the dark (mask, not a dark overlay) */
+  mask-image: linear-gradient(transparent, #000 9%, #000 91%, transparent); }
+.js #inside .room-pan { flex: 1; height: auto; }
+.shop-room {
+  --u: min(1.12cqw, 2.25cqh);
+  --look: 50;
+  position: absolute; inset: 0;
+  perspective: calc(var(--u) * 100);
+  perspective-origin: 50% calc(50% - var(--u) * 6.5);
+}
+.world { pointer-events: none; /* its own flat box sits in FRONT of the 3D room and would catch every click; only the books take them */
+  position: absolute; left: 50%; top: calc(50% - var(--u) * 6.5);
+  width: calc(var(--u) * 100); height: calc(var(--u) * 60);
+  translate: calc(var(--u) * var(--look) * -1) calc(var(--u) * -30);
+  transform-style: preserve-3d;
+  text-align: left;
+}
+/* Only the camera's turn glides (a swipe on a phone), never the room's size: --look is a registered number, so it can
+   transition on its own. Transitioning `translate` instead also animated the one-time size change at load, and
+   main.js measured the machine mid-slide, so the walk in started 70 to 230 px off. */
+@property --look { syntax: "<number>"; inherits: true; initial-value: 50; }
+@media (prefers-reduced-motion: no-preference) { .shop-room { transition: --look 0.9s var(--ease-out); } }
+.world > * { position: absolute; }
+.plane { box-sizing: border-box; border: 2px solid #F2E8DA66; }
+/* the room's box: walls, floor and ceiling, their edges meeting at the one vanishing point.
+   Big planes are ONE flat colour; the details are small pieces on top (a panel line, the floorboards, a glow).
+   A gradient over a whole plane made the browser paint every pixel of it again when a scene move began, so
+   the move's first frame came 150 ms+ late without a graphics chip (camera.mjs D1, stage.mjs 3). A flat colour
+   costs almost nothing: the browser fills it without painting it. */
+.wall-back { left: 0; bottom: 0; width: calc(var(--u) * 100); height: calc(var(--u) * 60); transform: translateZ(calc(var(--u) * -100)); background: #1A1410; }
+.wall-left, .wall-right { bottom: 0; width: calc(var(--u) * 100); height: calc(var(--u) * 60); background: #18120F; }
+/* a low wood panel round the room: a faint lower band and its top rail */
+:is(.wall-back, .wall-left, .wall-right)::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: calc(var(--u) * 16);
+  background: #F2E8DA08; border-top: 2px solid #F2E8DA55; }
+/* the lamp's warm light on the back wall, behind the machine */
+.wall-back::after { content: ""; position: absolute; left: calc(var(--u) * 52); bottom: calc(var(--u) * 6); width: calc(var(--u) * 42); height: calc(var(--u) * 40);
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--scene-glow) 30%, transparent), transparent); }
+/* Ethan's own book, Life Stories, standing on a walnut book stand on the table between the open book and the machine
+   (PLAN-book-stand.md). It hung framed on the back wall before, 100u deep = half size; at 10u deep it shows nearly
+   twice as big for the same width. Clickable (pointer-events: .world has none). The ledge (::after) holds its foot. */
+.book-stand { pointer-events: auto; left: calc(var(--u) * 61); bottom: calc(var(--u) * 15); width: calc(var(--u) * 14);
+  padding: 0 0 calc(var(--u) * 0.8); border: 0; background: none; cursor: pointer;
+  transform-origin: 50% 100%; transform: translateZ(calc(var(--u) * -10)) rotateX(-6deg); transition: transform 0.25s var(--ease-out); }
+.book-stand img { display: block; width: 100%; height: auto; border-radius: 1px; outline: 2px solid #F2E8DA66; outline-offset: -1px;
+  box-shadow: 0 calc(var(--u) * 0.6) calc(var(--u) * 1.6) rgb(0 0 0 / 0.6); }
+.book-stand::after { content: ""; position: absolute; left: calc(var(--u) * -0.7); right: calc(var(--u) * -0.7); bottom: 0; height: calc(var(--u) * 1.5);
+  box-sizing: border-box; border: 2px solid #F2E8DA66; border-radius: 2px; background: #5A381F; }
+.book-stand:hover, .book-stand:focus-visible, .book-stand[aria-expanded="true"] { transform: translateZ(calc(var(--u) * -9)) rotateX(-6deg); }
+.book-stand:is(:hover, :focus-visible, [aria-expanded="true"]) img { outline-color: var(--action); }
+.wall-left { left: 0; transform-origin: 0 50%; transform: rotateY(90deg); }
+.wall-right { right: 0; transform-origin: 100% 50%; transform: rotateY(-90deg); }
+.floor { left: 0; bottom: 0; width: calc(var(--u) * 100); height: calc(var(--u) * 100); transform-origin: 50% 100%; transform: rotateX(90deg); background: #15100D; }
+.boards { position: absolute; inset: 0; width: 100%; height: 100%; }
+.ceiling { left: 0; top: 0; width: calc(var(--u) * 100); height: calc(var(--u) * 100); transform-origin: 50% 0; transform: rotateX(-90deg); background: #110D0A; }
+/* the round rug, lying in the floor's own plane: rings of cream on a deep terracotta */
+.rug { position: absolute; left: calc(var(--u) * 2); top: calc(var(--u) * 42); width: calc(var(--u) * 32); aspect-ratio: 1; border-radius: 50%;
+  border: 2px solid #F2E8DAAA; box-shadow: inset 0 0 0 calc(var(--u) * 1.6) #3A2418, inset 0 0 0 calc(var(--u) * 1.6 + 2px) #F2E8DA66;
+  background: repeating-radial-gradient(circle, #4A2A1C 0 calc(var(--u) * 2.6), #F2E8DA33 calc(var(--u) * 2.6) calc(var(--u) * 2.6 + 2px), #4A2A1C calc(var(--u) * 2.6 + 2px) calc(var(--u) * 3.4)); }
+/* the table: wood tint + cream edges, like the door leaves. A warm pool of lamp light on its top. */
+.table-top { left: calc(var(--u) * 34); bottom: calc(var(--u) * 15); width: calc(var(--u) * 64); height: calc(var(--u) * 20);
+  transform-origin: 50% 100%; transform: translateZ(calc(var(--u) * -6)) rotateX(90deg); background: #5A381F; }
+/* the warm pool of lamp light on the table top, under the machine */
+.table-top::after { content: ""; position: absolute; left: calc(var(--u) * 24); top: calc(var(--u) * 2); width: calc(var(--u) * 38); height: calc(var(--u) * 16);
+  background: radial-gradient(closest-side, #F2B76B40, transparent); }
+.table-front { left: calc(var(--u) * 34); bottom: calc(var(--u) * 12); width: calc(var(--u) * 64); height: calc(var(--u) * 3);
+  transform: translateZ(calc(var(--u) * -6)); background: #4A2E1C; }
+.table-side { left: calc(var(--u) * 34); bottom: calc(var(--u) * 12); width: calc(var(--u) * 20); height: calc(var(--u) * 3);
+  transform-origin: 0 50%; transform: translateZ(calc(var(--u) * -6)) rotateY(90deg); background: #3A2416; }
+.leg { bottom: 0; width: calc(var(--u) * 1.6); height: calc(var(--u) * 12); background: #42281A; }
+.leg-fl { left: calc(var(--u) * 35); transform: translateZ(calc(var(--u) * -7)); }
+.leg-fr { left: calc(var(--u) * 96.2); transform: translateZ(calc(var(--u) * -7)); }
+.leg-bl { left: calc(var(--u) * 35); transform: translateZ(calc(var(--u) * -25)); }
+/* the machine stands on the table, the lamp hangs over it */
+#inside #machine.drawing { left: calc(var(--u) * 74.5); bottom: calc(var(--u) * 15); width: calc(var(--u) * 24); margin: 0;
+  transform: translateZ(calc(var(--u) * -17)); }
+.lamp { left: calc(var(--u) * 82.5); top: calc(var(--u) * 6); width: calc(var(--u) * 8); height: calc(var(--u) * 13); transform: translateZ(calc(var(--u) * -17)); }
+.lamp svg { display: block; width: 100%; height: 100%; overflow: visible; }
+
+/* the open book lies on the table, left of the machine, tipped back toward you so it stays readable */
+.book { container: book / inline-size; position: relative; width: min(290px, 80vw); margin: 0; color: var(--ink); }
+.world > .book { position: absolute; left: calc(var(--u) * 34.5); bottom: calc(var(--u) * 15); width: calc(var(--u) * 26);
+  transform-origin: 50% 100%; transform: translateZ(calc(var(--u) * -8)) rotateX(18deg); }
+/* phones: one stop at a time (rug, book, machine); a sideways swipe moves the camera to the next (main.js) */
+@media (max-width: 600px) {
+  .shop-room { --u: 2.9cqw; --look: 78.6; }
+  .shop-room[data-view="book"] { --look: 47.5; }
+  .shop-room[data-view="shelf"] { --look: 18; }
+}
+/* ---- the bookcase on the rug (PLAN-bookshelf.md Phase B). main.js buildShelf() sizes it to the books it holds:
+   every part gets its box in room units (--bx, --by from the case's front bottom left, --bw, --bh), set inline.
+   The case stands on the rug, its front 38u deep. Walnut frame with cream edges like the table; the books are in
+   their real colours (Ethan's ask). Each book is a <button>: the spine is the button, its top and sides are <i>s. */
+.case { left: calc(var(--u) * var(--bx)); bottom: 0; width: calc(var(--u) * var(--bw)); height: calc(var(--u) * var(--bh));
+  transform: translateZ(calc(var(--u) * -38)); transform-style: preserve-3d; }
+.case > * { position: absolute; left: calc(var(--u) * var(--bx)); bottom: calc(var(--u) * var(--by)); width: calc(var(--u) * var(--bw));
+  height: calc(var(--u) * var(--bh)); }
+.c-back { transform: translateZ(calc(var(--u) * -8)); background: #22160F; }
+.c-side { background: #3A2416; }
+.c-left { transform-origin: 0 50%; transform: rotateY(90deg); }
+.c-right { transform-origin: 100% 50%; transform: rotateY(-90deg); }
+.c-face { background: #4A2E1C; }
+.c-board { transform-origin: 50% 100%; transform: rotateX(90deg); background: #5A381F; }
+/* a book: the spine faces you, set back a little from the shelf's front edge */
+.shelf-book { --d: 7; pointer-events: auto; padding: calc(var(--u) * 0.7) 0; border: 0; border-radius: 0; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; justify-content: space-between; overflow: visible;
+  background: var(--spine); color: var(--ink-1); font: inherit; font-size: calc(var(--u) * 0.95 * var(--fit, 1)); line-height: 1.05;
+  transform-origin: 50% 100%; transform: translateZ(calc(var(--u) * -0.6)); transform-style: preserve-3d;
+  /* a soft roll across the spine (a small piece, so no repaint cost) */
+  background-image: linear-gradient(90deg, rgb(0 0 0 / 0.28), transparent 16%, rgb(255 255 255 / 0.1) 38%, transparent 62%, rgb(0 0 0 / 0.32)); }
+.shelf-book > span { writing-mode: vertical-rl; text-align: center; overflow: hidden; pointer-events: none; }
+.b-title { max-height: 74%; max-width: 100%; }
+.b-author { max-height: 24%; font-size: 0.62em; color: var(--ink-2, var(--ink-1)); letter-spacing: 0.02em; }
+.t-serif { font-family: var(--font-display); }
+.t-sans { font-family: var(--font-body); }
+.t-bold .b-title { font-weight: 800; }
+.t-light .b-title { font-weight: 300; letter-spacing: 0.08em; }
+.t-caps > span { text-transform: uppercase; }
+.t-caps .b-title { font-size: 0.86em; letter-spacing: 0.04em; }
+/* the top (page edges between the two boards) and the two sides (the cover boards), going back --d units */
+.shelf-book > i { position: absolute; backface-visibility: hidden; pointer-events: none; }
+.b-top { left: 0; bottom: 100%; width: 100%; height: calc(var(--u) * var(--d) * var(--fit, 1)); transform-origin: 50% 100%; transform: rotateX(90deg);
+  background: linear-gradient(90deg, var(--spine) 0 9%, #E8DCC4 9% 91%, var(--spine) 91%); }
+.b-side { top: 0; width: calc(var(--u) * var(--d) * var(--fit, 1)); height: 100%; background: color-mix(in srgb, var(--spine) 72%, #000); }
+.b-r { left: 100%; transform-origin: 0 50%; transform: rotateY(90deg); }
+.b-l { right: 100%; transform-origin: 100% 50%; transform: rotateY(-90deg); }
+/* hover: pulled forward a little. Picked: pulled out and tipped toward you from its foot. */
+.shelf-book:hover, .shelf-book:focus-visible { transform: translateZ(calc(var(--u) * 0.6)); }
+.shelf-book[aria-expanded="true"] { transform: translateZ(calc(var(--u) * 1.8)) rotateX(-16deg); }
+.shelf-book:focus-visible { outline: 2px solid var(--action); outline-offset: 2px; }
+@media (prefers-reduced-motion: no-preference) {
+  .shelf-book { transition: transform 0.5s var(--ease-out); }
+  /* the first visit's cue (main.js onArrive): the first book tips out a little and settles back, once */
+  .shelf-book.nudge { animation: book-nudge 1.3s ease-in-out 2.2s 1; }
+}
+@keyframes book-nudge {
+  0%, 100% { transform: translateZ(calc(var(--u) * -0.6)); }
+  40% { transform: translateZ(calc(var(--u) * 1)) rotateX(-10deg); }
+  70% { transform: translateZ(calc(var(--u) * 0.2)) rotateX(-2deg); }
+}
+/* the card for the picked book: flat (not in the 3D room), placed by main.js beside the case */
+.inside { position: relative; }
+.shelf-card { position: absolute; z-index: 2; display: grid; grid-template-columns: 4.2rem 1fr; gap: 0.8rem; align-items: center;
+  width: 15rem; padding: 0.7rem; text-align: left; background: #1E1712; border: 1px solid #F2E8DA33; border-radius: 10px;
+  box-shadow: 0 18px 40px rgb(0 0 0 / 0.55); }
+.shelf-card[hidden] { display: none; }
+.shelf-card-cover { display: block; width: 100%; height: auto; border-radius: 2px; box-shadow: 0 4px 12px rgb(0 0 0 / 0.5); }
+.shelf-card-words { display: grid; gap: 0.3rem; }
+.shelf-card-label { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+.shelf-card-title { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; line-height: 1.15; }
+.shelf-card-author { font-size: 0.85rem; color: var(--ink-soft); }
+.shelf-card-note { margin: 0.2rem 0 0; font-size: 0.85rem; line-height: 1.35; }
+.shelf-card-link { justify-self: start; font-size: 0.85rem; color: var(--action); }
+.shelf-card-note[hidden], .shelf-card-link[hidden] { display: none; }
+.shelf-card:has(.shelf-card-note:not([hidden])) { width: 18rem; }
+/* no JavaScript: Ethan's own book as a plain line under the list */
+.wrote-line { margin: 1rem auto 0; text-align: center; color: var(--ink-soft); }
+.wrote-line a { color: var(--action); }
+.js .wrote-line { display: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .shelf-card { transition: opacity 0.3s ease-out, translate 0.3s var(--ease-out); }
+  @starting-style { .shelf-card { opacity: 0; translate: 0 8px; } }
+}
+/* no JavaScript: the books as a plain list under the room */
+.shelf-list { list-style: none; margin: 1rem auto 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 0.4rem 1.5rem; max-width: 44rem; text-align: left; }
+.shelf-list cite { font-family: var(--font-display); font-style: italic; }
+.shelf-list span { color: var(--ink-soft); font-size: 0.9em; }
+.js .shelf-list { display: none; }
+
+.book-art { display: block; width: 100%; height: auto; }
+.book-cover { fill: #3A2418; opacity: 0.9; }
+.book-page { fill: #2A201A; }
+/* left page: the label, then the real cover centred under it. Right page: title and author. */
+/* The words on the pages are part of the drawing: they scale with the book (5.5cqi = 16px on a 290px book), so
+   the same lines wrap the same way at every size and the book can sit small or big in the 3D room. */
+.book figcaption { font-size: 5.5cqi; }
+.book-label, .book-cover-img, .book-words { position: absolute; text-align: left; line-height: 1.15; }
+.book-label { left: 10%; top: 19%; width: 34%; font-family: var(--font-mono); font-size: 0.6em; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+/* placed in book widths (cqi), not %, so it stays on the left page even when the words below make the book taller */
+.book-cover-img { left: 26.5%; top: 23.1cqi; height: 35cqi; width: auto; translate: -50% 0; border-radius: 2px; box-shadow: 0 4px 14px rgb(0 0 0 / 0.5); }
+.book-words { left: 56%; top: 20%; width: 36%; display: grid; gap: 0.45em; }
+.book-title { font-family: var(--font-display); font-style: italic; font-size: 1em; }
+.book-author { font-size: 0.75em; color: var(--ink-soft); }
+/* the quote, under the author on the right page */
+.book-quote { margin: 0.35em 0 0; font-family: var(--font-display); font-style: italic; font-size: 0.6em; line-height: 1.3; color: var(--ink-soft); }
+/* big text (the reader's own setting, or 200%): the words go back to the reader's size, leave the pages and flow
+   under the drawing, where they have room to grow (the cover stays on the left page). A CONTAINER query in em
+   (inspection 5): bigger text makes the book count as narrower. 12em = 192px at normal text, so no book in the
+   room switches unless the text is big. */
+@container book (max-width: 12em) {
+  .book figcaption { font-size: 1rem; }
+  .book-label, .book-words { position: static; width: auto; padding-inline: 4%; }
+  .book-label { display: block; margin: 0.6em 0 0.4em; }
+  .book-quote { font-size: 0.8em; }
+}
+#inside {
+  overflow-x: clip;
+  background: radial-gradient(ellipse 55% 50% at 50% 40%,
+    color-mix(in srgb, var(--scene-glow) 20%, transparent) 0%, transparent 70%);
+}
+
+#street {
+  overflow-x: clip;
+  /* the warm glow sits behind the house, a little above its middle (the lanterns and the door) */
+  background: radial-gradient(circle at 50% 46%,
+    color-mix(in srgb, var(--scene-glow) 30%, transparent) 0%,
+    transparent 55%);
+}
+
+@media (min-width: 860px) {
+  /* the drawing runs off the right edge of the section */
+  .drawing { margin-right: clamp(-120px, -7vw, 0px); }
+}
+
+.drawing svg, .drawing img { width: 100%; height: auto; display: block; }
+
+/* the navy machine (assets/art/machine.mjs, PLAN-machine.md). Whole and still by default (no JS, reduced
+   motion). main.js sets data-m on the first arrival: "draw" = the lines draw, then the shot; "whole" = walked
+   in from the street (you already saw it through the door), so just the shot. --t0 = when the shot starts. */
+.mc-coffee { transform-box: fill-box; transform-origin: 50% 100%; }
+.mc-paddle { transform-box: view-box; }
+.mc-needle { transform-box: view-box; transform-origin: 166px 258px; }
+@media (prefers-reduced-motion: no-preference) {
+  #machine[data-m] { --t0: 0.4s; }
+  #machine[data-m="draw"] { --t0: 1.3s; }
+  /* tag selectors, not [pathLength]: Chrome missed the restyle when only the ancestor's attribute changed */
+  .js #machine[data-m="draw"] .mc-art :is(path, rect, circle):not(.mc-fx, .mc-lamp) {
+    stroke-dasharray: 1 3; stroke-dashoffset: 1.02; fill-opacity: 0;
+    animation: draw .6s cubic-bezier(.4, 0, .2, 1) forwards, ink .5s ease-out forwards;
+    animation-delay: calc(var(--i) * 6ms), calc(var(--i) * 6ms + 400ms);
+  }
+  /* the glass waits empty until the shot fills it */
+  .js #machine .mc-coffee { transform: scaleY(0); }
+  .js #machine .mc-crema { opacity: 0; }
+  .js #machine[data-m] .mc-lamp { animation: mc-lamp 3.6s ease-in-out var(--t0) both; }
+  .js #machine[data-m] .mc-paddle { animation: mc-paddle 3.6s ease-in-out var(--t0) both; }
+  .js #machine[data-m] .mc-needle { animation: mc-needle 3.6s cubic-bezier(.3, .7, .4, 1) var(--t0) both; }
+  .js #machine[data-m] .mc-stream { stroke-dasharray: 1 1; animation: mc-stream 2.4s linear calc(var(--t0) + .6s) both; }
+  .js #machine[data-m] .mc-stream + .mc-stream { animation-delay: calc(var(--t0) + .66s); }
+  .js #machine[data-m] .mc-coffee { animation: mc-fill 2.1s cubic-bezier(.3, .1, .4, 1) calc(var(--t0) + .7s) both; }
+  .js #machine[data-m] .mc-crema { animation: mc-crema 2.1s cubic-bezier(.3, .1, .4, 1) calc(var(--t0) + .7s) both; }
+  .js #machine[data-m] .mc-steam { stroke-dasharray: .35 1.2; animation: mc-steam 3.2s ease-in-out calc(var(--t0) + 3s) infinite both; }
+  .js #machine[data-m] .mc-steam + .mc-steam { animation-delay: calc(var(--t0) + 4.6s); }
+}
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes ink { to { fill-opacity: 1; } }
+@keyframes mc-paddle { 0%, 100% { transform: none; } 10%, 86% { transform: translateX(14px); } }
+@keyframes mc-needle { 0%, 6% { transform: none; } 22% { transform: rotate(180deg); } 27% { transform: rotate(170deg); } 32%, 80% { transform: rotate(175deg); } 100% { transform: none; } }
+/* stream: dash 1 gap 1 on a length-1 line. offset 1 = hidden, 0 = full, -1 = the tail has fallen out the bottom */
+@keyframes mc-stream { 0% { opacity: 1; stroke-dashoffset: 1; } 12%, 88% { opacity: 1; stroke-dashoffset: 0; } 99.9% { opacity: 1; stroke-dashoffset: -1; } 100% { opacity: 0; stroke-dashoffset: -1; } }
+@keyframes mc-lamp { 0%, 100% { fill: #6E3B1E; } 8%, 88% { fill: #FFB860; } }
+@keyframes mc-fill { from { transform: scaleY(0); } to { transform: none; } }
+/* the crema rides on top of the coffee: it starts at the glass's bottom (34 = the coffee's height) */
+@keyframes mc-crema { from { opacity: 0; transform: translateY(34px); } 8% { opacity: 1; } to { opacity: 1; transform: none; } }
+@keyframes mc-steam { 0% { opacity: 0; stroke-dashoffset: .35; } 30% { opacity: .5; } 100% { opacity: 0; stroke-dashoffset: -.9; } }
+
+/* ---------- 2. the counter ---------- */
+/* v2 (PLAN-bar-tabs.md): one still view. Three lamps on cords, each over a tab on the chalk menu board, and a shelf on
+   the wall either side of the board. No cups, no counter: the board is the centre piece. Everything is sized from --k
+   (the board is 4.2 k wide, each shelf 1.25 k), so it scales as one picture. The same with or without JS. */
+/* --k: board + two shelves + gaps = about 6.94 k across the screen */
+:root { --k: min(calc((100vw - 2 * var(--gutter)) / 6.94), 200px); }
+
+#bar {
+  overflow-x: clip;
+  background: radial-gradient(ellipse 60% 45% at 50% 40%,
+    color-mix(in srgb, var(--scene-glow) 16%, transparent) 0%, transparent 70%);
+}
+.js #bar { padding-top: calc(64px + 1vh); } /* clear of the top bar; the cords run up behind it to the ceiling */
+.bar-room { position: relative; width: min(100%, calc(var(--k) * 4.2)); margin-inline: auto; }
+
+/* the lamps: one over each tab, on a cord up to the ceiling. Same side padding and gap as the tabs, so each lamp is
+   centred over its tab. */
+.bar-lamps {
+  position: relative; z-index: 3; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); justify-items: center;
+  gap: calc(var(--k) * 0.1); padding-inline: calc(var(--k) * 0.16 + 7px); pointer-events: none;
+}
+.bar-lamp { position: relative; display: block; width: max(30px, calc(var(--k) * 0.17)); }
+.bar-lamp::before { content: ""; position: absolute; left: calc(50% - 0.75px); bottom: 99%; width: 1.5px; height: 100vh; background: var(--ink); }
+.bar-lamp svg { display: block; width: 100%; fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.bar-lamp .bulb { fill: #FFD9A0; stroke: none; }
+/* its light: a halo round the bulb (::after) and a soft cone down over the board (.bar-glow) */
+.bar-lamp::after {
+  content: ""; position: absolute; left: 50%; top: 70%; width: 260%; aspect-ratio: 1; translate: -50% -50%;
+  border-radius: 50%; background: radial-gradient(closest-side, #FFB86055, transparent);
+}
+.bar-glow {
+  position: absolute; left: 50%; top: 66%; width: calc(var(--k) * 1.5); height: calc(var(--k) * 2); translate: -50% 0;
+  background: radial-gradient(ellipse 50% 62% at 50% 0%, #FFB8601F, transparent 72%);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .bar-glow, .bar-lamp::after { animation: lamp-flicker 4.9s linear infinite; }
+  .bar-lamp:nth-child(2) .bar-glow, .bar-lamp:nth-child(2)::after { animation-duration: 5.7s; animation-delay: -1.9s; }
+  .bar-lamp:nth-child(3) .bar-glow, .bar-lamp:nth-child(3)::after { animation-duration: 4.3s; animation-delay: -3.1s; }
+}
+
+/* the menu board: slate in a thin wood frame, hung from two strings, chalk writing (#chalk in the BACKBAR block) */
+.menu-board {
+  position: relative; z-index: 1;
+  margin: calc(var(--k) * 0.04) calc(var(--k) * 0.04) 0;
+  padding: calc(var(--k) * 0.3) calc(var(--k) * 0.12);
+  background:
+    radial-gradient(ellipse 30% 40% at 22% 70%, #F2E8DA0A, transparent 70%),
+    radial-gradient(ellipse 26% 34% at 78% 30%, #F2E8DA08, transparent 70%),
+    #1A1D1A;
+  border: 7px solid #4A3121;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px #00000080, inset 0 0 0 2px #F2E8DA12, 0 12px 26px #0009;
+}
+.menu-board::before, .menu-board::after { content: ""; position: absolute; bottom: calc(100% + 7px); width: 1px; height: 100vh; background: #F2E8DA45; }
+.menu-board::before { left: 31%; }
+.menu-board::after { right: 31%; }
+/* the h2 "What can I get you?" is for screen readers only (Ethan, 2026-11-19): the board holds just the tabs */
+.menu-board :is(.stop-name, .stop-note) { filter: url(#chalk); }
+
+/* the three tabs: chalk-ringed buttons on the board, left to right */
+.stops { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: calc(var(--k) * 0.1); margin: 0; padding: 0; list-style: none; }
+.stop {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 0.2rem;
+  min-height: 44px;
+  padding: calc(var(--k) * 0.14) 0.5rem;
+  text-align: center;
+  text-decoration: none;
+  color: #EFEAE1;
+  transition: color 0.2s;
+}
+.stop::before { /* the chalk ring */
+  content: ""; position: absolute; inset: 0; border: 2px solid #F2E8DA8C; border-radius: 12px;
+  filter: url(#chalk); transition: border-color 0.2s; pointer-events: none;
+}
+.stop-name { font-family: var(--font-display); font-size: min(2.5rem, calc(var(--k) * 0.18)); line-height: 1.1; white-space: nowrap; }
+.stop-note { font-family: var(--font-mono); font-size: var(--step--1); color: #BDB8AE; }
+.stop-note b { font-weight: 400; color: #EFEAE1; }
+@media (hover: hover) and (pointer: fine) { .stop:hover { color: var(--action); } .stop:hover::before { border-color: var(--action); } }
+.stop:focus-visible { outline: 2px solid var(--action); outline-offset: 4px; }
+/* Glare (ReactBits GlareHover, ported by hand): a band of lamp light waits off the tab's corner and sweeps across it
+   on hover / focus, and back out on leave. The 300% image keeps the band out of sight at both ends. */
+.stop::after {
+  content: ""; position: absolute; inset: 0; border-radius: 12px; pointer-events: none; mix-blend-mode: screen;
+  background: linear-gradient(-45deg, #F2E8DA00 40%, #F2E8DA14 45%, #F2E8DA59 50%, #F2E8DA14 55%, #F2E8DA00 60%) 100% 100% / 300% 300% no-repeat;
+}
+@media (prefers-reduced-motion: no-preference) { .stop::after { transition: background-position 0.7s cubic-bezier(.45, 0, .55, 1); } }
+@media (hover: hover) and (pointer: fine) { .stop:hover::after { background-position: 0% 0%; } }
+.stop:focus-visible::after { background-position: 0% 0%; }
+
+/* the two shelves on the wall, either side of the board (assets/art/backbar.mjs) */
+.backbar { position: absolute; inset: 0; pointer-events: none; }
+.backbar > svg:not(.sprite) { position: absolute; height: auto; overflow: visible; }
+.shelf { top: 46%; width: calc(var(--k) * 1.25); translate: 0 -50%; }
+.shelf-l { right: calc(100% + var(--k) * 0.12); }
+.shelf-r { left: calc(100% + var(--k) * 0.12); }
+
+/* phones: the board fills the width, the tabs stack, one lamp over the board, the shelves side by side under it */
+@media (max-width: 600px) {
+  :root { --k: calc((100vw - 2 * var(--gutter)) / 4.2); }
+  .js #bar { padding-top: 4.25rem; }
+  .bar-room { width: 100%; }
+  .bar-lamps { grid-template-columns: 1fr; }
+  .bar-lamp { width: 40px; }
+  .bar-lamp:not(:nth-child(2)) { display: none; }
+  .stops { grid-template-columns: 1fr; gap: 0.75rem; }
+  .stop { padding-block: 0.9rem; }
+  .stop-name { font-size: var(--step-2); }
+  .backbar { position: static; display: flex; justify-content: space-between; margin-top: 1.5rem; }
+  .backbar > svg:not(.sprite) { position: static; width: 45%; translate: none; }
+}
+
+/* the chalk filter's sprite svg: in the page, never seen */
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* ---------- the rooms ---------- */
+
+.room { align-content: start; }
+.room-head { display: flex; align-items: center; gap: 1.25rem; margin-bottom: 2rem; }
+.room-head .eyebrow { margin-bottom: 0.4rem; }
+
+.back {
+  display: none;
+  align-items: center;
+  min-height: 44px;
+  margin-bottom: 1.5rem;
+  padding: 8px 16px;
+  border-radius: 999px;
+  color: var(--ink-soft); /* Ethan 2026-11-20: no orange words; the same soft grey as the tab row's other tabs */
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  cursor: pointer;
+  transition: color 0.15s;
+}
+.back:hover { color: var(--ink); }
+.back:focus-visible { outline: 2px solid var(--action); outline-offset: 3px; }
+
+/* With JavaScript a room is a full-screen layer. Without it, rooms are plain sections in the page. */
+.js .room {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: none;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--ground);
+  padding-top: 5.5rem;
+}
+.js .room.open { display: grid; }
+/* wide screens (Ethan, 2026-11-19): "Back to the bar" shares the title's line, at its right end, so the room starts
+   higher and fits a laptop screen with no scroll. about.mjs A14 + experience.mjs E12 check it. */
+@media (min-width: 640px) {
+  .js .room { padding-bottom: 0; }
+  .js .room > .wrap { display: grid; grid-template-columns: 1fr auto; align-content: start; }
+  .js .room > .wrap > * { grid-column: 1 / -1; }
+  .js .room > .wrap > .back { grid-column: 2; grid-row: 1; align-self: center; margin: 0; }
+  .js .room > .wrap > .room-head { grid-column: 1; grid-row: 1; margin-bottom: clamp(1rem, 2.6vh, 2rem); }
+}
+.js .back { display: inline-flex; }
+
+/* the three tabs on top of an open room (JS only): the open one filled cream, the others a click away */
+.room-tabs { display: none; }
+.js.in-room .room-tabs {
+  position: fixed; z-index: 30; top: 0.9rem; left: 50%; translate: -50% 0;
+  display: flex; gap: 0.25rem; padding: 0.25rem;
+  border-radius: 999px;
+}
+.room-tabs a {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 1.1rem; border-radius: 999px;
+  font-family: var(--font-mono); font-size: var(--step--1); white-space: nowrap; text-decoration: none; color: var(--ink-soft);
+  transition: color 0.15s, background 0.15s;
+}
+.room-tabs a:hover { color: var(--action); }
+.room-tabs a[aria-current] { background: var(--ink); color: var(--ground); }
+.room-tabs a:focus-visible { outline: 2px solid var(--action); outline-offset: 2px; }
+/* phones: no room beside the name, so the name steps aside while a room is open (the tab row takes the top) */
+@media (max-width: 600px) { .room-tabs a { padding: 0 0.65rem; font-size: 0.72rem; } .js.in-room .top-name { visibility: hidden; } }
+
+/* ---------- cards ---------- */
+
+.cards {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+@media (min-width: 700px) { .card.featured { grid-column: span 2; } }
+
+/* An empty box that says which photo or video goes here. */
+.slot {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 3;
+  padding: 1rem;
+  border: 1px dashed var(--line);
+  border-radius: calc(var(--radius) - 4px);
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  text-align: center;
+}
+.media { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: calc(var(--radius) - 4px); }
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-top: 0.4rem;
+}
+.line { color: var(--ink-soft); }
+.link { color: var(--action); margin-top: auto; padding-top: 0.4rem; }
+.link:hover { color: var(--action-hover); }
+
+/* ---------- About Me cards (PLAN-about-bar.md Phase 1) ---------- */
+
+/* the latte timeline: 9 round cups stacked, one shows; a slider under it */
+.timeline { display: grid; gap: 0.5rem; }
+.tl-cups { position: relative; width: min(100%, 300px); aspect-ratio: 1; margin: 0 auto; border-radius: 50%;
+  box-shadow: 0 0 0 6px #F2E8DA, 0 0 0 7px var(--line), 0 14px 30px rgb(0 0 0 / 0.5); overflow: hidden; background: #3A2418; }
+.tl-cups img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.1); transition: opacity 0.35s ease-out; }
+.tl-cups img.on { opacity: 1; }
+.tl-date { margin: 0.6rem 0 0; text-align: center; font-family: var(--font-mono); font-size: var(--step--1); color: var(--ink); }
+.timeline input[type="range"] { width: 100%; margin: 0; accent-color: var(--action); cursor: pointer; }
+.tl-ends { display: flex; justify-content: space-between; margin: 0; font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-soft); }
+
+/* the holo card: tilts toward the pointer, no shine (main.js sets --x / --y, 0..1) */
+.holo { perspective: 900px; width: min(100%, 260px); margin: 0 auto; }
+.holo-tilt { position: relative; border-radius: 4.5% / 3.3%; overflow: hidden; box-shadow: 0 16px 34px rgb(0 0 0 / 0.55); }
+.holo-tilt img { display: block; width: 100%; height: auto; }
+@media (prefers-reduced-motion: no-preference) {
+  .holo-tilt { transition: transform 0.6s var(--ease-out); }
+  .holo.live .holo-tilt { transform: rotateX(calc((0.5 - var(--y, 0.5)) * 22deg)) rotateY(calc((var(--x, 0.5) - 0.5) * 26deg)); transition-duration: 0.12s; }
+  /* no pointer on it (and on phones): a slow sway */
+  .holo:not(.live) .holo-tilt { animation: holo-sway 7s ease-in-out infinite; }
+}
+@keyframes holo-sway { 0%, 100% { transform: rotateY(-7deg) rotateX(3deg); } 50% { transform: rotateY(7deg) rotateX(-2deg); } }
+
+/* Spotlight (ReactBits SpotlightCard, ported by hand): a soft light under the pointer on each order ticket (main.js
+   sets --mx / --my and .lit). Registered so the light glides after the pointer; inherits so ::before can read it.
+   The coffee bags had one too until 2026-11-20 (Ethan: "remove spotlight from bags"). */
+@property --mx { syntax: "<length-percentage>"; inherits: true; initial-value: 50%; }
+@property --my { syntax: "<length-percentage>"; inherits: true; initial-value: 40%; }
+.ticket::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 0.35s ease-out;
+}
+.ticket:is(.lit, :focus-visible)::before { opacity: 1; transition-duration: 0.15s; }
+/* paper under a lamp: the light warms the cream toward white, under the words (the ticket is its own layer) */
+.ticket::before { z-index: -1; background: radial-gradient(circle 230px at var(--mx) var(--my), #FFFDF8, #FFFBF280 40%, #FFFBF200 72%); }
+
+/* his sister's drawing, with the King of Spades and the portal sparks drawn on top in the photo's own pixels */
+.duel { position: relative; aspect-ratio: 1200 / 791; border-radius: calc(var(--radius) - 4px); overflow: hidden; }
+.duel img, .duel-fx { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.duel-fx .portal { opacity: 0.95; }
+.spark { fill: none; stroke-linecap: round; transform-box: view-box; transform-origin: 0 0; }
+.spark.s1 { stroke: #FFC560; stroke-width: 8; stroke-dasharray: 0.4 3 1.6 5 0.3 7 2.2 9; }
+.spark.s2 { stroke: #FFF4D6; stroke-width: 4.5; stroke-dasharray: 0.2 4 0.9 6 0.2 11; }
+.spark.s3 { stroke: #FF8A1F; stroke-width: 6; stroke-dasharray: 1.2 8 0.3 4 0.6 12; }
+@media (prefers-reduced-motion: no-preference) {
+  .spark.s1 { animation: spark-spin 7s linear infinite; }
+  .spark.s2 { animation: spark-spin 11s linear infinite reverse; }
+  .spark.s3 { animation: spark-spin 4.6s linear infinite; }
+}
+@keyframes spark-spin { to { rotate: 360deg; } }
+.tl-hint { margin: 0.4rem 0 0; text-align: center; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.04em; color: var(--ink-soft); }
+.watched { margin: 0; padding: 0; list-style: none; color: var(--ink-soft); }
+.watched li + li { margin-top: 0.15rem; }
+.credit { margin: 0; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.04em; color: var(--ink-soft); }
+
+/* the fantasy lineup: a café chalkboard in a wood frame */
+.lineup { padding: 0.9rem 1rem 1rem; border: 6px solid #5A381F; border-radius: 6px; background: #1C1A17;
+  box-shadow: inset 0 0 30px rgb(0 0 0 / 0.6); color: #F2E8DA; }
+.lineup-label { margin: 0; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; text-wrap: balance; color: var(--ink-soft); }
+.lineup-team { margin: 0.1rem 0 0.6rem; font-family: var(--font-display); font-style: italic; font-size: 1.5rem; line-height: 1.1; }
+.lineup ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.15rem; }
+.lineup li { display: grid; grid-template-columns: 3.2em 1fr auto; white-space: nowrap; align-items: baseline; gap: 0.5rem; padding: 0.22rem 0;
+  border-bottom: 1px dashed #F2E8DA22; font-size: 0.95rem; }
+.lineup li:last-child { border-bottom: 0; }
+.slot-pos { font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-soft); }
+.slot-team { display: inline-flex; align-items: center; gap: 0.4em; font-family: var(--font-mono); font-size: 0.7rem; color: var(--ink-soft); }
+.slot-team::before { content: ""; width: 0.6em; height: 0.6em; border-radius: 50%; background: var(--team); box-shadow: 0 0 0 1px #F2E8DA55; }
+
+/* ---------- the fanned tarot card stack ----------
+   main.js sets --n (cards), --i (each card's place) and --turn (card i is in front when --turn = i). Every card's
+   place, size, stacking order and dimming come from those, so gliding --turn moves the whole fan. No cq units here
+   (see the Gotchas: never transition anything computed from them). */
+@property --turn { syntax: "<number>"; inherits: true; initial-value: 0; }
+.js .ring {
+  --R: min(380px, 30vw);           /* the floor sigil's radius */
+  --W: min(300px, 100vw - 6rem);   /* a card's width */
+  position: relative;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  align-items: end;
+  margin-inline: calc(-1 * var(--gutter));
+  padding: 0.5rem 0 2.5rem;
+  overflow-x: clip;                /* back cards peek at the screen's edge, never make it scroll */
+  perspective: 1400px;
+  perspective-origin: 50% 0%;      /* the floor sigil is still a 3D plane */
+  touch-action: pan-y;
+}
+@media (prefers-reduced-motion: no-preference) { .js .ring { transition: --turn 1.1s var(--ease-out); } }
+.js .ring.dragging { transition: none; user-select: none; cursor: grabbing; }
+.js .ring > .card {
+  --o: calc(mod(var(--i) - var(--turn) + var(--n) / 2, var(--n)) - var(--n) / 2);
+  --a: abs(var(--o));
+  grid-area: 1 / 1;
+  width: var(--W);
+  transform-origin: 50% 130%;      /* a hand holds the fan below the cards */
+  transform: translate(calc(var(--o) * var(--W) * 0.5), calc(var(--a) * -64px)) /* lifted: the low pivot drops the side cards */
+    rotate(calc(var(--o) * 12deg)) scale(calc(1 - var(--a) * 0.38));
+  z-index: calc(100 - var(--a) * 10);
+  opacity: clamp(0, calc((1.75 - var(--a)) * 1.2), 1); /* invisible before the offset wraps at +/-2 */
+  filter: brightness(calc(1 - var(--a) * 0.2));
+  cursor: pointer;
+}
+.js .ring > .card.front { cursor: auto; box-shadow: none; }
+
+/* tarot cards (Ethan, 2026-11-19, plan A): in the fan every card is ONE size, like a deck. A thin spell-orange
+   frame inside the edge, the numeral at the foot (main.js), and the tall pictures packed a little tighter so the
+   deck can be short. Short cards keep the spare room between their words and the numeral. min-height, not height:
+   with bigger reader text a card grows instead of spilling. about.mjs A15. */
+.js .ring > .card { min-height: var(--H, 566px); padding: 1.1rem 1.1rem 0.7rem; }
+.js .ring > .card::before {
+  content: ""; position: absolute; inset: 6px; pointer-events: none;
+  border: 1px solid color-mix(in srgb, var(--spell) 30%, transparent); border-radius: calc(var(--radius) - 4px);
+}
+.card-num {
+  display: flex; align-items: center; gap: 0.7rem; margin: auto 0 0;
+  font-family: var(--font-display); font-size: 0.95rem; letter-spacing: 0.2em; color: var(--spell);
+}
+.card-num::before, .card-num::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--spell) 45%, transparent)); }
+.card-num::after { scale: -1 1; }
+/* coffee: a smaller cup, the date sits on the cup's rim, the end dates either side of the slider */
+.js .ring .timeline { grid-template-columns: auto 1fr auto; align-items: center; column-gap: 0.6rem; row-gap: 0.4rem; }
+.js .ring .timeline > :not(input, .tl-ends) { grid-column: 1 / -1; }
+.js .ring .tl-cups { grid-row: 1; width: 226px; margin-top: 0.35rem; }
+.js .ring .tl-date { grid-row: 1; z-index: 1; align-self: end; justify-self: center; margin: 0 0 -0.55rem;
+  padding: 0.15rem 0.65rem; border-radius: 999px; background: var(--surface); box-shadow: 0 0 0 1px var(--line); }
+.js .ring .timeline input { grid-row: 2; grid-column: 2; margin-top: 0.6rem; }
+.js .ring .tl-ends { display: contents; }
+.js .ring .tl-ends > span { grid-row: 2; margin-top: 0.6rem; white-space: nowrap; }
+.js .ring .tl-ends > span:last-child { grid-column: 3; }
+.js .ring .tl-hint { grid-row: 3; margin: 0; }
+/* Darkrai: a little smaller; sports: a tighter board */
+.js .ring .holo { width: 214px; }
+.js .ring .lineup { padding: 0.75rem 0.9rem 0.7rem; }
+.js .ring .lineup-team { margin-bottom: 0.4rem; }
+.js .ring .lineup ol { gap: 0; }
+.js .ring .lineup li { padding: 0.17rem 0; font-size: 0.9rem; }
+/* movies (the shortest card): the credit sits under the drawing as its caption, the list gets the lineup board's dashed rows */
+.js .ring .card > :first-child { order: -2; }
+.js .ring .credit { order: -1; margin-top: -0.25rem; }
+.js .ring .watched li { padding: 0.38rem 0; border-bottom: 1px dashed #F2E8DA22; }
+.js .ring .watched li + li { margin-top: 0; }
+.js .ring .watched li:last-child { border-bottom: 0; }
+
+/* Doctor Strange orange (Ethan's ask, 2026-11-18): the spell circle and the portal use their OWN gold-orange,
+   not --action, by his choice. Glow = a wider see-through copy of the lines under the thin bright ones, no blur
+   filter (a blur repaints every frame while it turns). */
+.js .ring { --spell: #FFB43A; --spell-glow: #FF7A1A; }
+
+/* the spell circle: a real floor centred under the stack at the front card's feet.
+   The svg inside turns slowly (still in reduced motion). */
+.spell {
+  position: absolute; left: 50%; bottom: 2.5rem; z-index: 0;   /* bottom = the ring's padding-bottom = the feet line */
+  width: calc(2.4 * var(--R)); aspect-ratio: 1;
+  translate: -50% 50%;
+  transform: translateZ(calc(-1 * var(--R))) rotateX(90deg);
+  pointer-events: none; overflow: clip; /* the turning svg's corners poke out and made the room scroll */
+}
+.spell svg { display: block; width: 100%; height: 100%; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.spell .spell-lines { stroke: var(--spell); stroke-width: 0.4; }
+.spell .runes { stroke-width: 0.3; }
+.spell .spell-glow { stroke: var(--spell-glow); stroke-width: 2; opacity: 0.3; }
+.spell .spell-sparks { stroke: var(--spell); stroke-width: 1.2; stroke-dasharray: 0.3 2.2; opacity: 0.8; }
+@media (prefers-reduced-motion: no-preference) { .spell-turn { animation: spell-spin 60s linear infinite; } }
+@keyframes spell-spin { to { rotate: 360deg; } }
+
+/* the sling-ring portal behind the front card: centred on it (the feet line + half the card), a bit taller than
+   the card so its sparks show on both sides. main.js sets --h = the front card's height. */
+.ring-portal {
+  --d: max(calc(var(--h, 400px) * 1.06), calc(var(--W) * 1.4));
+  position: absolute; left: 50%; bottom: calc(2.5rem + var(--h, 400px) / 2);
+  z-index: 99; /* in front of the side cards (the fire is the point), under the front card (100) */
+  width: var(--d); aspect-ratio: 1;
+  translate: -50% 50%;
+  pointer-events: none; overflow: clip; /* same: the spinning spark squares' corners */
+  /* the warm haze of the ring: a still gradient, so it never repaints while the sparks spin */
+  background: radial-gradient(circle closest-side, transparent 72%, #FF7A1A30 79%, #FFB43A50 82%, #FF7A1A26 89%, transparent 99%);
+}
+.ring-portal svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke-linecap: round; }
+.ring-portal .phot { stroke: #FFF4D6; stroke-width: 0.5; }
+.ring-portal .pcore { stroke: #FFD27A; stroke-width: 0.6; }
+.ring-portal .pmid { stroke: var(--spell); stroke-width: 0.45; opacity: 0.85; }
+.ring-portal .pfar { stroke: var(--spell-glow); stroke-width: 0.4; opacity: 0.7; }
+.ring-portal .dim { opacity: 0.4; }
+@media (prefers-reduced-motion: no-preference) {
+  .ring-portal svg { will-change: transform; }
+  /* slow on purpose (Ethan, 2026-11-18: "too fast, less distracting"): the cards are the point, not the fire */
+  .ring-portal .p1 { animation: spark-spin 10s linear infinite; }
+  .ring-portal .p2 { animation: spark-spin 15s linear infinite; }
+  .ring-portal .p3 { animation: spark-spin 22s linear infinite; }
+}
+
+.ring-nav { display: flex; justify-content: center; align-items: center; gap: 1rem; margin-top: 0.5rem; }
+.ring-nav button {
+  width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 50%;
+  background: none; color: var(--action); font-size: 1.5rem; line-height: 1; cursor: pointer;
+}
+.ring-nav button:hover, .ring-nav button:focus-visible { outline: none; border-color: var(--action); }
+.ring-at { min-width: 14ch; margin: 0; text-align: center; font-family: var(--font-mono); font-size: var(--step--1); color: var(--ink-soft); }
+/* wide screens (Ethan, 2026-11-19): the arrows stand left and right of the front card, in the ring's own row, so
+   nothing hangs under the ring. The count stays for screen readers (aria-live), the card's own title shows which. */
+@media (min-width: 640px) {
+  .js .room > .wrap > :is(.ring, .ring-nav) { grid-row: 2; }
+  .js .room > .wrap > .ring-nav {
+    position: relative; z-index: 1; align-self: center; justify-self: center; justify-content: space-between;
+    width: calc(300px + 2 * 44px + 4rem); /* the front card + an arrow each side */
+    margin: 0; padding-bottom: 2.5rem; pointer-events: none;
+  }
+  .js .room > .wrap > .ring-nav button { pointer-events: auto; background: #14100DD0; }
+  .js .room > .wrap > .ring-nav .ring-at { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; min-width: 0; }
+  /* fit with no scroll (Ethan, 2026-11-20; about.mjs A14): first the space above the stack goes (the room's top
+     padding down to just under the tab row, almost no gap under the title), then only laptops shorter than his
+     770 px Safari get a smaller stack, never under 85% (his 2026-11-19 note: 76% was too small) */
+  .js #offclock { padding-top: 4.5rem; }
+  /* the title sits left and the card in the middle, so the stack can rise beside the title's foot (negative margin
+     on the head = the whole ring row, arrows included, moves up). The floor sigil is a 3D plane whose near edge
+     reaches ~12 px under the ring, so that counts too. */
+  .js #offclock > .wrap > .room-head { margin-bottom: -1.25rem; }
+  .js #offclock .ring { padding-top: 0; }
+}
+@media (min-width: 640px) and (max-height: 741px) { .js #offclock .ring { zoom: 0.93; } }
+@media (min-width: 640px) and (max-height: 704px) { .js #offclock .ring { zoom: 0.89; } }
+@media (min-width: 640px) and (max-height: 678px) { .js #offclock .ring { zoom: 0.86; } } /* the floor: lower = a little scroll */
+
+/* Marks words Ethan has not approved yet. Remove "draft: true" in content.js to clear it. */
+[data-draft]::after {
+  content: "draft";
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+/* ---------- the Experience room: order tickets on a steel rail (PLAN-experience.md) ----------
+   Each .hang carries its piece of the rail (::before, half a gap past each side, so side by side the pieces join
+   into one rail; on a phone each ticket gets its own short rail) and its clip (::after). The ticket is the same
+   thermal paper as the receipt. Drawings: every part's own style is its finished frame; animations only run FROM. */
+.tickets {
+  --gap: 1.25rem;
+  display: grid;
+  gap: 2rem var(--gap);
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+  align-items: stretch; /* every ticket as long as the longest in its row (Ethan, 2026-11-19) */
+  padding: 0;
+  list-style: none;
+}
+.hang { position: relative; display: flex; flex-direction: column; padding-top: 14px; }
+.hang::before {
+  content: ""; position: absolute; top: 4px; left: calc(var(--gap) / -2); right: calc(var(--gap) / -2); height: 5px;
+  background: linear-gradient(#C9C4BC, #8A847C 45%, #4E4A45); box-shadow: 0 2px 3px #0008; /* square ends: side by side the pieces meet with no seam */
+}
+.hang::after {
+  content: ""; position: absolute; z-index: 1; top: 0; left: calc(50% - 11px); width: 22px; height: 22px;
+  border-radius: 3px 3px 5px 5px; background: linear-gradient(#B8B2A9, #6E6962); box-shadow: 0 2px 4px #000a;
+}
+.ticket {
+  position: relative;
+  flex: 1;
+  padding: 1rem 1rem 1.8rem;
+  background: var(--ink);
+  color: var(--ground);
+  transform-origin: 50% -8px;
+  isolation: isolate; /* the spotlight sits under the words */
+  transition: --mx 0.16s ease-out, --my 0.16s ease-out;
+}
+/* Count Up (main.js bold() + countUp()): the number counts up as plain text on the line. An invisible copy of the
+   final number holds the width, so the words around it never shift while it counts. */
+.count { display: inline-grid; font-variant-numeric: tabular-nums; }
+.count > * { grid-area: 1 / 1; text-align: right; }
+.count > [data-final] { visibility: hidden; }
+.t-top { display: flex; justify-content: space-between; gap: 1rem; padding: 0.4rem 0 0.5rem; border-bottom: 1px dashed currentColor;
+  font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.ticket h3 { margin-top: 0.4rem; font-family: var(--font-display); font-size: 1.45rem; line-height: 1.1; }
+.t-role { margin-top: 0.35rem; font-family: var(--font-mono); font-size: 0.75rem; line-height: 1.4; }
+.t-items { display: grid; gap: 0.6rem; margin-top: 0.8rem; padding: 0.7rem 0 0; border-top: 1px dashed currentColor; list-style: none; font-size: 0.88rem; line-height: 1.4; }
+.t-items li { position: relative; padding-left: 1em; }
+.t-items li::before { content: "•"; position: absolute; left: 0; }
+.t-items b { font-weight: 800; }
+.ticket[data-draft]::after { top: auto; bottom: 1.1rem; background: var(--ground); color: var(--ink); }
+
+.t-art { display: block; width: 100%; height: auto; margin: 0.6rem 0 0.2rem; overflow: visible;
+  fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.t-art * { transform-box: fill-box; transform-origin: center; }
+.t-art text { fill: currentColor; stroke: none; font-family: var(--font-mono); font-size: 8px; }
+.t-art text.big { font-size: 13px; font-weight: 700; }
+.t-art .soft, .t-art .faint { opacity: 0.55; }
+.t-art .thick { stroke-width: 2.4; }
+.t-art .dot, .t-art .real { fill: currentColor; }
+.t-art .tile { fill: color-mix(in srgb, currentColor 18%, transparent); stroke-width: 1; }
+.t-art .lit { fill: color-mix(in srgb, currentColor 16%, transparent); stroke-width: 2.2; }
+.t-art .bean, .t-art .drip { fill: currentColor; stroke: none; opacity: 0; } /* finished: all fallen through */
+.t-art .fake { opacity: 0.15; }                                               /* finished: the team's own, faded */
+@media (prefers-reduced-motion: no-preference) {
+  .t-art * { --at: calc(1.1s + var(--i, 0) * 0.15s + var(--d, 0s)); }
+  .t-art :is(path, rect, polyline) { stroke-dasharray: 1 3; animation: t-draw 0.9s ease-out var(--at) backwards; }
+  .t-art .pop { animation: t-pop 0.5s var(--ease-out) var(--at) backwards; stroke-dasharray: none; }
+  .t-art .pop * { stroke-dasharray: none; animation: none; } /* a popping group's parts pop with it, no draw-in */
+  .t-art .bean { animation: t-fall 0.9s ease-in var(--at) backwards; }
+  .t-art .drip { animation: t-drip 0.6s ease-in var(--at) backwards; }
+  .t-art .lit { animation: t-draw 0.9s ease-out var(--at) backwards, t-lit 0.6s ease-out calc(var(--at) + 0.9s) backwards; }
+  .t-art .heart { stroke-dasharray: none; animation: t-rise 2.2s ease-out var(--at) backwards; }
+  .t-art .fake { animation-name: t-rise-fade; }
+  .hang:hover .ticket { animation: t-swing 1.1s ease-out; }
+}
+@keyframes t-draw { from { stroke-dashoffset: 1.02; } }
+@keyframes t-pop { from { opacity: 0; scale: 0.6; } }
+@keyframes t-fall { from { opacity: 1; translate: 0 -6px; } 80% { opacity: 1; } to { opacity: 0; translate: 0 18px; } }
+@keyframes t-drip { from { opacity: 1; } 80% { opacity: 1; } to { opacity: 0; translate: 0 12px; } }
+@keyframes t-lit { from { fill: transparent; stroke-width: 1.6; } }
+@keyframes t-rise { from { opacity: 0; translate: 0 16px; } 35% { opacity: 1; translate: 0 0; } }
+@keyframes t-rise-fade { from { opacity: 0; translate: 0 16px; } 35% { opacity: 1; translate: 0 0; } 65% { opacity: 1; } }
+@keyframes t-swing { 30% { rotate: 2deg; } 60% { rotate: -1.2deg; } 85% { rotate: 0.4deg; } }
+
+/* ---------- House blends: OPEN coffee bags on a roaster's shelf (PLAN-blends.md, PLAN-open-bags.md) ----------
+   Each slot carries its piece of the wood shelf (::after, half a gap past each side, so side by side the pieces join
+   into one shelf; the ticket rail's trick). Nothing to click: every bag shows it all. Seal + valve, the screenshot in
+   the bag's clear window, a paper label (colour band: tag, name, drawing; cream sheet: line, roast notes, link).
+   Wide: 3 bags a shelf (5 bags + the roaster = 2 shelves); tablet 2; phone 1. Bags on one shelf share a height. */
+.bags {
+  --gap: 1.5rem;
+  display: grid;
+  gap: 3rem var(--gap);
+  grid-template-columns: 1fr;
+  align-items: stretch;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 640px) { .bags { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1100px) { .bags { grid-template-columns: repeat(3, 1fr); } }
+.js #specials { align-content: stretch; }
+.js #specials > .wrap { display: grid; grid-template-rows: auto auto 1fr; justify-items: start; }
+.js #specials .bags { justify-self: stretch; align-self: start; padding: 2rem 0 8vh; }
+@media (min-width: 640px) {
+  .js #specials > .wrap { grid-template-rows: auto 1fr; }
+  /* wider than its grid cell: a grid item does not centre past its cell, so equal negative margins centre it */
+  .js #specials .bags { --shelf: min(1240px, 100vw - 4rem); justify-self: start; width: var(--shelf); margin-inline: calc((100% - var(--shelf)) / 2); }
+}
+.bag-slot, .roaster-slot { position: relative; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 12px; }
+.bag-slot::after, .roaster-slot::after {
+  content: ""; position: absolute; left: calc(var(--gap) / -2); right: calc(var(--gap) / -2); bottom: 0; height: 12px;
+  background: linear-gradient(#80593A, #573B26 55%, #34241A); box-shadow: 0 10px 16px #000a;
+}
+.bag {
+  --seal: 18px;
+  position: relative; display: flex; flex-direction: column; flex: 1; width: min(100%, 370px); margin: 0 auto;
+  padding: 0 9% 8%; color: var(--ink);
+}
+/* the kraft outline stretches to the bag's height; its lines stay 1.4px (non-scaling) */
+.bag-shell { position: absolute; inset: var(--seal) 0 0; width: 100%; height: calc(100% - var(--seal)); overflow: visible;
+  fill: none; stroke: var(--ink); stroke-width: 1.4; stroke-linejoin: round; }
+.bag-shell path, .bag-seal :is(rect, path) { vector-effect: non-scaling-stroke; }
+.bag-shell .kraft, .bag-seal .kraft { fill: #A27E562E; }
+.bag-shell .faint, .bag-seal .faint { opacity: 0.45; }
+.bag-seal { position: relative; display: block; width: 84%; height: var(--seal); margin: 0 auto; overflow: visible;
+  fill: none; stroke: var(--ink); stroke-width: 1.4; }
+.bag-valve { position: relative; display: block; width: 14px; height: 14px; margin: 10px auto 12px; border: 1.4px solid var(--ink);
+  border-radius: 50%; background: radial-gradient(circle, var(--ink) 0 2.5px, transparent 3px); }
+/* the clear window: the site's screenshot, top of the page, 2:1 */
+.bag-window { position: relative; margin: 0; border: 1.4px solid var(--ink); border-radius: 6px; overflow: hidden; background: #0B0907; }
+.bag-window img { display: block; width: 100%; aspect-ratio: 2 / 1; object-fit: cover; object-position: top; }
+.bag-label { position: relative; display: flex; flex-direction: column; flex: 1; margin-top: 12px; border-radius: 3px; overflow: hidden;
+  box-shadow: 0 1px 0 #0006; }
+.bag-band { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; padding: 0.6rem 0.8rem;
+  background: var(--label); color: var(--ground); }
+.bag-tag { margin: 0; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.bag-name { margin: 0.1rem 0 0; font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; line-height: 1.05; }
+.bag-art.t-art { flex: none; width: 34%; max-width: 104px; margin: 0; stroke-width: 2.2; }
+.bag-sheet { display: flex; flex-direction: column; gap: 0.7rem; flex: 1; padding: 0.8rem 0.85rem 0.9rem; background: #EFE5D6; color: #1E1712; }
+.bag-line { margin: 0; font-size: 0.9rem; line-height: 1.45; }
+.bag-sheet .bag-notes, .roast-tag .bag-notes { margin-top: auto; }
+.bag-notes { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0; padding: 0; list-style: none; font-size: 0.75rem; }
+.bag-notes li { padding: 0.15rem 0.55rem; border: 1px solid #1E171240; border-radius: 999px; }
+/* the one thing to click on a bag: dark pill, orange words (orange = clickable, and it reads on the cream) */
+.bag-link { align-self: flex-start; padding: 0.35rem 0.75rem; border-radius: 999px; background: var(--ground); color: var(--action);
+  font-size: 0.85rem; text-decoration: none; }
+.bag-link:hover, .bag-link:focus-visible { color: var(--action-hover); }
+.bag[data-draft]::after { top: 7%; }
+
+/* the grinder's bag of beans (the grinder walk) still uses the old closed bag, label laid over it */
+.bag-body { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible;
+  fill: none; stroke: var(--ink); stroke-width: 1.4; stroke-linejoin: round; }
+.bag-body .kraft { fill: #A27E562E; }
+.bag-body .faint { opacity: 0.45; }
+.beans-bag .bag-label {
+  position: absolute; left: 16%; right: 16%; top: 26%; bottom: 11%; margin: 0; overflow: visible; box-shadow: none;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.15rem;
+  padding: 0.35rem 0.3rem; border-radius: 2px; background: var(--label); color: var(--ground); text-align: center;
+}
+.beans-bag .bag-tag { font-size: 0.56rem; }
+.beans-bag .bag-name { margin: 0; font-size: 1.02rem; }
+
+/* the drum roaster: what Ethan is building now, the whole idea printed on its paper tag. The drum turns, a thin smoke
+   thread rises; that is all that moves. */
+.roaster { position: relative; display: flex; flex-direction: column; align-items: center; width: min(100%, 370px); margin: 0 auto; color: var(--ink); }
+.roaster-art { display: block; width: min(100%, 200px); height: auto; overflow: visible;
+  fill: none; stroke: var(--ink); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.roaster-art .metal { fill: #2A2521; }
+.roaster-art .window { fill: color-mix(in srgb, var(--scene-glow) 35%, var(--ground)); }
+.roaster-art .knob { fill: var(--ink); stroke: none; }
+.roaster-art .beans { stroke: #9A6A40; stroke-width: 3.2; }
+.roaster-art .smoke { stroke: url(#smoke-fade); stroke-width: 1.3; }
+.roaster-art .smoke.two { opacity: 0.6; }
+.roaster-art .drum { transform-box: fill-box; transform-origin: center; }
+.roast-tag {
+  order: -1; display: flex; flex-direction: column; gap: 0.45rem; margin: 0 0 0.4rem; padding: 0.75rem 0.9rem 0.9rem;
+  background: #EFE5D6; color: #1E1712; rotate: -1.5deg; box-shadow: 0 6px 14px #0008; border-radius: 2px;
+}
+.roast-head { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.roast-what { font-family: var(--font-display); font-size: 1.2rem; line-height: 1.15; }
+.roast-line { font-size: 0.9rem; line-height: 1.45; }
+@media (prefers-reduced-motion: no-preference) {
+  .roaster-art .drum { animation: drum-turn 9s linear infinite; }
+  /* one wisp per path rides up the curve and thins out (the stroke's gradient fades it); 30 + 46 = 76 = one loop */
+  .roaster-art .smoke { stroke-dasharray: 30 46; animation: smoke-rise 4.2s linear infinite; }
+  .roaster-art .smoke.two { animation-duration: 5.7s; animation-delay: -2.4s; }
+}
+@keyframes drum-turn { to { rotate: 360deg; } }
+@keyframes smoke-rise { from { stroke-dashoffset: 30; } to { stroke-dashoffset: -46; } }
+
+/* ---------- the grinder walk (PLAN-bar-tabs.md part 2: first Inside -> Counter step per visit) ----------
+   A full-screen layer over the stage (the top bar stays on top): a caption, Ethan's grinder big on a wood counter, a
+   bag of beans beside it. main.js grindWalk sets data-step "pour" (the bag tips: lid off, beans fall, the hopper
+   fills), then "pour grind" (it shakes, the button glows, the hopper sinks, grounds fall into the bin), then pushes
+   the whole layer into the bin while the dolly starts under it. Timings match POUR_MS / GRIND_MS in main.js. */
+.grind {
+  position: fixed; inset: 0; z-index: 5; display: grid; grid-template-rows: auto 1fr auto; justify-items: center;
+  padding-top: 5.5rem; overflow: hidden; pointer-events: none;
+  background: radial-gradient(ellipse 46% 50% at 54% 74%, #C96B2C2E, #0000 70%) var(--ground);
+}
+.grind[hidden] { display: none; }
+.grind-head { width: min(100% - 2 * var(--gutter), 72rem); }
+.grind-head .eyebrow { margin-bottom: 0.4rem; }
+.grind-title { font-family: var(--font-display); font-weight: 500; font-size: var(--step-2); line-height: 1.1; }
+.grind-stage {
+  position: relative; align-self: end;
+  width: min(90vw, 640px, (100svh - 5.5rem - 9.5rem - clamp(44px, 9svh, 96px)) * 0.99); aspect-ratio: 400 / 404;
+}
+.grind-art { display: block; width: 100%; height: 100%; overflow: visible;
+  fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.grind-art .dark { fill: #1E1712; }
+.grind-art .bay { fill: #0E0A08; }
+.grind-art .faint { opacity: 0.4; }
+.grind-art .hopper { fill: #F2E8DA0F; }
+.grind-art .glint { stroke: #F2E8DA; opacity: 0.25; }
+.grind-art .tick { fill: var(--ink); stroke: none; }
+.grind-art .pulse { fill: #3A3026; }
+.grind-art .pulse-ring { opacity: 0.5; }
+.grind-art .bin { fill: #F2E8DA0D; }
+.grind-art .mass { fill: #4A2E1A; stroke: none; }
+.grind-art .bean-pile, .grind-art .falling { fill: #7A4E2C; stroke: #F2E8DA; stroke-width: 0.9; }
+.grind-art .grounds { fill: #5A3A22; stroke: none; }
+.grind-art .stream { stroke: #8A5A34; stroke-width: 5; stroke-dasharray: 3 5; opacity: 0; }
+.grind-art .hopper-rise { translate: 0 64px; }  /* empty until the beans go in */
+.grind-art .grounds-rise { translate: 0 44px; } /* the bin starts empty */
+.grind-art .falling ellipse { opacity: 0; }
+.grind-counter {
+  width: 100%; height: clamp(44px, 9svh, 96px);
+  background: repeating-linear-gradient(90deg, transparent 0 119px, #00000059 0 120px) #19120D;
+  border-top: 2px solid #F2E8DA5C; box-shadow: inset 0 5px 0 #2C2018;
+}
+/* the bag of beans: kraft body (BAG_BODY) + label; sized and placed in the drawing's units (x 60-170, foot on the counter) */
+.beans-bag { --label: var(--action); position: absolute; left: 5%; bottom: 0; width: 27.5%; aspect-ratio: 120 / 168; color: var(--ink); }
+.beans-bag .bag-label { top: 30%; bottom: 14%; }
+.beans-bag .bag-name { font-size: clamp(0.8rem, 2.4vw, 1.02rem); }
+@media (prefers-reduced-motion: no-preference) {
+  .grind[data-step~="pour"] .lid { animation: lid-off 1.1s var(--ease-out) forwards; transform-box: fill-box; transform-origin: 100% 100%; }
+  .grind[data-step~="pour"] .falling ellipse { animation: bean-fall 0.42s cubic-bezier(.5,0,1,1) calc(0.45s + var(--i) * 0.05s) 2 backwards; }
+  .grind[data-step~="pour"] .hopper-rise { animation: hopper-fill 0.6s ease-out 0.45s forwards; }
+  .grind[data-step~="grind"] .grinder { animation: grind-shake 0.07s linear infinite; }
+  .grind[data-step~="grind"] .pulse { fill: var(--ink); filter: drop-shadow(0 0 6px #F2E8DA); }
+  .grind[data-step~="grind"] .hopper-sink { animation: hopper-sink 1s ease-in forwards; }
+  .grind[data-step~="grind"] .stream { opacity: 1; animation: stream-run 0.25s linear infinite; }
+  .grind[data-step~="grind"] .grounds-rise { animation: grounds-fill 1s ease-out 0.1s forwards; }
+}
+@keyframes lid-off { 0% { translate: 0 0; rotate: 0deg; } 18%, 74% { translate: 46px -14px; rotate: 28deg; } 100% { translate: 0 0; rotate: 0deg; } } /* hinges up and off to the right, away from the bag */
+@keyframes bean-fall { from { opacity: 1; translate: 0 0; } 85% { opacity: 1; } to { opacity: 0; translate: 0 64px; } }
+@keyframes hopper-fill { to { translate: 0 0; } }
+@keyframes grind-shake { 0%, 100% { translate: 0 0; } 25% { translate: 0.7px 0; } 75% { translate: -0.7px 0.4px; } }
+@keyframes hopper-sink { to { translate: 0 46px; } }
+@keyframes stream-run { to { stroke-dashoffset: -8; } }
+@keyframes grounds-fill { to { translate: 0 0; } }
+@media (max-width: 640px) {
+  .grind-title { font-size: var(--step-1); }
+}
+
+/* ---------- 3. the receipt ---------- */
+
+.paper {
+  max-width: 420px;
+  margin-inline: auto;
+  padding: 2rem 1.5rem;
+  background: var(--ink);
+  color: var(--ground);
+  font-family: var(--font-mono);
+  padding-bottom: 2.6rem;
+}
+/* torn zigzag bottom edge, like paper ripped off the printer (the receipt and the order tickets: one paper) */
+.paper, .ticket {
+  --tooth: 9px;
+  mask:
+    linear-gradient(#000 0 0) top / 100% calc(100% - var(--tooth)) no-repeat,
+    conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / calc(2 * var(--tooth)) var(--tooth) repeat-x;
+}
+.paper-head { text-align: center; padding-bottom: 1.25rem; border-bottom: 1px dashed currentColor; }
+.paper-foot { text-align: center; padding-top: 1.25rem; }
+/* ---------- 4. the checkout room (PLAN-bio.md) ----------
+   The register scene is a shallow 3D room built like the one inside (.room-pan > .shop-room > .world, room units --u),
+   the back wall at z = -40u (inside: -100u) so the board's words read. Left: the cork board on the back wall (photo +
+   the "I'm Ethan." card). Right: the counter (x 57..100, top 17u high, front at z -24) with the to-go cups, the register
+   and the receipt printer on it, the coffee button on its front, the night window on the wall behind.
+   --look: 50 = the whole room; phones: 23 = the board, 80.5 = the till (main.js swipes between them).
+   The base rules are the no-JS page: a plain column of the same pieces. The 3D is all under .js. */
+.register { --tw: clamp(200px, 40vw, 320px); }
+.till { width: var(--tw); }
+.till svg { width: 100%; height: auto; display: block; }
+.cork { position: relative; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 1.5rem; width: min(46rem, 100%); padding: 1.5rem;
+  border: 12px solid #5A381F; outline: 2px solid #F2E8DA66; outline-offset: -1px; background: #8A6440;
+  /* cork: two layers of small dots (the only texture in the room, kept on the board, never on a big plane) */
+  --dot: 9px;
+  background-image: radial-gradient(#6E4C2E 18%, transparent 22%), radial-gradient(#A27A52 14%, transparent 18%);
+  background-size: var(--dot) var(--dot), calc(var(--dot) * 1.45) calc(var(--dot) * 1.45); background-position: 0 0, calc(var(--dot) * 0.45) calc(var(--dot) * 0.65);
+  box-shadow: 0 10px 25px rgb(0 0 0 / 0.6); }
+/* his photo: a white print, taped, a little tilted */
+.bio-photo { position: relative; margin: 0; width: min(13rem, 100%); padding: 0.6rem 0.6rem 2rem; background: #F4EEE4; rotate: -3deg;
+  box-shadow: 0 5px 12px rgb(0 0 0 / 0.45); }
+.bio-photo img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
+.tape { position: absolute; z-index: 1; left: -1rem; top: 0.3rem; width: 4rem; height: 1.2rem; background: #EFE6D8AA; rotate: -38deg; }
+/* the card on one pin; it swings from the pin (transform-origin) on the first arrival */
+.bio-card { position: relative; flex: 1 1 18rem; padding: 1.4rem 1.5rem 1.6rem; background: #EFE6D8; color: #221A14; rotate: 1deg;
+  transform-origin: 50% 0; box-shadow: 0 5px 12px rgb(0 0 0 / 0.45); }
+.bio-card h2 { font-size: 2.6rem; line-height: 1; letter-spacing: -0.01em; margin-bottom: 0.8rem; }
+.bio-card p { line-height: 1.45; }
+.bio-card p + p { margin-top: 0.6em; }
+.bio-pin { position: absolute; left: 50%; top: -0.3rem; translate: -50% 0; width: 0.9rem; aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #F2E8DA, #B9AA97 45%, #6A5228); box-shadow: 0 2px 3px rgb(0 0 0 / 0.5); }
+/* the receipt stands on its printer and rises up out of the slot on its top */
+.slip { display: flex; flex-direction: column-reverse; align-items: center; width: min(18rem, 100%); }
+.slip .paper { width: 100%; margin: 0; }
+.printer { position: relative; flex: none; width: calc(100% + 1rem); height: 1.6rem; border: 2px solid var(--ink);
+  border-radius: 0.5rem 0.5rem 0.2rem 0.2rem; background: linear-gradient(#6A5228, #352713); }
+.till-slot { position: absolute; inset: 0.15rem 0.4rem auto; height: 5px; border-radius: 2px; background: #0B0806; }
+/* torn along the TOP here: that edge was ripped off the roll */
+#register .paper { mask:
+    linear-gradient(#000 0 0) bottom / 100% calc(100% - var(--tooth)) no-repeat,
+    conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) top / calc(2 * var(--tooth)) var(--tooth) repeat-x;
+  padding: 2rem 1.25rem 1.25rem; }
+
+/* no JS: undo the shared 3D room rules (they are not .js-only, the inside room uses them) and stack the pieces */
+html:not(.js) #register :is(.room-pan, .shop-room, .world, .world > *) { position: static; width: auto; height: auto; margin: 0; transform: none;
+  translate: none; border: 0; background: none; overflow: visible; mask-image: none; perspective: none; container-type: normal; pointer-events: auto; }
+html:not(.js) #register :is(.world, .wall-back) { display: grid; justify-items: center; gap: 2rem; }
+html:not(.js) #register :is(.plane:not(.wall-back, .desk), .wall-back::before, .wall-back::after, .night, .togo) { display: none; }
+/* Big text or a big zoom: the room's sizes are in --u (screen units) and would not grow, so when the scene is under
+   30em tall (in TEXT units: 200% text or zoom halves that) it turns into the same plain column. Same three rules. */
+@container checkout (max-height: 30em) {
+  #register :is(.room-pan, .shop-room, .world, .world > *) { position: static; width: auto; height: auto; margin: 0; transform: none;
+    translate: none; border: 0; background: none; overflow: visible; mask-image: none; perspective: none; container-type: normal; pointer-events: auto; }
+  #register :is(.world, .wall-back) { display: grid; justify-items: center; gap: 2rem; }
+  #register :is(.plane:not(.wall-back, .desk), .wall-back::before, .wall-back::after, .night, .togo) { display: none; }
+}
+
+/* with JS: the 3D room. Numbers from the approved mockup (mockups/checkout/gen.mjs). */
+.js #register { padding-block: 3.75rem 0; }
+.js #register > .wrap { container: checkout / size; flex: 1; min-height: 0; max-width: none; margin-block: 0; display: flex; flex-direction: column; }
+@container checkout (min-height: 30em) {
+.js #register .room-pan { flex: 1; height: auto; margin-top: 0; }
+.js #register .shop-room { --u: min(1.2cqw, 2.3cqh); perspective-origin: 50% calc(50% - var(--u) * 4); }
+.js #register .world { top: calc(50% - var(--u) * 4); }
+.js #register .wall-back { transform: translateZ(calc(var(--u) * -40)); }
+.js #register .wall-back::after { left: calc(var(--u) * -2); bottom: calc(var(--u) * 8); width: calc(var(--u) * 58); height: calc(var(--u) * 50); }
+.js #register :is(.wall-left, .wall-right) { width: calc(var(--u) * 40); }
+.js #register :is(.floor, .ceiling) { height: calc(var(--u) * 40); }
+.js #register .cork { position: absolute; left: calc(var(--u) * 3.5); bottom: calc(var(--u) * 12.5); width: calc(var(--u) * 52); height: calc(var(--u) * 38.5);
+  display: block; padding: 0; border-width: calc(var(--u) * 1.1); --dot: calc(var(--u) * 0.9); box-shadow: 0 calc(var(--u) * 1) calc(var(--u) * 2.5) rgb(0 0 0 / 0.6); }
+.js #register .bio-photo { position: absolute; left: calc(var(--u) * 2.2); top: calc(var(--u) * 4.5); width: calc(var(--u) * 17); padding: calc(var(--u) * 0.9) calc(var(--u) * 0.9) calc(var(--u) * 3.2); }
+.js #register .tape { left: calc(var(--u) * -1.6); top: calc(var(--u) * 0.4); width: calc(var(--u) * 6); height: calc(var(--u) * 1.8); }
+.js #register .bio-card { position: absolute; right: calc(var(--u) * 2.2); top: calc(var(--u) * 2); width: calc(var(--u) * 28.5); padding: calc(var(--u) * 2) calc(var(--u) * 2.1) calc(var(--u) * 2.2); }
+/* sizes in --u do not grow with the reader's text size (Gotchas): big text turns the room into the column (above) */
+.js #register .bio-card h2 { font-size: calc(var(--u) * 3.4); margin-bottom: calc(var(--u) * 1.1); }
+.js #register .bio-card p { font-size: calc(var(--u) * 1.34); }
+.js #register .bio-pin { top: calc(var(--u) * -0.4); width: calc(var(--u) * 1.3); }
+.js #register .night { position: absolute; left: calc(var(--u) * 62); bottom: calc(var(--u) * 27); width: calc(var(--u) * 33); height: calc(var(--u) * 25);
+  border: calc(var(--u) * 0.9) solid #5A381F; outline: 2px solid #F2E8DA66; outline-offset: -1px; overflow: hidden;
+  background: linear-gradient(#0B1018, #141A24 70%, #1E1812 70.5%); }
+/* the window's cross bars */
+.js #register .night::before { content: ""; position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent calc(50% - 1px), #5A381F calc(50% - 1px) calc(50% + 1px), transparent 0),
+    linear-gradient(transparent calc(50% - 1px), #5A381F calc(50% - 1px) calc(50% + 1px), transparent 0); }
+.night svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.night-glow { position: absolute; left: 70%; top: 46%; width: 44%; aspect-ratio: 1; translate: -50% -50%; border-radius: 50%;
+  background: radial-gradient(closest-side, #E9A24D66, transparent); }
+.js #register .desk-top { left: calc(var(--u) * 57); bottom: calc(var(--u) * 17); width: calc(var(--u) * 43); height: calc(var(--u) * 15);
+  transform-origin: 50% 100%; transform: translateZ(calc(var(--u) * -24)) rotateX(90deg); background: #5A381F; }
+.js #register .desk-side { left: calc(var(--u) * 57); bottom: 0; width: calc(var(--u) * 15); height: calc(var(--u) * 17);
+  transform-origin: 0 50%; transform: translateZ(calc(var(--u) * -24)) rotateY(90deg); background: #3A2416; }
+.js #register .desk { left: calc(var(--u) * 57); bottom: 0; width: calc(var(--u) * 43); height: calc(var(--u) * 17); display: grid; place-content: center; justify-items: center; gap: calc(var(--u) * 0.6);
+  transform: translateZ(calc(var(--u) * -24)); background: #4A2E1C; border-top: calc(var(--u) * 0.6) solid #6A4428; }
+/* .world takes no clicks (its flat box sits in front of the room, Gotchas): the links and the button take them back */
+.js #register .desk a { pointer-events: auto; }
+.js #register .desk .links a { width: calc(var(--u) * 4); height: calc(var(--u) * 4); }
+.js #register .desk .links svg { width: calc(var(--u) * 2); height: calc(var(--u) * 2); }
+.js #register .desk .button { margin: 0; white-space: nowrap; font-size: calc(var(--u) * 1.9); padding: calc(var(--u) * 1.3) calc(var(--u) * 2.8); }
+.js #register .till { left: calc(var(--u) * 61); bottom: calc(var(--u) * 17); width: calc(var(--u) * 19.5); transform: translateZ(calc(var(--u) * -33)); }
+.js #register .togo { left: calc(var(--u) * 58.5); bottom: calc(var(--u) * 17); width: calc(var(--u) * 3.2); transform: translateZ(calc(var(--u) * -27)); }
+.togo svg { display: block; width: 100%; }
+/* the receipt's words: 1.14u = 12px+ on a 1146 laptop; the longest head line sets its width */
+.js #register .slip { left: calc(var(--u) * 81); bottom: calc(var(--u) * 17); width: calc(var(--u) * 19); transform: translateZ(calc(var(--u) * -29)); }
+.js #register .printer { width: calc(var(--u) * 19); height: calc(var(--u) * 3.2); border-radius: calc(var(--u) * 0.6) calc(var(--u) * 0.6) calc(var(--u) * 0.2) calc(var(--u) * 0.2); }
+.js #register .till-slot { inset: calc(var(--u) * 0.3) calc(var(--u) * 0.7) auto; height: calc(var(--u) * 0.4); }
+.js #register .paper { width: calc(var(--u) * 18); flex: none; font-size: calc(var(--u) * 1.14); line-height: 1.35;
+  padding: calc(var(--u) * 2.2) calc(var(--u) * 1) calc(var(--u) * 1.2); --tooth: calc(var(--u) * 0.7); }
+.js #register .paper-head { padding-bottom: 0.9em; }
+.js #register .paper-foot { padding-top: 0.8em; }
+/* phones: one side at a time. The board stacks: photo top left, "I'm Ethan." beside it, the card under them.
+   The till stop: a smaller register and a wider receipt, so the receipt's words are 12px+ and nothing is cut. */
+@media (max-width: 600px) {
+  .js #register .shop-room { --u: 3.6cqw; --look: 23; }
+  .js #register .shop-room[data-view="till"] { --look: 80.5; }
+  .js #register .cork { left: calc(var(--u) * 6); bottom: calc(var(--u) * 2.5); width: calc(var(--u) * 34); height: calc(var(--u) * 56); }
+  .js #register .bio-photo { left: calc(var(--u) * 1.5); top: calc(var(--u) * 1.5); width: calc(var(--u) * 15); }
+  .js #register .bio-card { left: calc(var(--u) * 1.3); right: auto; top: calc(var(--u) * 20); width: calc(var(--u) * 29.6); padding: calc(var(--u) * 1.6); }
+  .js #register .bio-card h2 { position: absolute; left: calc(var(--u) * 16.5); top: calc(var(--u) * -11); font-size: calc(var(--u) * 3.6);
+    color: var(--ink); rotate: -2deg; text-shadow: 0 2px 6px #0008; }
+  .js #register .bio-card p { font-size: calc(var(--u) * 1.5); }
+  .js #register .night { left: calc(var(--u) * 58); }
+  .js #register .till { left: calc(var(--u) * 63.5); width: calc(var(--u) * 13.5); }
+  .js #register .slip { left: calc(var(--u) * 78.5); width: calc(var(--u) * 19.5); }
+  .js #register .printer { width: calc(var(--u) * 19.5); }
+  .js #register .paper { width: calc(var(--u) * 18.5); font-size: calc(var(--u) * 1.12); }
+}
+} /* end of @container checkout (min-height: 30em) */
+
+/* the first time you reach the register (main.js sets data-till="ring"): it draws itself, the crank turns, a key
+   presses, the $0.00 flags pop up, the drawer bumps out, then the receipt rises out of the printer (below).
+   Keyframe names start with till- (they are global; see the Gotchas). */
+@media (prefers-reduced-motion: no-preference) {
+  .js .till [pathLength] { stroke-dasharray: 1 3; stroke-dashoffset: 1.02; fill-opacity: 0; }
+  .js .till text, .js .printer { opacity: 0; }
+  .js .till-flags { transform: translateY(46px); }
+  /* NOT [pathLength] here: Chrome never restyled the svg lines when data-till changed (the camelCase attribute
+     selector after a changing ancestor attribute), so the lines stayed hidden. Tag names restyle fine. */
+  .js .till[data-till="ring"] .till-art :is(path, rect, circle) {
+    animation: till-draw 0.6s cubic-bezier(.4, 0, .2, 1) forwards, ink 0.5s ease-out forwards;
+    animation-delay: calc(var(--i) * 6ms), calc(var(--i) * 6ms + 400ms);
+  }
+  .js .till[data-till="ring"] text, .js #register:has(.till[data-till="ring"]) .printer { opacity: 1; animation: appear 0.5s ease-out 0.8s both; }
+  .js .till[data-till="ring"] .till-crank { animation: till-crank 0.5s ease-in-out 1s; }
+  .js .till[data-till="ring"] .till-key { animation: till-press 0.26s ease-in-out 1.1s; }
+  .js .till[data-till="ring"] .till-flags { transform: none; animation: till-flag 0.55s cubic-bezier(.3, 1.4, .5, 1) 1.3s both; }
+  .js .till[data-till="ring"] .till-drawer { animation: till-drawer 0.7s ease-out 1.45s forwards; }
+}
+.till-crank { transform-box: view-box; transform-origin: 80px 288px; }
+@keyframes till-draw { to { stroke-dashoffset: 0; } }
+@keyframes till-crank { 45% { transform: rotate(-30deg); } }
+@keyframes till-press { 50% { transform: translateY(5px); } }
+@keyframes till-flag { from { transform: translateY(46px); } 65% { transform: translateY(-5px); } to { transform: none; } }
+@keyframes till-drawer { 35% { transform: translateY(16px); } 70% { transform: translateY(6px); } to { transform: translateY(9px); } }
+
+/* After the register rings: the receipt rises UP out of the printer's slot in small printer steps (it slides up
+   while its bottom stays hidden, so only the part out of the slot shows), the card swings once on its pin, and the
+   street lamp in the window flickers always (lamp-flicker: opacity only, shared with the street's lanterns). */
+@media (prefers-reduced-motion: no-preference) {
+  .js #register .paper { clip-path: inset(0 0 100% 0); transform: translateY(100%); }
+  .js #register .paper.print { animation: receipt-rise 1.6s steps(14, end) 1.6s forwards; }
+  .js #register .bio-card.swing { animation: card-swing 1.8s ease-out 0.4s; }
+  .js .night-glow { animation: lamp-flicker 5.3s linear -1.7s infinite; }
+}
+@keyframes receipt-rise { to { clip-path: inset(0 0 0 0); transform: none; } }
+@keyframes card-swing { 18% { transform: rotate(-4deg); } 42% { transform: rotate(2.5deg); } 66% { transform: rotate(-1deg); } 85% { transform: rotate(0.4deg); } }
+
+/* ---------- people who ask for less motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js [data-scene], .js [data-scene][data-at="here"] { transition: none; transform: none; }
+  .button, .stop, .stop::before, .js .corner, .leaf, .leaf::after, .shop .spill, .book-stand { transition: none; }
+}

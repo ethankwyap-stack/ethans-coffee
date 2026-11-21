@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ethan Yap</title>
+  <meta name="description" content="Ethan Yap. Business student, builder, barista. Always got something brewing.">
+  <script>document.documentElement.className = "js";</script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="top">
+    <a class="top-name" href="#street">Ethan Yap</a>
+  </header>
+
+  <!-- the corner: LinkedIn / GitHub / Instagram (Bootstrap Icons, MIT), inside + counter only (PLAN-links.md).
+       The small corner coffee button is gone (Ethan, 2026-11-19): the big one lives on the register's counter. -->
+  <div class="corner">
+    <nav class="links corner-links" aria-label="Ethan online">
+      <a href="https://www.linkedin.com/in/ethan-yap-827a45346/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/></svg></a>
+      <a href="https://github.com/ethankwyap-stack" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/></svg></a>
+      <a href="https://www.instagram.com/ethan.yap1" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/></svg></a>
+    </nav>
+  </div>
+
+  <main>
+    <!-- THE STAGE. With JavaScript it is one locked screen: each scroll, swipe or key is one step into the shop.
+         Without it, the four scenes stack as a normal page. The rooms live OUTSIDE the stage (see main.js, pageParts). -->
+    <div class="stage">
+
+    <!-- 1. THE STREET: outside the shop. The house alone is the centre piece (Ethan's ask, 2026-11-17);
+         the headline stays for screen readers only, the corner button is the coffee action here. -->
+    <section id="street" data-scene aria-label="Outside the shop">
+      <div class="wrap door">
+        <h1 class="sr-only">Hi, I'm Ethan. Always got something brewing.</h1>
+        <!-- SHOP: written by assets/art/shopfront.mjs. Edit that file, not this block. -->
+<div class="storefront" aria-hidden="true"><svg class="shop" viewBox="0,-200,1000,1120" xmlns="http://www.w3.org/2000/svg">
+<defs><radialGradient id="shopglow"><stop offset="0" stop-color="#C96B2C" stop-opacity=".45"/><stop offset="1" stop-color="#C96B2C" stop-opacity="0"/></radialGradient>
+<radialGradient id="roomglow" cx=".5" cy=".55" r=".75"><stop offset="0" stop-color="#E0924A" stop-opacity=".75"/><stop offset=".6" stop-color="#8A4A22" stop-opacity=".55"/><stop offset="1" stop-color="#3A2014"/></radialGradient>
+<linearGradient id="lamp" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4B66A" stop-opacity=".9"/><stop offset="1" stop-color="#C96B2C" stop-opacity=".55"/></linearGradient>
+<linearGradient id="wood-l" x1="0" y1="0" x2="1" y2="0.2"><stop offset="0" stop-color="#6E4628"/><stop offset=".55" stop-color="#5A381F"/><stop offset="1" stop-color="#42281A"/></linearGradient>
+<linearGradient id="wood-r" x1="1" y1="0" x2="0" y2="0.2"><stop offset="0" stop-color="#6E4628"/><stop offset=".55" stop-color="#5A381F"/><stop offset="1" stop-color="#42281A"/></linearGradient>
+<clipPath id="wall"><path clip-rule="evenodd" d="M110 40 H890 V830 H110 Z M300 830 V336 A200 200 0 0 1 700 336 V830 Z M230 54 h540 v62 h-540 Z"/></clipPath></defs>
+<ellipse class="lamp-glow" style="--flick:4.3s;--off:-1.7s" cx="232" cy="430" rx="110" ry="120" fill="url(#shopglow)"/>
+<ellipse class="lamp-glow" style="--flick:6.1s;--off:-3.2s" cx="768" cy="430" rx="110" ry="120" fill="url(#shopglow)"/>
+<ellipse class="spill" cx="500" cy="826" rx="330" ry="46" fill="url(#shopglow)"/>
+<g fill="none" stroke="#F2E8DA" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path pathLength="1" style="--i:0" d="M90 24 H910 M100 40 H900" />
+<path pathLength="1" style="--i:1" d="M110 40 V830 M890 40 V830" />
+<g clip-path="url(#wall)"><path pathLength="1" style="--i:2" d="M110 86 H890 M150 86 v44 M270 86 v44 M390 86 v44 M510 86 v44 M630 86 v44 M750 86 v44 M870 86 v44" opacity=".16" stroke-width="2"/><path pathLength="1" style="--i:3" d="M110 130 H890 M210 130 v44 M330 130 v44 M450 130 v44 M570 130 v44 M690 130 v44 M810 130 v44" opacity=".16" stroke-width="2"/><path pathLength="1" style="--i:4" d="M110 174 H890 M150 174 v44 M270 174 v44 M390 174 v44 M510 174 v44 M630 174 v44 M750 174 v44 M870 174 v44" opacity=".16" stroke-width="2"/><path pathLength="1" style="--i:5" d="M110 218 H890 M210 218 v44 M330 218 v44 M450 218 v44 M570 218 v44 M690 218 v44 M810 218 v44" opacity=".16" stroke-width="2"/><path pathLength="1" style="--i:6" d="M110 262 H890 M150 262 v44 M270 262 v44 M390 262 v44 M510 262 v44 M630 262 v44 M750 262 v44 M870 262 v44" opacity=".16" stroke-width="2"/><path pathLength="1" style="--i:7" d="M110 306 H890 M210 306 v44 M330 306 v44 M450 306 v44 M570 306 v44 M690 306 v44 M810 306 v44" opacity=".16" stroke-width="2"/><path pathLength="1" style="--i:8" d="M110 350 H890 M150 350 v44 M270 350 v44 M390 350 v44 M510 350 v44 M630 350 v44 M750 350 v44 M870 350 v44" opacity=".16" stroke-width="2"/><path pathLength="1" style="--i:9" d="M110 394 H890 M210 394 v44 M330 394 v44 M450 394 v44 M570 394 v44 M690 394 v44 M810 394 v44" opacity=".16" stroke-width="2"/><path pathLength="1" style="--i:10" d="M110 438 H890 M150 438 v44 M270 438 v44 M390 438 v44 M510 438 v44 M630 438 v44 M750 438 v44 M870 438 v44" opacity=".16" stroke-width="2"/><path pathLength="1" style="--i:11" d="M110 482 H890 M210 482 v44 M330 482 v44 M450 482 v44 M570 482 v44 M690 482 v44 M810 482 v44" opacity=".16" stroke-width="2"/><path pathLength="1" style="--i:12" d="M110 526 H890 M150 526 v44 M270 526 v44 M390 526 v44 M510 526 v44 M630 526 v44 M750 526 v44 M870 526 v44" opacity=".16" stroke-width="2"/><path pathLength="1" style="--i:13" d="M110 570 H890 M210 570 v44 M330 570 v44 M450 570 v44 M570 570 v44 M690 570 v44 M810 570 v44" opacity=".16" stroke-width="2"/><path pathLength="1" style="--i:14" d="M110 614 H890 M150 614 v44 M270 614 v44 M390 614 v44 M510 614 v44 M630 614 v44 M750 614 v44 M870 614 v44" opacity=".16" stroke-width="2"/><path pathLength="1" style="--i:15" d="M110 658 H890 M210 658 v44 M330 658 v44 M450 658 v44 M570 658 v44 M690 658 v44 M810 658 v44" opacity=".16" stroke-width="2"/><path pathLength="1" style="--i:16" d="M110 702 H890 M150 702 v44 M270 702 v44 M390 702 v44 M510 702 v44 M630 702 v44 M750 702 v44 M870 702 v44" opacity=".16" stroke-width="2"/><path pathLength="1" style="--i:17" d="M110 746 H890 M210 746 v44 M330 746 v44 M450 746 v44 M570 746 v44 M690 746 v44 M810 746 v44" opacity=".16" stroke-width="2"/><path pathLength="1" style="--i:18" d="M110 790 H890 M150 790 v44 M270 790 v44 M390 790 v44 M510 790 v44 M630 790 v44 M750 790 v44 M870 790 v44" opacity=".16" stroke-width="2"/></g>
+<path pathLength="1" style="--i:19" d="M300 770 V336 A200 200 0 0 1 700 336 V770" class="arch"/>
+<path pathLength="1" style="--i:20" d="M320 770 V336 A180 180 0 0 1 680 336 V770" opacity=".35" stroke-width="2"/>
+<path pathLength="1" style="--i:21" d="M480 130 h40 l-6 46 h-28 z" fill="#1A1410"/>
+<g class="roof">
+<path pathLength="1" style="--i:22" d="M190 -188 H810" />
+<path pathLength="1" style="--i:23" d="M70 -100 Q500 -114 930 -100" />
+<path pathLength="1" style="--i:24" d="M190 -188 Q130 -140 70 -102" />
+<path pathLength="1" style="--i:25" d="M810 -188 Q870 -140 930 -102" />
+<path pathLength="1" style="--i:26" d="M170 -160 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0" opacity=".35" stroke-width="2"/>
+<path pathLength="1" style="--i:27" d="M130 -130 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0 a20 14 0 0 0 40 0" opacity=".35" stroke-width="2"/>
+</g>
+<g class="coffee-sign">
+<rect pathLength="1" style="--i:28" x="140" y="-92" width="720" height="112" rx="4" fill="#1A1410"/>
+<text x="528" y="-26" text-anchor="middle" font-family="ui-serif, Georgia, serif" font-size="70" letter-spacing="28" stroke-width="2.5">ETHAN<tspan dx="-14">’</tspan><tspan dx="-14">S</tspan></text>
+<text x="508" y="13" text-anchor="middle" font-family="ui-serif, Georgia, serif" font-size="30" letter-spacing="16" stroke-width="1.6">COFFEE SHOP</text>
+</g>
+<g class="menu">
+<rect pathLength="1" style="--i:29" x="230" y="54" width="540" height="62" rx="3" fill="#1A1410"/>
+<text class="menu-item" x="325" y="93" text-anchor="middle" font-family="ui-serif, Georgia, serif" font-style="italic" font-size="24" fill="#F2E8DA" stroke="none">Cortados</text>
+<text class="menu-item" x="500" y="93" text-anchor="middle" font-family="ui-serif, Georgia, serif" font-style="italic" font-size="24" fill="#F2E8DA" stroke="none">Cappuccinos</text>
+<text class="menu-item" x="675" y="93" text-anchor="middle" font-family="ui-serif, Georgia, serif" font-style="italic" font-size="24" fill="#F2E8DA" stroke="none">One and one</text>
+<circle pathLength="1" style="--i:30" cx="402" cy="85" r="2.5" fill="#F2E8DA" stroke="none"/>
+<circle pathLength="1" style="--i:31" cx="589" cy="85" r="2.5" fill="#F2E8DA" stroke="none"/>
+</g>
+<path pathLength="1" style="--i:32" d="M340 770 V336 A160 160 0 0 1 660 336 V770 Z" fill="url(#roomglow)" stroke="none"/>
+<path pathLength="1" style="--i:33" d="M340 700 H660" opacity=".35" stroke-width="2"/>
+<path pathLength="1" style="--i:34" d="M340 770 L380 700 M660 770 L620 700" opacity=".16" stroke-width="2"/>
+<ellipse pathLength="1" style="--i:35" cx="380" cy="742" rx="40" ry="9" fill="#4A2A1C" opacity=".9"/>
+<ellipse pathLength="1" style="--i:36" cx="380" cy="742" rx="28" ry="6" opacity=".35" stroke-width="2"/>
+<g class="shop-shelf">
+<rect pathLength="1" style="--i:37" x="355" y="628.2" width="50" height="113.8" fill="#22160F" stroke-width="2"/>
+<rect pathLength="1" style="--i:38" class="spine" x="359.4" y="694.3" width="8.7" height="41.9" fill="#EDE8DE" stroke="none"/>
+<rect pathLength="1" style="--i:39" class="spine" x="368.7" y="692.2" width="9" height="43.9" fill="#F7F7F5" stroke="none"/>
+<rect pathLength="1" style="--i:40" class="spine" x="378.4" y="694.3" width="9" height="41.9" fill="#1E3A63" stroke="none"/>
+<rect pathLength="1" style="--i:41" class="spine" x="388.1" y="688.7" width="11.9" height="47.4" fill="#6B5540" stroke="none"/>
+<path pathLength="1" style="--i:42" d="M355 736.2 h50" stroke-width="2"/>
+<rect pathLength="1" style="--i:43" class="spine" x="359.4" y="635.8" width="9" height="46" fill="#6F9FDB" stroke="none"/>
+<rect pathLength="1" style="--i:44" class="spine" x="369" y="636.4" width="10.2" height="45.4" fill="#F1EDE4" stroke="none"/>
+<rect pathLength="1" style="--i:45" class="spine" x="379.9" y="640.4" width="8.4" height="41.3" fill="#C3D24A" stroke="none"/>
+<rect pathLength="1" style="--i:46" class="spine" x="388.9" y="635.8" width="10.5" height="46" fill="#13213F" stroke="none"/>
+<path pathLength="1" style="--i:47" d="M355 681.8 h50" stroke-width="2"/>
+</g>
+<path pathLength="1" style="--i:48" d="M420 660 H660 M420 672 H660" />
+<path pathLength="1" style="--i:49" d="M420 660 v12 M432 672 v88 M610 672 v88" opacity=".35" stroke-width="2"/>
+<path pathLength="1" style="--i:50" d="M438 659 q12 -16 25 -6 q13 -10 25 6" stroke-width="2"/>
+<path pathLength="1" style="--i:51" d="M552 350 V512" />
+<path pathLength="1" style="--i:52" d="M530 538 q22 -30 44 0 z" />
+<svg class="shop-machine" x="492" y="552" width="120" height="108" viewBox="0 0 500 450"><use href="assets/art/machine.svg#m"/></svg>
+<path pathLength="1" style="--i:53" d="M340 770 V336 A160 160 0 0 1 660 336 V770 Z" />
+<path pathLength="1" style="--i:54" d="M340 336 H660 M340 350 H660" />
+<path pathLength="1" style="--i:55" d="M553.6935750346352 305 L638.6 256.0" stroke-width="2.5"/>
+<path pathLength="1" style="--i:56" d="M531 282.3064249653648 L580.0 197.4" stroke-width="2.5"/>
+<path pathLength="1" style="--i:57" d="M500 274 L500.0 176.0" stroke-width="2.5"/>
+<path pathLength="1" style="--i:58" d="M469 282.3064249653648 L420.0 197.4" stroke-width="2.5"/>
+<path pathLength="1" style="--i:59" d="M446.3064249653648 305 L361.4 256.0" stroke-width="2.5"/>
+<path pathLength="1" style="--i:60" d="M438 336 A62 62 0 0 1 562 336" stroke-width="2.5"/>
+<g class="lantern">
+<path pathLength="1" style="--i:61" d="M186 420 h30 q16 0 16 -16" />
+<path pathLength="1" style="--i:62" d="M232 368 v-12 M206 392 L232 370 L258 392 Z" />
+<path pathLength="1" style="--i:63" d="M210 392 h44 l-6 72 h-32 z" fill="url(#lamp)"/>
+<path pathLength="1" style="--i:64" d="M232 392 v72 M213 428 h38" opacity=".35" stroke-width="2"/>
+<path pathLength="1" style="--i:65" d="M214 464 h36 v8 h-36 z M232 472 v12" />
+</g>
+<g class="lantern">
+<path pathLength="1" style="--i:66" d="M814 420 h-30 q-16 0 -16 -16" />
+<path pathLength="1" style="--i:67" d="M768 368 v-12 M742 392 L768 370 L794 392 Z" />
+<path pathLength="1" style="--i:68" d="M746 392 h44 l-6 72 h-32 z" fill="url(#lamp)"/>
+<path pathLength="1" style="--i:69" d="M768 392 v72 M749 428 h38" opacity=".35" stroke-width="2"/>
+<path pathLength="1" style="--i:70" d="M750 464 h36 v8 h-36 z M768 472 v12" />
+</g>
+<rect pathLength="1" style="--i:71" x="310" y="770" width="380" height="28" fill="#1A1410"/>
+<rect pathLength="1" style="--i:72" x="280" y="798" width="440" height="32" fill="#1A1410"/>
+<path pathLength="1" style="--i:73" d="M380 765 h240" stroke-width="5" opacity=".6"/>
+<path pathLength="1" style="--i:74" d="M274.0 676.0 A13 13 0 0 1 268.9 698.6 A13 13 0 0 1 254.4 716.7 A13 13 0 0 1 233.6 726.7 A13 13 0 0 1 210.4 726.7 A13 13 0 0 1 189.6 716.7 A13 13 0 0 1 175.1 698.6 A13 13 0 0 1 170.0 676.0 A13 13 0 0 1 175.1 653.4 A13 13 0 0 1 189.6 635.3 A13 13 0 0 1 210.4 625.3 A13 13 0 0 1 233.6 625.3 A13 13 0 0 1 254.4 635.3 A13 13 0 0 1 268.9 653.4 A13 13 0 0 1 274.0 676.0 Z" fill="#1A1410"/>
+<path pathLength="1" style="--i:75" d="M196 660 q8 -14 20 -8 M228 690 q10 -12 22 -4 M212 640 q10 -8 18 0" opacity=".35" stroke-width="2"/>
+<path pathLength="1" style="--i:76" d="M172 724 h100 v14 h-100 z" fill="#1A1410"/>
+<path pathLength="1" style="--i:77" d="M178 738 L190 830 h64 L266 738" fill="#1A1410"/>
+<circle pathLength="1" style="--i:78" cx="184" cy="718" r="5" stroke-width="2"/>
+<circle pathLength="1" style="--i:79" cx="204" cy="720" r="5" stroke-width="2"/>
+<circle pathLength="1" style="--i:80" cx="244" cy="721" r="5" stroke-width="2"/>
+<circle pathLength="1" style="--i:81" cx="262" cy="721" r="5" stroke-width="2"/>
+<path pathLength="1" style="--i:82" d="M830.0 676.0 A13 13 0 0 1 824.9 698.6 A13 13 0 0 1 810.4 716.7 A13 13 0 0 1 789.6 726.7 A13 13 0 0 1 766.4 726.7 A13 13 0 0 1 745.6 716.7 A13 13 0 0 1 731.1 698.6 A13 13 0 0 1 726.0 676.0 A13 13 0 0 1 731.1 653.4 A13 13 0 0 1 745.6 635.3 A13 13 0 0 1 766.4 625.3 A13 13 0 0 1 789.6 625.3 A13 13 0 0 1 810.4 635.3 A13 13 0 0 1 824.9 653.4 A13 13 0 0 1 830.0 676.0 Z" fill="#1A1410"/>
+<path pathLength="1" style="--i:83" d="M752 660 q8 -14 20 -8 M784 690 q10 -12 22 -4 M768 640 q10 -8 18 0" opacity=".35" stroke-width="2"/>
+<path pathLength="1" style="--i:84" d="M728 724 h100 v14 h-100 z" fill="#1A1410"/>
+<path pathLength="1" style="--i:85" d="M734 738 L746 830 h64 L822 738" fill="#1A1410"/>
+<circle pathLength="1" style="--i:86" cx="740" cy="718" r="5" stroke-width="2"/>
+<circle pathLength="1" style="--i:87" cx="760" cy="720" r="5" stroke-width="2"/>
+<circle pathLength="1" style="--i:88" cx="800" cy="721" r="5" stroke-width="2"/>
+<circle pathLength="1" style="--i:89" cx="818" cy="721" r="5" stroke-width="2"/>
+<path pathLength="1" style="--i:90" d="M0 830 H1000" />
+<path pathLength="1" style="--i:91" d="M10 852 h64 M90 852 h64 M170 852 h64 M250 852 h64 M330 852 h64 M410 852 h64 M490 852 h64 M570 852 h64 M650 852 h64 M730 852 h64 M810 852 h64 M890 852 h64 M970 852 h64 " opacity=".2" stroke-width="2"/>
+<path pathLength="1" style="--i:92" d="M50 876 h64 M130 876 h64 M210 876 h64 M290 876 h64 M370 876 h64 M450 876 h64 M530 876 h64 M610 876 h64 M690 876 h64 M770 876 h64 M850 876 h64 M930 876 h64 " opacity=".2" stroke-width="2"/>
+<path pathLength="1" style="--i:93" d="M10 900 h64 M90 900 h64 M170 900 h64 M250 900 h64 M330 900 h64 M410 900 h64 M490 900 h64 M570 900 h64 M650 900 h64 M730 900 h64 M810 900 h64 M890 900 h64 M970 900 h64 " opacity=".2" stroke-width="2"/>
+</g></svg><div class="doors" style="left:34%;top:49.107%;width:32%;height:37.5%"><div class="leaf leaf-l"><svg viewBox="0 0 160 420" preserveAspectRatio="none"><g fill="none" stroke="#F2E8DA" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect pathLength="1" style="--i:94" class="wood" x="0" y="0" width="160" height="420" fill="url(#wood-l)" stroke="none"/><rect pathLength="1" style="--i:95" x="1.5" y="1.5" width="157" height="417"/><rect pathLength="1" style="--i:96" x="24" y="26" width="112" height="150"/><rect pathLength="1" style="--i:97" x="35" y="37" width="90" height="128" stroke-width="2"/><path pathLength="1" style="--i:98" d="M24 26 l11 11 M136 26 l-11 11 M24 176 l11 -11 M136 176 l-11 -11" opacity=".35" stroke-width="2"/><rect pathLength="1" style="--i:99" x="24" y="198" width="112" height="46"/><rect pathLength="1" style="--i:100" x="35" y="209" width="90" height="24" stroke-width="2"/><path pathLength="1" style="--i:101" d="M24 198 l11 11 M136 198 l-11 11 M24 244 l11 -11 M136 244 l-11 -11" opacity=".35" stroke-width="2"/><rect pathLength="1" style="--i:102" x="24" y="266" width="112" height="130"/><rect pathLength="1" style="--i:103" x="35" y="277" width="90" height="108" stroke-width="2"/><path pathLength="1" style="--i:104" d="M24 266 l11 11 M136 266 l-11 11 M24 396 l11 -11 M136 396 l-11 -11" opacity=".35" stroke-width="2"/><path pathLength="1" style="--i:105" d="M10 8 q-3 105 0 210 t0 194" opacity=".16" stroke-width="2"/><path pathLength="1" style="--i:106" d="M150 8 q-3 105 0 210 t0 194" opacity=".16" stroke-width="2"/><path pathLength="1" style="--i:107" d="M146 196 v58" stroke-width="5"/><path pathLength="1" style="--i:108" d="M146 200 h-6 M146 250 h-6" stroke-width="3"/></g></svg></div><div class="leaf leaf-r"><svg viewBox="0 0 160 420" preserveAspectRatio="none"><g fill="none" stroke="#F2E8DA" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect pathLength="1" style="--i:109" class="wood" x="0" y="0" width="160" height="420" fill="url(#wood-r)" stroke="none"/><rect pathLength="1" style="--i:110" x="1.5" y="1.5" width="157" height="417"/><rect pathLength="1" style="--i:111" x="24" y="26" width="112" height="150"/><rect pathLength="1" style="--i:112" x="35" y="37" width="90" height="128" stroke-width="2"/><path pathLength="1" style="--i:113" d="M24 26 l11 11 M136 26 l-11 11 M24 176 l11 -11 M136 176 l-11 -11" opacity=".35" stroke-width="2"/><rect pathLength="1" style="--i:114" x="24" y="198" width="112" height="46"/><rect pathLength="1" style="--i:115" x="35" y="209" width="90" height="24" stroke-width="2"/><path pathLength="1" style="--i:116" d="M24 198 l11 11 M136 198 l-11 11 M24 244 l11 -11 M136 244 l-11 -11" opacity=".35" stroke-width="2"/><rect pathLength="1" style="--i:117" x="24" y="266" width="112" height="130"/><rect pathLength="1" style="--i:118" x="35" y="277" width="90" height="108" stroke-width="2"/><path pathLength="1" style="--i:119" d="M24 266 l11 11 M136 266 l-11 11 M24 396 l11 -11 M136 396 l-11 -11" opacity=".35" stroke-width="2"/><path pathLength="1" style="--i:120" d="M10 8 q-3 105 0 210 t0 194" opacity=".16" stroke-width="2"/><path pathLength="1" style="--i:121" d="M150 8 q-3 105 0 210 t0 194" opacity=".16" stroke-width="2"/><path pathLength="1" style="--i:122" d="M14 196 v58" stroke-width="5"/><path pathLength="1" style="--i:123" d="M14 200 h6 M14 250 h6" stroke-width="3"/></g></svg></div><i class="seam"></i></div></div>
+<!-- /SHOP -->
+        <a class="step-cue" href="#inside">Scroll to see what’s brewing</a>
+      </div>
+    </section>
+
+    <!-- 2. INSIDE: just through the door. The espresso machine draws itself when you arrive. -->
+    <section id="inside" data-scene aria-label="Inside the shop">
+      <div class="wrap inside">
+        <p class="eyebrow">Welcome!</p>
+        <h2>Pick up a book!</h2>
+        <!-- a real 3D room (PLAN-bookshelf.md): .room-pan is the camera's frame, .shop-room holds the camera
+             (perspective), .world is the room. Right: the table with the machine and the book. Left: the rug.
+             Phones look at one side at a time (data-view, main.js). -->
+        <div class="room-pan">
+         <div class="shop-room" data-view="machine">
+          <div class="world">
+          <div class="plane ceiling" aria-hidden="true"></div>
+          <div class="plane wall-back" aria-hidden="true"></div>
+          <div class="plane wall-left" aria-hidden="true"></div>
+          <div class="plane wall-right" aria-hidden="true"></div>
+          <div class="plane floor" aria-hidden="true">
+            <svg class="boards" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M6.25 0V100M12.5 0V100M18.75 0V100M25 0V100M31.25 0V100M37.5 0V100M43.75 0V100M50 0V100M56.25 0V100M62.5 0V100M68.75 0V100M75 0V100M81.25 0V100M87.5 0V100M93.75 0V100" stroke="#F2E8DA" stroke-opacity=".11" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
+            <div class="rug"></div>
+          </div>
+          <!-- the bookcase on the rug: main.js builds it from content.js shelf (buildShelf). Each book is a button. -->
+          <div class="case" role="group" aria-label="Bookcase: books I have finished"></div>
+          <div class="lamp" aria-hidden="true"><svg viewBox="0 0 80 130" fill="none" stroke="#F2E8DA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><defs><radialGradient id="pendantglow"><stop offset="0" stop-color="#F4B66A" stop-opacity=".55"/><stop offset="1" stop-color="#F4B66A" stop-opacity="0"/></radialGradient></defs><ellipse class="lamp-glow" style="--flick:4.9s;--off:-2.3s" cx="40" cy="124" rx="34" ry="20" fill="url(#pendantglow)" stroke="none"/><path d="M40 0 V96" opacity=".6"/><path d="M22 120 Q22 100 40 96 Q58 100 58 120 Z" fill="#2A201A"/><path d="M14 122 H66" /><path d="M34 122 Q40 129 46 122" fill="#F2C98A" stroke="none"/></svg></div>
+          <div class="plane table-top" aria-hidden="true"></div>
+          <div class="plane table-front" aria-hidden="true"></div>
+          <div class="plane table-side" aria-hidden="true"></div>
+          <div class="plane leg leg-fl" aria-hidden="true"></div>
+          <div class="plane leg leg-fr" aria-hidden="true"></div>
+          <div class="plane leg leg-bl" aria-hidden="true"></div>
+          <!-- Ethan's own book, standing on a wooden book stand on the table (PLAN-book-stand.md). Click: the shelf card (content.js wrote). -->
+          <button class="book-stand" type="button" aria-label="Life Stories, a book I wrote" aria-expanded="false" aria-controls="shelf-card"><img src="assets/books/life-stories.jpg" alt="" width="334" height="500"></button>
+          <div class="drawing" id="machine">
+<!-- MACHINE: written by assets/art/machine.mjs. Edit that file, not this block. -->
+<svg class="mc-art" role="img" aria-label="A navy espresso machine with walnut handles and Ethan Yap on the front" viewBox="0 0 500 450" xmlns="http://www.w3.org/2000/svg">
+<g fill="none" stroke="#F2E8DA" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+<rect class="mc-fx mc-frame" width="500" height="450" fill="none" stroke="none"/>
+<path pathLength="1" style="--i:0" d="M44 426 H456" opacity=".22" stroke-width="1.4"/>
+<rect pathLength="1" style="--i:1" x="118" y="410" width="20" height="9" rx="3" fill="#8A6A2C"/>
+<rect pathLength="1" style="--i:2" x="362" y="410" width="20" height="9" rx="3" fill="#8A6A2C"/>
+<rect pathLength="1" style="--i:3" x="86" y="408" width="30" height="14" rx="4" fill="#C8A14E"/>
+<path pathLength="1" style="--i:4" d="M89 413 H113" stroke="#8A6A2C" stroke-width="1.2"/>
+<rect pathLength="1" style="--i:5" x="384" y="408" width="30" height="14" rx="4" fill="#C8A14E"/>
+<path pathLength="1" style="--i:6" d="M387 413 H411" stroke="#8A6A2C" stroke-width="1.2"/>
+<rect pathLength="1" style="--i:7" x="66" y="332" width="368" height="78" rx="5" fill="#22305A"/>
+<path pathLength="1" style="--i:8" d="M74 341 H426" opacity=".22" stroke-width="1.4"/>
+<path pathLength="1" style="--i:9" d="M74 402 H426" opacity=".22" stroke-width="1.4"/>
+<path pathLength="1" style="--i:10" d="M216 332 Q216 344 228 344 H272 Q284 344 284 332" fill="#131C38"/>
+<circle pathLength="1" style="--i:11" cx="80" cy="372" r="2.6" fill="#C8A14E" stroke-width="1.2"/><path pathLength="1" style="--i:12" d="M78.4 370.4 L81.6 373.6" stroke="#8A6A2C" stroke-width="1.2"/>
+<circle pathLength="1" style="--i:13" cx="420" cy="372" r="2.6" fill="#C8A14E" stroke-width="1.2"/><path pathLength="1" style="--i:14" d="M418.4 370.4 L421.6 373.6" stroke="#8A6A2C" stroke-width="1.2"/>
+<rect pathLength="1" style="--i:15" x="62" y="316" width="376" height="18" rx="3" fill="#19254A"/>
+<path pathLength="1" style="--i:16" d="M64 318.5 H436" stroke="#C8A14E" stroke-width="1.4"/>
+<path pathLength="1" style="--i:17" d="M76 321.5 V325.5 M76 328 V331 M84 321.5 V325.5 M84 328 V331 M92 321.5 V325.5 M92 328 V331 M100 321.5 V325.5 M100 328 V331 M108 321.5 V325.5 M108 328 V331 M116 321.5 V325.5 M116 328 V331 M124 321.5 V325.5 M124 328 V331 M132 321.5 V325.5 M132 328 V331 M140 321.5 V325.5 M140 328 V331 M148 321.5 V325.5 M148 328 V331 M156 321.5 V325.5 M156 328 V331 M164 321.5 V325.5 M164 328 V331 M172 321.5 V325.5 M172 328 V331 M180 321.5 V325.5 M180 328 V331 M188 321.5 V325.5 M188 328 V331 M196 321.5 V325.5 M196 328 V331 M204 321.5 V325.5 M204 328 V331 M212 321.5 V325.5 M212 328 V331 M220 321.5 V325.5 M220 328 V331 M284 321.5 V325.5 M284 328 V331 M292 321.5 V325.5 M292 328 V331 M300 321.5 V325.5 M300 328 V331 M308 321.5 V325.5 M308 328 V331 M316 321.5 V325.5 M316 328 V331 M324 321.5 V325.5 M324 328 V331 M332 321.5 V325.5 M332 328 V331 M340 321.5 V325.5 M340 328 V331 M348 321.5 V325.5 M348 328 V331 M356 321.5 V325.5 M356 328 V331 M364 321.5 V325.5 M364 328 V331 M372 321.5 V325.5 M372 328 V331 M380 321.5 V325.5 M380 328 V331 M388 321.5 V325.5 M388 328 V331 M396 321.5 V325.5 M396 328 V331 M404 321.5 V325.5 M404 328 V331 M412 321.5 V325.5 M412 328 V331 M420 321.5 V325.5 M420 328 V331" opacity=".38" stroke-width="1.2"/>
+<path pathLength="1" style="--i:18" d="M318 397 H406" stroke="#C8A14E" stroke-width="1" opacity=".7"/>
+<path pathLength="1" style="--i:19" d="M128 150 H372 L396 316 H104 Z" fill="#19254A"/>
+<path pathLength="1" style="--i:20" d="M137 162 L158 316 M363 162 L342 316" opacity=".22" stroke-width="1.4"/>
+<path pathLength="1" style="--i:21" d="M140 160 H360" opacity=".22" stroke-width="1.4"/>
+<circle pathLength="1" style="--i:22" cx="133" cy="172" r="1.8" fill="#C8A14E" stroke="none"/>
+<circle pathLength="1" style="--i:23" cx="138" cy="210" r="1.8" fill="#C8A14E" stroke="none"/>
+<circle pathLength="1" style="--i:24" cx="143" cy="248" r="1.8" fill="#C8A14E" stroke="none"/>
+<circle pathLength="1" style="--i:25" cx="148" cy="286" r="1.8" fill="#C8A14E" stroke="none"/>
+<circle pathLength="1" style="--i:26" cx="367" cy="172" r="1.8" fill="#C8A14E" stroke="none"/>
+<circle pathLength="1" style="--i:27" cx="362" cy="210" r="1.8" fill="#C8A14E" stroke="none"/>
+<circle pathLength="1" style="--i:28" cx="357" cy="248" r="1.8" fill="#C8A14E" stroke="none"/>
+<circle pathLength="1" style="--i:29" cx="352" cy="286" r="1.8" fill="#C8A14E" stroke="none"/>
+<path pathLength="1" style="--i:30" d="M190 300 V310 M197 300 V310 M204 300 V310 M211 300 V310 M218 300 V310 M281 300 V310 M288 300 V310 M295 300 V310 M302 300 V310 M309 300 V310" opacity=".3" stroke-width="1.6"/>
+<rect pathLength="1" style="--i:31" x="174" y="152" width="12" height="10" rx="2" fill="#C8A14E"/>
+<path pathLength="1" style="--i:32" d="M180 162 V176 Q180 182 175 182" stroke="#C8A14E" stroke-width="4.5"/>
+<path pathLength="1" style="--i:33" d="M180 162 V176 Q180 182 175 182" stroke-width="1" opacity=".55"/>
+<circle pathLength="1" style="--i:34" cx="166" cy="258" r="21" fill="#C8A14E"/>
+<circle pathLength="1" style="--i:35" cx="166" cy="258" r="18" fill="none" stroke="#8A6A2C" stroke-width="1.2"/>
+<circle pathLength="1" style="--i:36" cx="166" cy="258" r="15" fill="#EDE3D2" stroke-width="1.2"/>
+<path pathLength="1" style="--i:37" d="M177.8 260.1 A12 12 0 0 1 174.5 266.5" stroke="#A23A2A" stroke-width="2.4" stroke-linecap="butt"/>
+<path pathLength="1" style="--i:38" d="M158.6 265.4 L156.4 267.6 M155.4 263.7 L154 264.4 M155.7 260 L152.7 260.7 M154.1 256.8 L152.5 256.7 M156.3 254 L153.4 252.8 M156.7 250.4 L155.5 249.4 M160.2 249.3 L158.4 246.7 M162.5 246.5 L162.1 245 M166 247.5 L166 244.4 M169.5 246.5 L169.9 245 M171.8 249.3 L173.6 246.7 M175.3 250.4 L176.5 249.4 M175.7 254 L178.6 252.8 M177.9 256.8 L179.5 256.7 M176.3 260 L179.3 260.7 M176.6 263.7 L178 264.4 M173.4 265.4 L175.6 267.6" stroke="#4A2C18" stroke-width=".9"/>
+<g class="mc-needle"><path pathLength="1" style="--i:39" d="M168.9 256 L156.6 264.6" stroke="#A23A2A" stroke-width="1.8"/></g>
+<circle pathLength="1" style="--i:40" cx="166" cy="258" r="2.2" fill="#4A2C18" stroke="none"/>
+<path pathLength="1" style="--i:41" d="M156 251 A12 12 0 0 1 164 246" stroke="#fff" stroke-width="1.4" opacity=".6"/>
+<circle pathLength="1" style="--i:42" cx="334" cy="258" r="21" fill="#C8A14E"/>
+<circle pathLength="1" style="--i:43" cx="334" cy="258" r="18" fill="none" stroke="#8A6A2C" stroke-width="1.2"/>
+<circle pathLength="1" style="--i:44" cx="334" cy="258" r="15" fill="#EDE3D2" stroke-width="1.2"/>
+<path pathLength="1" style="--i:45" d="M345.8 260.1 A12 12 0 0 1 342.5 266.5" stroke="#A23A2A" stroke-width="2.4" stroke-linecap="butt"/>
+<path pathLength="1" style="--i:46" d="M326.6 265.4 L324.4 267.6 M323.4 263.7 L322 264.4 M323.7 260 L320.7 260.7 M322.1 256.8 L320.5 256.7 M324.3 254 L321.4 252.8 M324.7 250.4 L323.5 249.4 M328.2 249.3 L326.4 246.7 M330.5 246.5 L330.1 245 M334 247.5 L334 244.4 M337.5 246.5 L337.9 245 M339.8 249.3 L341.6 246.7 M343.3 250.4 L344.5 249.4 M343.7 254 L346.6 252.8 M345.9 256.8 L347.5 256.7 M344.3 260 L347.3 260.7 M344.6 263.7 L346 264.4 M341.4 265.4 L343.6 267.6" stroke="#4A2C18" stroke-width=".9"/>
+<path pathLength="1" style="--i:47" d="M337 259.8 L324 252.3" stroke="#A23A2A" stroke-width="1.8"/>
+<circle pathLength="1" style="--i:48" cx="334" cy="258" r="2.2" fill="#4A2C18" stroke="none"/>
+<path pathLength="1" style="--i:49" d="M324 251 A12 12 0 0 1 332 246" stroke="#fff" stroke-width="1.4" opacity=".6"/>
+<path pathLength="1" style="--i:50" d="M104 11 H130 L128 26 Q127 29 124 29 H110 Q107 29 106 26 Z" fill="#E9DFCF"/>
+<path pathLength="1" style="--i:51" d="M107 15 H127" stroke="#C8A14E" stroke-width="1.2"/>
+<path pathLength="1" style="--i:52" d="M134 11 H160 L158 26 Q157 29 154 29 H140 Q137 29 136 26 Z" fill="#E9DFCF"/>
+<path pathLength="1" style="--i:53" d="M137 15 H157" stroke="#C8A14E" stroke-width="1.2"/>
+<path pathLength="1" style="--i:54" d="M346 16 H368 L366 26 Q365 29 362 29 H352 Q349 29 348 26 Z" fill="#E9DFCF"/>
+<path pathLength="1" style="--i:55" d="M349 20 H365" stroke="#C8A14E" stroke-width="1.2"/>
+<path pathLength="1" style="--i:56" d="M345 3 H369 L367 13 Q366 16 363 16 H351 Q348 16 347 13 Z" fill="#E9DFCF"/>
+<path pathLength="1" style="--i:57" d="M348 7 H366" stroke="#C8A14E" stroke-width="1.2"/>
+<rect pathLength="1" style="--i:58" x="82" y="29" width="336" height="4" rx="2" fill="#C8A14E"/>
+<path pathLength="1" style="--i:59" d="M96 33 V40 M168 33 V40 M250 33 V40 M332 33 V40 M404 33 V40" stroke="#C8A14E" stroke-width="2"/>
+<rect pathLength="1" style="--i:60" x="70" y="40" width="360" height="112" rx="4" fill="#2B3C6E"/>
+<path pathLength="1" style="--i:61" d="M80 49 H420" opacity=".22" stroke-width="1.4"/>
+<path pathLength="1" style="--i:62" d="M78 144 H422" opacity=".22" stroke-width="1.4"/>
+<path pathLength="1" style="--i:63" d="M426 26 Q440 26 440 40 V150 Q440 162 430 162 H422 V26 Z" fill="#6B4326"/>
+<path pathLength="1" style="--i:64" d="M430 34 Q433 70 430 96 Q428 120 431 154" stroke="#4A2C18" stroke-width="1.2"/>
+<path pathLength="1" style="--i:65" d="M435 40 Q437 60 434 80 M435 118 Q437 136 435 152" stroke="#4A2C18" stroke-width="1.2"/>
+<path pathLength="1" style="--i:66" d="M433 100 q3 -5 0 -10 q-3 5 0 10" stroke="#4A2C18" stroke-width="1.2"/>
+<path pathLength="1" style="--i:67" d="M74 26 Q60 26 60 40 V150 Q60 162 70 162 H78 V26 Z" fill="#6B4326"/>
+<path pathLength="1" style="--i:68" d="M70 34 Q67 70 70 96 Q72 120 69 154" stroke="#4A2C18" stroke-width="1.2"/>
+<path pathLength="1" style="--i:69" d="M65 40 Q63 60 66 80 M65 118 Q63 136 65 152" stroke="#4A2C18" stroke-width="1.2"/>
+<path pathLength="1" style="--i:70" d="M67 100 q-3 -5 0 -10 q3 5 0 10" stroke="#4A2C18" stroke-width="1.2"/>
+<circle pathLength="1" style="--i:71" cx="88" cy="56" r="3" fill="#C8A14E" stroke-width="1.2"/><path pathLength="1" style="--i:72" d="M86.2 54.2 L89.8 57.8" stroke="#8A6A2C" stroke-width="1.2"/>
+<circle pathLength="1" style="--i:73" cx="412" cy="56" r="3" fill="#C8A14E" stroke-width="1.2"/><path pathLength="1" style="--i:74" d="M410.2 54.2 L413.8 57.8" stroke="#8A6A2C" stroke-width="1.2"/>
+<circle pathLength="1" style="--i:75" cx="88" cy="136" r="3" fill="#C8A14E" stroke-width="1.2"/><path pathLength="1" style="--i:76" d="M86.2 134.2 L89.8 137.8" stroke="#8A6A2C" stroke-width="1.2"/>
+<circle pathLength="1" style="--i:77" cx="412" cy="136" r="3" fill="#C8A14E" stroke-width="1.2"/><path pathLength="1" style="--i:78" d="M410.2 134.2 L413.8 137.8" stroke="#8A6A2C" stroke-width="1.2"/>
+<circle pathLength="1" style="--i:79" cx="148" cy="96" r="27" fill="#131C38" stroke-width="1.2"/>
+<circle pathLength="1" style="--i:80" cx="148" cy="96" r="24" fill="#6B4326"/>
+<path pathLength="1" style="--i:81" d="M167.5 96 L172 96 M166.8 101 L171.2 102.2 M164.9 105.8 L168.8 108 M161.8 109.8 L165 113 M157.8 112.9 L160 116.8 M153 114.8 L154.2 119.2 M148 115.5 L148 120 M143 114.8 L141.8 119.2 M138.3 112.9 L136 116.8 M134.2 109.8 L131 113 M131.1 105.8 L127.2 108 M129.2 101 L124.8 102.2 M128.5 96 L124 96 M129.2 91 L124.8 89.8 M131.1 86.3 L127.2 84 M134.2 82.2 L131 79 M138.3 79.1 L136 75.2 M143 77.2 L141.8 72.8 M148 76.5 L148 72 M153 77.2 L154.2 72.8 M157.8 79.1 L160 75.2 M161.8 82.2 L165 79 M164.9 86.2 L168.8 84 M166.8 91 L171.2 89.8" stroke="#4A2C18" stroke-width="1.3"/>
+<circle pathLength="1" style="--i:82" cx="148" cy="96" r="15" fill="#C8A14E"/>
+<circle pathLength="1" style="--i:83" cx="148" cy="96" r="10.5" fill="none" stroke="#8A6A2C" stroke-width="1.2"/>
+<path pathLength="1" style="--i:84" d="M148 85 V93" stroke-width="2.2"/>
+<path pathLength="1" style="--i:85" d="M139 91 A10 10 0 0 1 144 86" stroke="#fff" stroke-width="1.2" opacity=".5"/>
+<circle pathLength="1" style="--i:86" cx="352" cy="96" r="27" fill="#131C38" stroke-width="1.2"/>
+<circle pathLength="1" style="--i:87" cx="352" cy="96" r="24" fill="#6B4326"/>
+<path pathLength="1" style="--i:88" d="M371.5 96 L376 96 M370.8 101 L375.2 102.2 M368.9 105.8 L372.8 108 M365.8 109.8 L369 113 M361.8 112.9 L364 116.8 M357 114.8 L358.2 119.2 M352 115.5 L352 120 M347 114.8 L345.8 119.2 M342.3 112.9 L340 116.8 M338.2 109.8 L335 113 M335.1 105.8 L331.2 108 M333.2 101 L328.8 102.2 M332.5 96 L328 96 M333.2 91 L328.8 89.8 M335.1 86.3 L331.2 84 M338.2 82.2 L335 79 M342.3 79.1 L340 75.2 M347 77.2 L345.8 72.8 M352 76.5 L352 72 M357 77.2 L358.2 72.8 M361.8 79.1 L364 75.2 M365.8 82.2 L369 79 M368.9 86.2 L372.8 84 M370.8 91 L375.2 89.8" stroke="#4A2C18" stroke-width="1.3"/>
+<circle pathLength="1" style="--i:89" cx="352" cy="96" r="15" fill="#C8A14E"/>
+<circle pathLength="1" style="--i:90" cx="352" cy="96" r="10.5" fill="none" stroke="#8A6A2C" stroke-width="1.2"/>
+<path pathLength="1" style="--i:91" d="M352 85 V93" stroke-width="2.2"/>
+<path pathLength="1" style="--i:92" d="M343 91 A10 10 0 0 1 348 86" stroke="#fff" stroke-width="1.2" opacity=".5"/>
+<circle pathLength="1" style="--i:93" cx="214" cy="62" r="4" fill="#C8A14E"/>
+<circle class="mc-lamp" cx="214" cy="62" r="2.2" fill="#6E3B1E" stroke="none"/>
+<path pathLength="1" style="--i:94" d="M226 62 H286" opacity=".22" stroke-width="1.4"/>
+<rect pathLength="1" style="--i:95" x="232" y="108" width="36" height="8" rx="2" fill="#C8A14E"/>
+<g class="mc-paddle"><path pathLength="1" style="--i:96" d="M206 82 H296 Q310 82 310 96 Q310 110 296 110 H206 Q192 110 192 96 Q192 82 206 82 Z" fill="#6B4326"/><path pathLength="1" style="--i:97" d="M204 89 Q250 85 300 89 M200 96 Q250 99 304 96 M204 103 Q250 107 300 103" stroke="#4A2C18" stroke-width="1.2"/><path pathLength="1" style="--i:98" d="M198 86 Q193 96 198 106 M304 86 Q309 96 304 106" stroke="#C8A14E" stroke-width="2.4"/><circle pathLength="1" style="--i:99" cx="284" cy="96" r="2.4" fill="#C8A14E" stroke-width="1"/></g>
+<rect pathLength="1" style="--i:100" x="240" y="78" width="20" height="36" rx="3" fill="#C8A14E"/>
+<path pathLength="1" style="--i:101" d="M244 84 H256 M244 108 H256" stroke="#8A6A2C" stroke-width="1.2"/>
+<rect pathLength="1" style="--i:102" x="378" y="150" width="14" height="8" rx="2" fill="#C8A14E"/>
+<circle pathLength="1" style="--i:103" cx="385" cy="163" r="6.5" fill="#C8A14E"/>
+<path pathLength="1" style="--i:104" d="M380 160 A6 6 0 0 1 388 158" stroke="#fff" stroke-width="1.2" opacity=".5"/>
+<path pathLength="1" style="--i:105" d="M385 169 V174 Q385 186 396 190 Q408 194 408 208 V296" stroke="#C8A14E" stroke-width="7"/>
+<path pathLength="1" style="--i:106" d="M385 169 V174 Q385 186 396 190 Q408 194 408 208 V296" stroke-width="1.1" opacity=".55"/>
+<rect pathLength="1" style="--i:107" x="404" y="296" width="8" height="6" rx="1" fill="#8A6A2C"/>
+<rect pathLength="1" style="--i:108" x="403" y="301" width="10" height="13" rx="2" fill="#C8A14E"/>
+<path pathLength="1" style="--i:109" d="M406 314 V316 M410 314 V316" stroke-width="1.2"/>
+<rect pathLength="1" style="--i:110" x="204" y="150" width="92" height="17" rx="3" fill="#C8A14E"/>
+<circle pathLength="1" style="--i:111" cx="214" cy="158.5" r="2.4" fill="#8A6A2C" stroke-width="1"/>
+<circle pathLength="1" style="--i:112" cx="286" cy="158.5" r="2.4" fill="#8A6A2C" stroke-width="1"/>
+<path pathLength="1" style="--i:113" d="M226 156 H274 M226 161 H274" stroke="#8A6A2C" stroke-width="1.2"/>
+<rect pathLength="1" style="--i:114" x="212" y="167" width="76" height="9" rx="2" fill="#C8A14E"/>
+<path pathLength="1" style="--i:115" d="M214 172 H286" stroke="#8A6A2C" stroke-width="1.2"/>
+<path pathLength="1" style="--i:116" d="M216 176 H284 V186 Q284 196 272 196 H228 Q216 196 216 186 Z" fill="#C8A14E"/>
+<path pathLength="1" style="--i:117" d="M209 178 H216 V184 H211 Z M291 178 H284 V184 H289 Z" fill="#C8A14E" stroke-width="1.4"/>
+<path pathLength="1" style="--i:118" d="M222 184 H278" stroke="#8A6A2C" stroke-width="1.2"/>
+<path pathLength="1" style="--i:119" d="M226 180 L168 204 Q154 211 158 222 Q164 232 177 225 L232 192 Z" fill="#6B4326"/>
+<path pathLength="1" style="--i:120" d="M216 191 L174 210 M220 186 L190 200" stroke="#4A2C18" stroke-width="1.2"/>
+<path pathLength="1" style="--i:121" d="M226 180 L231 192" stroke="#C8A14E" stroke-width="3"/>
+<path pathLength="1" style="--i:122" d="M243 196 V203 H257 V196" fill="#C8A14E"/>
+<path pathLength="1" style="--i:123" d="M246 203 V207 M254 203 V207" stroke-width="2"/>
+<path d="M246 208 V318" class="mc-fx mc-stream" pathLength="1" opacity="0" stroke="#3A2214" stroke-width="2.6"/>
+<path d="M254 208 V318" class="mc-fx mc-stream" pathLength="1" opacity="0" stroke="#3A2214" stroke-width="2.6"/>
+<rect class="mc-fx mc-coffee" x="233" y="284" width="34" height="34" rx="2" fill="#3A2214" stroke="none"/>
+<rect class="mc-fx mc-crema" x="233" y="280" width="34" height="6" rx="2" fill="#B9824A" stroke="none"/>
+<path pathLength="1" style="--i:124" d="M228 268 L232 316 Q232 318 234 318 H266 Q268 318 268 316 L272 268" fill="#F2E8DA14"/>
+<path pathLength="1" style="--i:125" d="M230 296 H270" opacity=".4" stroke-width="1.4"/>
+<path pathLength="1" style="--i:126" d="M239 296 L240 318 M250 296 V318 M261 296 L260 318" opacity=".25" stroke-width="1.2"/>
+<path pathLength="1" style="--i:127" d="M236 274 V290" opacity=".5" stroke-width="1.4"/>
+<g class="mc-name"><path pathLength="1" style="--i:128" d="M316.3 389.5L316.3 389.5Q316.3 389.5 316.2 389.5Q316.2 389.4 316.0 389.3L316.0 389.3Q315.8 389.1 315.7 388.5Q315.5 388.0 315.4 387.4Q315.3 386.8 315.3 386.3L315.3 386.3L315.3 386.0Q313.6 385.8 312.7 384.9Q311.7 384.0 311.7 382.8L311.7 382.8Q311.6 381.6 312.2 380.5Q312.7 379.5 313.7 378.6Q314.7 377.8 316.1 377.3Q317.4 376.8 319.0 376.8L319.0 376.8L319.1 376.8Q318.7 376.4 318.6 375.8L318.6 375.8Q316.7 375.4 315.5 374.5Q314.3 373.6 313.8 372.4L313.8 372.4Q313.7 372.3 313.7 372.2Q313.7 372.1 313.7 372.1L313.7 372.1Q313.7 372.0 313.8 372.0L313.8 372.0Q313.9 372.0 314.0 372.3L314.0 372.3Q315.1 374.8 318.5 375.5L318.5 375.5Q318.5 375.4 318.5 375.2L318.5 375.2Q318.5 373.7 319.2 372.6Q319.8 371.4 320.9 370.6Q322.1 369.8 323.4 369.3Q324.7 368.9 326.0 368.9L326.0 368.9Q327.9 368.9 329.0 369.6Q330.1 370.3 330.1 371.6L330.1 371.6Q330.1 372.5 329.5 373.3Q328.8 374.1 327.6 374.8Q326.4 375.4 324.9 375.7Q323.3 376.1 321.6 376.1L321.6 376.1Q320.5 376.1 319.6 376.0L319.6 376.0Q319.7 376.4 320.0 376.9L320.0 376.9Q321.2 377.0 321.8 377.3Q322.5 377.7 322.5 378.1L322.5 378.1Q322.5 378.5 321.8 378.5L321.8 378.5Q321.3 378.5 320.6 378.1Q320.0 377.8 319.4 377.3L319.4 377.3Q318.2 377.4 317.1 378.0Q315.9 378.6 315.0 379.4Q314.0 380.3 313.5 381.3Q312.9 382.3 312.9 383.2L312.9 383.2Q313.0 384.2 313.6 384.8Q314.2 385.5 315.3 385.7L315.3 385.7Q315.4 384.6 315.9 383.5Q316.4 382.5 317.1 381.7Q317.9 380.8 318.8 380.3Q319.7 379.8 320.7 379.8L320.7 379.8Q321.5 379.8 322.0 380.3Q322.6 380.8 322.6 381.5L322.6 381.5Q322.6 382.8 321.7 383.8Q320.9 384.8 319.4 385.4Q317.9 386.0 316.1 386.0L316.1 386.0Q316.0 386.0 315.9 386.0Q315.8 386.0 315.7 386.0L315.7 386.0Q315.7 386.1 315.7 386.2Q315.7 386.3 315.7 386.4L315.7 386.4Q315.7 386.8 315.8 387.4Q315.8 388.0 316.0 388.5Q316.2 388.9 316.4 389.2L316.4 389.2Q316.5 389.3 316.5 389.4L316.5 389.4Q316.5 389.5 316.3 389.5ZM321.4 375.7L321.4 375.7Q322.8 375.7 324.2 375.4Q325.7 375.1 326.9 374.5Q328.2 373.9 328.9 373.1Q329.7 372.2 329.7 371.2L329.7 371.2Q329.7 370.4 328.8 369.8Q327.9 369.2 326.4 369.2L326.4 369.2Q325.1 369.2 323.9 369.8Q322.7 370.4 321.7 371.4Q320.7 372.4 320.2 373.4Q319.6 374.5 319.6 375.5L319.6 375.5L319.6 375.6Q320.0 375.7 320.5 375.7Q320.9 375.7 321.4 375.7ZM322.0 378.2L322.0 378.2Q322.2 378.2 322.2 378.0L322.2 378.0Q322.2 377.8 321.6 377.6Q321.1 377.3 320.3 377.2L320.3 377.2Q320.7 377.7 321.1 377.9Q321.6 378.2 322.0 378.2ZM316.2 385.7L316.2 385.7Q317.2 385.7 318.2 385.3Q319.2 384.8 320.1 384.1Q321.0 383.4 321.5 382.6Q322.1 381.8 322.1 381.2L322.1 381.2Q322.1 380.7 321.7 380.4Q321.3 380.1 320.7 380.1L320.7 380.1Q319.7 380.1 318.6 380.8Q317.5 381.5 316.7 382.8Q315.9 384.0 315.7 385.7L315.7 385.7Q315.8 385.7 315.9 385.7Q316.1 385.7 316.2 385.7ZM324.8 386.0L324.8 386.0Q324.1 386.0 323.8 385.8Q323.4 385.5 323.4 385.1L323.4 385.1Q323.4 384.7 323.5 384.4Q323.6 384.1 323.9 383.6Q324.2 383.1 324.7 382.2Q325.3 381.4 326.3 380.0L326.3 380.0L329.4 375.6L328.5 375.6Q328.1 375.6 328.1 375.4L328.1 375.4Q328.1 375.2 328.6 375.2L328.6 375.2L329.7 375.2L331.9 372.1Q332.1 372.1 332.4 372.1Q332.6 372.1 333.1 372.1L333.1 372.1Q333.4 372.1 333.6 372.1L333.6 372.1L331.3 375.2L334.4 375.2Q334.8 375.2 334.8 375.4L334.8 375.4Q334.8 375.6 334.5 375.6L334.5 375.6L331.0 375.6L327.8 379.9Q326.6 381.5 325.9 382.5Q325.3 383.4 324.9 384.0Q324.5 384.6 324.4 384.9Q324.3 385.2 324.3 385.3L324.3 385.3Q324.3 385.7 324.9 385.7L324.9 385.7Q325.7 385.7 326.6 385.1Q327.5 384.6 328.4 383.8Q329.2 383.0 329.8 382.2Q330.5 381.5 330.9 381.0L330.9 381.0L331.1 381.3Q330.8 381.7 330.1 382.4Q329.4 383.2 328.5 384.1Q327.6 384.9 326.7 385.5Q325.7 386.0 324.8 386.0ZM335.8 386.0L335.8 386.0Q335.3 386.0 334.8 385.8Q334.2 385.5 334.2 385.1L334.2 385.1Q334.2 384.8 334.4 384.3Q334.5 383.9 335.1 383.1Q335.6 382.3 336.8 381.0L336.8 381.0Q337.8 379.9 338.2 379.3Q338.5 378.7 338.5 378.4L338.5 378.4Q338.5 378.2 338.4 378.1Q338.3 377.9 337.9 377.9L337.9 377.9Q337.7 377.9 337.2 378.1Q336.7 378.3 336.1 378.6L336.1 378.6Q335.2 379.3 333.7 380.7Q332.3 382.0 330.5 384.3L330.5 384.3L329.4 385.8Q329.2 385.7 329.0 385.7Q328.9 385.7 328.7 385.7L328.7 385.7Q328.2 385.7 327.9 385.7Q327.6 385.8 327.5 385.8L327.5 385.8L341.0 366.5Q341.2 366.5 341.4 366.6Q341.7 366.6 342.2 366.6L342.2 366.6Q342.3 366.6 342.4 366.6Q342.6 366.5 342.7 366.5L342.7 366.5L330.6 383.3L330.7 383.5Q332.5 381.3 333.8 380.1Q335.2 378.9 336.0 378.3L336.0 378.3Q336.6 377.9 337.1 377.8Q337.7 377.6 338.1 377.6L338.1 377.6Q338.8 377.6 339.2 378.0Q339.5 378.4 339.5 378.9L339.5 378.9Q339.5 379.4 339.2 380.0Q338.9 380.7 338.1 381.7Q337.4 382.7 336.0 384.2L336.0 384.2Q335.4 384.9 335.3 385.1Q335.1 385.2 335.1 385.4L335.1 385.4Q335.1 385.5 335.4 385.6Q335.7 385.7 336.0 385.7L336.0 385.7Q336.8 385.7 337.5 385.3Q338.3 384.8 339.1 384.2Q339.8 383.5 340.4 382.9Q341.0 382.2 341.4 381.7Q341.8 381.2 341.9 381.0L341.9 381.0L342.2 381.3Q342.0 381.4 341.6 381.9Q341.2 382.5 340.6 383.2Q339.9 383.9 339.2 384.5Q338.4 385.2 337.5 385.6Q336.7 386.0 335.8 386.0ZM341.8 386.0L341.8 386.0Q341.1 386.0 340.7 385.6Q340.3 385.2 340.3 384.4L340.3 384.4Q340.3 383.6 340.7 382.7Q341.0 381.8 341.8 380.8L341.8 380.8Q343.5 378.9 344.9 378.3Q346.4 377.6 347.6 377.6L347.6 377.6Q348.2 377.6 348.7 377.9Q349.1 378.2 349.1 378.6L349.1 378.6Q349.1 379.0 349.0 379.4L349.0 379.4Q349.4 378.9 349.6 378.5Q349.9 378.2 350.2 377.9L350.2 377.9Q350.5 378.0 350.9 378.0L350.9 378.0Q351.1 378.0 351.4 378.0Q351.7 378.0 351.8 377.9L351.8 377.9L347.7 382.9Q346.9 383.8 346.6 384.4Q346.2 385.0 346.2 385.3L346.2 385.3Q346.2 385.7 346.6 385.7L346.6 385.7Q347.3 385.7 348.0 385.3Q348.7 384.9 349.4 384.3Q350.1 383.7 350.7 383.1Q351.3 382.4 351.7 381.8Q352.2 381.3 352.4 381.0L352.4 381.0L352.7 381.2Q352.4 381.5 351.9 382.1Q351.4 382.7 350.8 383.4Q350.2 384.0 349.4 384.6Q348.7 385.2 347.9 385.6Q347.2 386.0 346.4 386.0L346.4 386.0Q345.2 386.0 345.2 385.3L345.2 385.3Q345.2 385.0 345.3 384.7Q345.4 384.4 345.7 384.0Q346.1 383.5 346.7 382.7L346.7 382.7L346.6 382.7Q345.1 384.5 343.8 385.3Q342.6 386.0 341.8 386.0ZM341.9 385.7L341.9 385.7Q342.7 385.7 344.0 384.7Q345.2 383.8 347.0 381.7L347.0 381.7Q347.3 381.4 347.6 381.1Q347.8 380.8 348.1 380.5L348.1 380.5Q348.3 380.1 348.6 379.6Q348.8 379.1 348.8 378.7L348.8 378.7Q348.8 378.4 348.5 378.2Q348.2 378.0 347.9 378.0L347.9 378.0Q347.3 378.0 346.0 378.9Q344.7 379.7 343.1 381.6L343.1 381.6Q342.1 382.7 341.7 383.6Q341.3 384.4 341.3 385.0L341.3 385.0Q341.3 385.7 341.9 385.7ZM359.1 386.0L359.1 386.0Q358.4 386.0 357.9 385.8Q357.4 385.5 357.4 385.1L357.4 385.1Q357.4 384.8 357.5 384.3Q357.7 383.9 358.2 383.1Q358.8 382.3 360.0 381.0L360.0 381.0Q361.0 379.9 361.3 379.3Q361.7 378.7 361.7 378.4L361.7 378.4Q361.7 378.2 361.6 378.1Q361.4 377.9 361.1 377.9L361.1 377.9Q360.9 377.9 360.4 378.1Q360.0 378.3 359.5 378.6L359.5 378.6Q358.5 379.3 357.1 380.7Q355.7 382.0 353.9 384.3L353.9 384.3L352.8 385.8Q352.4 385.7 352.0 385.7L352.0 385.7Q351.6 385.7 351.3 385.7Q351.0 385.8 350.9 385.8L350.9 385.8Q352.3 383.9 353.2 382.6Q354.1 381.3 354.6 380.5Q355.2 379.7 355.5 379.3Q355.7 378.9 355.8 378.7Q355.9 378.5 356.0 378.4L356.0 378.4Q356.0 378.1 355.7 378.1L355.7 378.1Q355.5 378.1 355.1 378.4Q354.8 378.7 354.3 379.2Q353.9 379.8 353.4 380.3Q353.0 380.8 352.7 381.3L352.7 381.3Q352.6 381.3 352.4 381.2L352.4 381.2Q352.4 381.1 352.4 381.0L352.4 381.0Q352.8 380.7 353.2 380.1Q353.6 379.5 354.1 379.0Q354.6 378.4 355.1 378.0Q355.6 377.6 356.1 377.6L356.1 377.6Q356.5 377.6 356.8 377.8Q357.2 377.9 357.1 378.5L357.1 378.5Q357.1 378.7 357.0 379.0Q356.9 379.3 356.5 379.8L356.5 379.8L354.0 383.3L354.0 383.5Q356.0 381.3 357.2 380.1Q358.5 378.9 359.4 378.3L359.4 378.3Q360.0 377.9 360.4 377.8Q360.9 377.6 361.2 377.6L361.2 377.6Q362.0 377.6 362.4 378.0Q362.7 378.4 362.7 378.9L362.7 378.9Q362.7 379.4 362.3 380.0Q362.0 380.7 361.3 381.7Q360.5 382.7 359.2 384.2L359.2 384.2Q358.6 384.9 358.4 385.1Q358.3 385.2 358.3 385.4L358.3 385.4Q358.3 385.5 358.5 385.6Q358.8 385.7 359.2 385.7L359.2 385.7Q359.9 385.7 360.7 385.3Q361.5 384.8 362.2 384.2Q363.0 383.5 363.6 382.9Q364.2 382.2 364.6 381.7Q365.0 381.2 365.1 381.0L365.1 381.0L365.4 381.3Q365.2 381.4 364.8 381.9Q364.4 382.5 363.8 383.1Q363.1 383.8 362.3 384.5Q361.6 385.2 360.7 385.6Q359.9 386.0 359.1 386.0ZM373.2 388.8L373.2 388.8Q371.8 388.8 370.8 388.2Q369.9 387.7 369.9 386.7L369.9 386.7Q369.9 386.1 370.3 385.8Q370.6 385.5 371.0 385.5L371.0 385.5Q371.2 385.5 371.4 385.7Q371.6 385.8 371.6 386.1L371.6 386.1Q371.6 386.3 371.4 386.5Q371.2 386.7 370.9 386.7L370.9 386.7Q370.8 386.7 370.7 386.7Q370.5 386.7 370.4 386.6L370.4 386.6Q370.4 386.7 370.4 386.9L370.4 386.9Q370.4 387.6 371.2 388.0Q372.0 388.5 373.3 388.5L373.3 388.5Q375.0 388.5 377.3 386.7Q379.6 385.0 382.0 381.5L382.0 381.5Q382.9 380.1 383.9 378.7Q384.9 377.3 385.7 376.2L385.7 376.2Q383.7 378.3 382.3 379.4Q380.9 380.5 380.0 380.9Q379.1 381.3 378.5 381.3L378.5 381.3Q377.9 381.3 377.6 380.9Q377.3 380.5 377.3 380.0L377.3 380.0Q377.3 379.2 377.8 378.2Q378.3 377.1 379.2 375.9Q380.1 374.8 381.1 373.7L381.1 373.7Q382.4 372.4 383.0 371.7Q383.7 371.0 383.8 370.7Q384.0 370.4 384.0 370.2L384.0 370.2Q384.0 368.8 381.6 368.8L381.6 368.8Q380.5 368.8 379.3 369.2Q378.1 369.7 377.0 370.4Q375.9 371.0 375.0 371.9Q374.1 372.7 373.6 373.5Q373.1 374.4 373.1 375.1L373.1 375.1Q373.1 376.1 374.2 376.1L374.2 376.1Q375.0 376.1 375.9 375.6Q376.7 375.1 377.6 374.3Q378.4 373.4 379.1 372.6Q379.8 371.7 380.2 371.0Q380.7 370.4 380.8 370.1L380.8 370.1Q380.8 369.9 380.9 369.9L380.9 369.9Q381.0 369.9 381.0 370.1L381.0 370.1Q381.1 370.8 380.6 371.7Q380.2 372.5 379.4 373.4Q378.7 374.3 377.7 375.0Q376.8 375.7 375.9 376.2Q374.9 376.6 374.2 376.6L374.2 376.6Q373.5 376.6 373.1 376.2Q372.8 375.8 372.8 375.2L372.8 375.2Q372.8 374.4 373.3 373.5Q373.8 372.5 374.7 371.7Q375.6 370.8 376.8 370.1Q377.9 369.3 379.2 368.9Q380.4 368.5 381.6 368.5L381.6 368.5Q382.9 368.5 383.8 368.9Q384.6 369.3 384.6 370.3L384.6 370.3Q384.6 370.9 384.4 371.7Q384.1 372.5 383.3 373.5Q382.5 374.5 381.0 375.9L381.0 375.9Q379.5 377.3 378.6 378.4Q377.8 379.5 377.8 380.2L377.8 380.2Q377.8 380.5 377.9 380.8Q378.1 381.0 378.6 381.0L378.6 381.0Q379.0 381.0 379.7 380.7Q380.4 380.4 381.6 379.5Q382.7 378.7 384.3 377.1Q386.0 375.5 388.2 373.1L388.2 373.1Q389.5 371.6 390.6 370.9Q391.7 370.3 392.1 370.3L392.1 370.3Q392.4 370.3 392.4 370.4L392.4 370.4Q392.4 370.5 392.2 370.6L392.2 370.6L391.8 370.7Q390.3 371.3 388.7 373.3Q387.0 375.3 385.2 378.8L385.2 378.8Q383.5 382.0 381.4 384.2Q379.4 386.4 377.2 387.6Q375.1 388.8 373.2 388.8ZM386.3 386.0L386.3 386.0Q385.5 386.0 385.1 385.6Q384.8 385.2 384.8 384.4L384.8 384.4Q384.8 383.6 385.1 382.7Q385.5 381.8 386.3 380.8L386.3 380.8Q387.9 378.9 389.4 378.3Q390.8 377.6 392.1 377.6L392.1 377.6Q392.7 377.6 393.1 377.9Q393.6 378.2 393.6 378.6L393.6 378.6Q393.6 379.0 393.4 379.4L393.4 379.4Q393.8 378.9 394.1 378.5Q394.4 378.2 394.6 377.9L394.6 377.9Q394.9 378.0 395.4 378.0L395.4 378.0Q395.5 378.0 395.8 378.0Q396.1 378.0 396.3 377.9L396.3 377.9L392.2 382.9Q391.4 383.8 391.0 384.4Q390.7 385.0 390.7 385.3L390.7 385.3Q390.7 385.7 391.1 385.7L391.1 385.7Q391.7 385.7 392.4 385.3Q393.1 384.9 393.8 384.3Q394.5 383.7 395.1 383.1Q395.7 382.4 396.2 381.8Q396.6 381.3 396.9 381.0L396.9 381.0L397.1 381.2Q396.8 381.5 396.4 382.1Q395.9 382.7 395.2 383.4Q394.6 384.0 393.9 384.6Q393.2 385.2 392.4 385.6Q391.6 386.0 390.9 386.0L390.9 386.0Q389.7 386.0 389.7 385.3L389.7 385.3Q389.7 385.0 389.8 384.7Q389.9 384.4 390.2 384.0Q390.5 383.5 391.1 382.7L391.1 382.7L391.0 382.7Q389.5 384.5 388.3 385.3Q387.0 386.0 386.3 386.0ZM386.3 385.7L386.3 385.7Q387.1 385.7 388.4 384.7Q389.7 383.8 391.5 381.7L391.5 381.7Q391.8 381.4 392.0 381.1Q392.3 380.8 392.5 380.5L392.5 380.5Q392.8 380.1 393.0 379.6Q393.2 379.1 393.2 378.7L393.2 378.7Q393.2 378.4 393.0 378.2Q392.7 378.0 392.4 378.0L392.4 378.0Q391.8 378.0 390.4 378.9Q389.1 379.7 387.5 381.6L387.5 381.6Q386.6 382.7 386.2 383.6Q385.8 384.4 385.8 385.0L385.8 385.0Q385.8 385.7 386.3 385.7ZM387.9 394.7L387.9 394.7Q387.8 394.7 387.5 394.6Q387.2 394.6 387.0 394.5L387.0 394.5Q388.0 393.3 389.2 391.7Q390.4 390.1 391.6 388.3Q392.9 386.6 394.1 384.9Q395.3 383.3 396.2 381.9L396.2 381.9Q396.9 380.9 397.4 380.3Q397.9 379.6 398.3 379.1Q398.7 378.5 399.2 377.9Q399.7 377.3 400.3 376.4Q401.0 375.5 402.0 374.1L402.0 374.1Q402.5 374.1 402.7 374.1Q403.0 374.1 403.2 374.1L403.2 374.1Q403.4 374.1 403.5 374.1Q403.7 374.1 403.9 374.1L403.9 374.1Q402.8 375.4 402.1 376.3Q401.3 377.1 400.8 377.8Q400.3 378.4 400.0 378.9Q399.6 379.4 399.2 379.9Q398.8 380.4 398.3 381.1Q397.8 381.8 397.1 382.8L397.1 382.8L397.1 382.9Q400.9 379.2 402.7 378.3L402.7 378.3Q403.3 378.0 403.8 377.8Q404.2 377.6 405.0 377.6L405.0 377.6Q405.6 377.6 405.8 377.9Q406.1 378.2 406.1 378.7L406.1 378.7Q406.1 379.6 405.3 380.7Q404.5 381.8 402.4 383.2L402.4 383.2Q401.2 384.1 400.8 384.5Q400.5 384.9 400.5 385.1L400.5 385.1Q400.5 385.7 401.3 385.7L401.3 385.7Q402.2 385.7 403.1 385.1Q404.0 384.6 404.8 383.8Q405.6 383.0 406.3 382.3Q407.0 381.5 407.4 381.0L407.4 381.0L407.6 381.3Q407.3 381.7 406.6 382.4Q405.9 383.2 405.0 384.1Q404.1 384.9 403.2 385.5Q402.2 386.0 401.3 386.0L401.3 386.0Q400.6 386.0 400.2 385.7Q399.9 385.4 399.9 384.8L399.9 384.8Q399.9 384.0 400.8 382.8Q401.7 381.7 403.9 380.0L403.9 380.0Q405.0 379.3 405.2 378.9Q405.5 378.6 405.5 378.3L405.5 378.3Q405.5 378.2 405.3 378.1Q405.2 377.9 405.0 377.9L405.0 377.9Q404.4 377.9 403.8 378.1Q403.3 378.3 402.6 378.7L402.6 378.7Q401.9 379.2 400.9 379.9Q399.9 380.7 398.8 381.7Q397.8 382.7 396.8 383.7Q395.8 384.8 394.9 385.8L394.9 385.8Q394.3 386.6 393.6 387.7Q392.8 388.8 392.1 389.9Q391.3 391.1 390.6 392.1Q390.0 393.1 389.6 393.8Q389.1 394.5 389.1 394.6L389.1 394.6Q389.0 394.6 388.7 394.6Q388.4 394.7 387.9 394.7Z" fill="#C8A14E" stroke="#C8A14E" stroke-width=".5"/></g>
+<path d="M240 262 C234 252 246 244 240 234 C236 228 240 222 242 218" class="mc-fx mc-steam" pathLength="1" opacity="0" stroke-width="1.8"/>
+<path d="M260 262 C266 252 254 244 260 234 C264 228 260 222 258 218" class="mc-fx mc-steam" pathLength="1" opacity="0" stroke-width="1.8"/>
+</g></svg>
+<!-- /MACHINE -->
+          </div>
+          <!-- an open book on the counter: what Ethan is reading. main.js fills the words from content.js (SITE.reading) -->
+          <figure class="book">
+            <svg class="book-art" viewBox="0 0 300 210" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path class="book-cover" d="M5 42 Q80 30 150 46 Q220 30 295 42 L298 198 Q220 188 150 204 Q80 188 2 198 Z"/>
+              <path class="book-page" d="M150 42 C115 24 55 22 12 32 L10 188 C55 178 115 180 150 196 Z"/>
+              <path class="book-page" d="M150 42 C185 24 245 22 288 32 L290 188 C245 178 185 180 150 196 Z"/>
+              <path d="M10 188 L8 192 C55 182 115 184 150 200 C185 184 245 182 292 192 L290 188" opacity=".5"/>
+              <path d="M150 42 V196" opacity=".6"/>
+              <path d="M160 197 l1 12 l-5 -4 l-5 4 l0 -11" opacity=".7"/>
+            </svg>
+            <figcaption>
+              <span class="book-label">Currently reading</span>
+              <!-- the real cover, on the left page under the label (content.js: reading.cover) -->
+              <img class="book-cover-img" src="assets/books/empire-of-ai.jpg" alt="Cover of Empire of AI by Karen Hao" width="328" height="500">
+              <div class="book-words"><span class="book-title">Empire of AI</span><span class="book-author">Karen Hao</span>
+                <blockquote class="book-quote">“Just as empires of old eventually fell to more inclusive forms of governance, we, too, can shape the future of AI together.”</blockquote></div>
+            </figcaption>
+          </figure>
+          </div>
+         </div>
+        </div>
+        <!-- the card for the book picked off the shelf (main.js fills and places it next to the case) -->
+        <div class="shelf-card" id="shelf-card" hidden>
+          <img class="shelf-card-cover" alt="" width="333" height="500">
+          <div class="shelf-card-words"><span class="shelf-card-label">Finished</span><span class="shelf-card-title"></span><span class="shelf-card-author"></span>
+            <p class="shelf-card-note" hidden></p><a class="shelf-card-link" target="_blank" rel="noopener" hidden>See it on Amazon</a></div>
+        </div>
+        <!-- no JavaScript: the shelf as a plain list. Keep it the same as content.js shelf (verify/shelf.mjs N-B20). -->
+        <ul class="shelf-list" aria-label="Books I have finished">
+          <li><cite>Zero to One</cite> <span>Peter Thiel</span></li>
+          <li><cite>Atomic Habits</cite> <span>James Clear</span></li>
+          <li><cite>The Tipping Point</cite> <span>Malcolm Gladwell</span></li>
+          <li><cite>The Worlds I See</cite> <span>Fei-Fei Li</span></li>
+          <li><cite>Between the World and Me</cite> <span>Ta-Nehisi Coates</span></li>
+          <li><cite>The Almanack of Naval Ravikant</cite> <span>Eric Jorgenson</span></li>
+          <li><cite>Ceremony</cite> <span>Leslie Marmon Silko</span></li>
+          <li><cite>Map</cite> <span>Wisława Szymborska</span></li>
+        </ul>
+        <p class="wrote-line">I wrote <cite>Life Stories</cite>, a reading and writing comprehension book I published to help English learners. <a href="https://www.amazon.com/dp/B0DWWTB2XV" target="_blank" rel="noopener">See it on Amazon</a></p>
+      </div>
+      <a class="step-cue" href="#bar">Scroll to experience more</a>
+    </section>
+
+    <!-- 3. THE COUNTER: three stops, a mug under each, three rooms. -->
+    <section id="bar" data-scene aria-label="The counter">
+      <div class="wrap">
+        <!-- the counter (v2, PLAN-bar-tabs.md): one still view. Three lamps, each over a tab on the chalk menu board,
+             and a shelf on the wall either side. Each tab opens its room. -->
+        <div class="bar-room">
+        <div class="bar-lamps" aria-hidden="true">
+          <i class="bar-lamp"><svg viewBox="0 0 40 70"><path d="M20 0 V30"/><path d="M8 46 Q8 30 20 30 Q32 30 32 46 Z" fill="#1E1712"/><path d="M5 46 H35"/><circle class="bulb" cx="20" cy="49" r="3.4"/></svg><b class="bar-glow"></b></i>
+          <i class="bar-lamp"><svg viewBox="0 0 40 70"><path d="M20 0 V30"/><path d="M8 46 Q8 30 20 30 Q32 30 32 46 Z" fill="#1E1712"/><path d="M5 46 H35"/><circle class="bulb" cx="20" cy="49" r="3.4"/></svg><b class="bar-glow"></b></i>
+          <i class="bar-lamp"><svg viewBox="0 0 40 70"><path d="M20 0 V30"/><path d="M8 46 Q8 30 20 30 Q32 30 32 46 Z" fill="#1E1712"/><path d="M5 46 H35"/><circle class="bulb" cx="20" cy="49" r="3.4"/></svg><b class="bar-glow"></b></i>
+        </div>
+        <div class="menu-board">
+          <h2 class="sr-only">What can I get you?</h2>
+          <ol class="stops">
+            <li><a class="stop" href="#specials" data-stop="specials"><span class="stop-name">House blends</span><span class="stop-note">My Builds</span></a></li>
+            <li><a class="stop" href="#shifts" data-stop="shifts"><span class="stop-name">On shift</span><span class="stop-note">Experience</span></a></li>
+            <li><a class="stop" href="#offclock" data-stop="offclock"><span class="stop-name">Off the clock</span><span class="stop-note">About me</span></a></li>
+          </ol>
+        </div>
+<!-- BACKBAR: written by assets/art/backbar.mjs. Edit that file, not this block. -->
+<div class="backbar" aria-hidden="true">
+<svg class="sprite" aria-hidden="true" focusable="false"><filter id="chalk" x="-4%" y="-15%" width="108%" height="130%">
+<feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="2" seed="7" result="n"/>
+<feDisplacementMap in="SourceGraphic" in2="n" scale="1.6" xChannelSelector="R" yChannelSelector="G" result="d"/>
+<feTurbulence type="fractalNoise" baseFrequency="1.7" numOctaves="1" seed="2" result="g"/>
+<feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.7 1.8" result="grain"/>
+<feComposite in="d" in2="grain" operator="in"/></filter></svg>
+<svg class="shelf shelf-l" viewBox="0 30 200 96" fill="none" stroke="#F2E8DA" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 112 H194" stroke-width="3"/><path d="M26 112 v10 M174 112 v10" opacity=".6"/><path d="M28 112 L32 92 H68 L72 112 Z" fill="#1E1712"/><path d="M30 92 L34 74 H66 L70 92" fill="#1E1712"/><path d="M26 92 H74" opacity=".5"/><path d="M32 74 L36 58 H64 L68 74" fill="#1E1712"/><path d="M28 74 H72" opacity=".5"/><path d="M70 63 q12 2 8 12"/><path d="M122 112 L118 56 H178 L174 112 Z" fill="#1E1712"/><path d="M118 56 L122 46 H174 L178 56"/><path d="M124 46 V40 H172 V46"/><rect x="130" y="70" width="36" height="28" rx="3" opacity=".7"/><ellipse cx="148" cy="84" rx="6" ry="8"/><path d="M148 77 Q144 84 148 91"/></svg>
+<svg class="shelf shelf-r" viewBox="0 30 200 96" fill="none" stroke="#F2E8DA" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 112 H194" stroke-width="3"/><path d="M26 112 v10 M174 112 v10" opacity=".6"/><path d="M22 112 V72 Q22 66 28 66 H52 Q58 66 58 72 V112 Z" fill="#F2E8DA14"/><rect x="24" y="58" width="32" height="8" rx="2"/><path d="M70 112 V80 Q70 74 76 74 H96 Q102 74 102 80 V112 Z" fill="#F2E8DA14"/><rect x="72" y="67" width="28" height="7" rx="2"/><circle cx="34" cy="100" r="2.4"/><circle cx="43" cy="94" r="2.4"/><circle cx="48" cy="104" r="2.4"/><circle cx="82" cy="102" r="2.2"/><circle cx="90" cy="95" r="2.2"/><path d="M114 112 L118 92 H150 L154 112 Z" fill="#1E1712"/><path d="M154 97 q11 2 7 12"/><path d="M162 112 L165 96 H182 L185 112 Z" fill="#1E1712"/><path d="M185 100 q8 2 5 9"/></svg>
+</div>
+<!-- /BACKBAR -->
+        </div>
+      </div>
+      <a class="step-cue" href="#register">Scroll to experience more</a>
+    </section>
+
+    <!-- 4. THE REGISTER = the checkout room (PLAN-bio.md): a shallow 3D room built like the one inside. Left: a cork board
+         with Ethan's photo and his bio. Right: the counter with the register, to-go cups, the receipt rising out of its
+         printer, and the coffee button on the counter's front. Phones look at one side at a time (data-view, main.js).
+         With no JavaScript it is a plain column: photo, bio, register, receipt, button. -->
+    <section id="register" data-scene aria-label="The register">
+      <div class="wrap register">
+        <div class="room-pan">
+         <div class="shop-room" data-view="board">
+          <div class="world">
+          <div class="plane ceiling" aria-hidden="true"></div>
+          <div class="plane wall-back">
+            <div class="cork">
+              <figure class="bio-photo"><span class="tape" aria-hidden="true"></span><img src="assets/about/ethan-florence.jpg" alt="Me in Florence at sunset" width="640" height="800"></figure>
+              <article class="bio-card"><span class="bio-pin" aria-hidden="true"></span>
+                <h2>I’m Ethan.</h2>
+                <p>As you can tell, I love the whole process of making coffee. I try different beans, change the grind size, pick the drink, and then tap into my creative side with the latte art. My first pours looked more like clouds than hearts, so finally pouring a tulip after weeks of practice was extremely satisfying.</p>
+                <p>I take the same approach to tech, and to life. I explore an idea, build it, iterate and learn, and then comes the most exciting part, the launch!</p>
+              </article>
+            </div>
+            <!-- the night window behind the register: a dark street, a building edge, a street lamp whose glow flickers -->
+            <div class="night" aria-hidden="true"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><g fill="none" stroke="#F2E8DA55" stroke-width=".8"><path d="M0 70H100"/><path d="M8 70V40H30V70M12 48h6M22 48h4M12 58h6"/><path d="M70 70V38M64 38H76L74 30H66Z"/></g><circle cx="70" cy="46" r="2" fill="#F2B76B"/></svg><i class="night-glow"></i></div>
+          </div>
+          <div class="plane wall-left" aria-hidden="true"></div>
+          <div class="plane wall-right" aria-hidden="true"></div>
+          <div class="plane floor" aria-hidden="true"></div>
+          <div class="plane desk-top" aria-hidden="true"></div>
+          <div class="plane desk-side" aria-hidden="true"></div>
+        <!-- TILL: written by assets/art/register.mjs. Edit that file, not this block. -->
+<div class="till"><svg class="till-art" role="img" aria-label="A vintage brass cash register" viewBox="0 0 440 440" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="brass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6A5228"/><stop offset=".6" stop-color="#4E3B1C"/><stop offset="1" stop-color="#352713"/></linearGradient>
+<linearGradient id="drawer" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5A4422"/><stop offset="1" stop-color="#2E2211"/></linearGradient>
+<clipPath id="till-window"><rect x="182" y="44" width="116" height="42" rx="4"/></clipPath></defs>
+<g fill="none" stroke="#F2E8DA" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path pathLength="1" style="--i:0" d="M160 98 V54 Q160 22 192 17 Q240 4 288 17 Q320 22 320 54 V98" fill="url(#brass)"/>
+<path pathLength="1" style="--i:1" d="M228 10 q12 -10 24 0 M240 4 v-2" />
+<path pathLength="1" style="--i:2" d="M172 92 V58 Q172 32 198 28 Q240 18 282 28 Q308 32 308 58 V92" opacity=".4" stroke-width="2"/>
+<rect pathLength="1" style="--i:3" class="till-window" x="182" y="44" width="116" height="42" rx="4" fill="#1A1410"/>
+<path pathLength="1" style="--i:4" d="M100 98 H380 V108 H100 Z" fill="url(#brass)"/>
+<path pathLength="1" style="--i:5" d="M108 108 H372 L394 240 H86 Z" fill="url(#brass)"/>
+<path pathLength="1" style="--i:6" d="M122 120 H358 L374 228 H106 Z" opacity=".18" stroke-width="2"/>
+<path pathLength="1" style="--i:7" d="M153 145 v9" stroke-width="2"/><circle pathLength="1" style="--i:8" cx="153" cy="136" r="9" fill="#1A1410"/><circle pathLength="1" style="--i:9" cx="153" cy="136" r="5" opacity=".18" stroke-width="2"/>
+<path pathLength="1" style="--i:10" d="M182 145 v9" stroke-width="2"/><circle pathLength="1" style="--i:11" cx="182" cy="136" r="9" fill="#1A1410"/><circle pathLength="1" style="--i:12" cx="182" cy="136" r="5" opacity=".18" stroke-width="2"/>
+<path pathLength="1" style="--i:13" d="M211 145 v9" stroke-width="2"/><circle pathLength="1" style="--i:14" cx="211" cy="136" r="9" fill="#1A1410"/><circle pathLength="1" style="--i:15" cx="211" cy="136" r="5" opacity=".18" stroke-width="2"/>
+<path pathLength="1" style="--i:16" d="M240 145 v9" stroke-width="2"/><circle pathLength="1" style="--i:17" cx="240" cy="136" r="9" fill="#1A1410"/><circle pathLength="1" style="--i:18" cx="240" cy="136" r="5" opacity=".18" stroke-width="2"/>
+<path pathLength="1" style="--i:19" d="M269 145 v9" stroke-width="2"/><circle pathLength="1" style="--i:20" cx="269" cy="136" r="9" fill="#1A1410"/><circle pathLength="1" style="--i:21" cx="269" cy="136" r="5" opacity=".18" stroke-width="2"/>
+<path pathLength="1" style="--i:22" d="M298 145 v9" stroke-width="2"/><circle pathLength="1" style="--i:23" cx="298" cy="136" r="9" fill="#1A1410"/><circle pathLength="1" style="--i:24" cx="298" cy="136" r="5" opacity=".18" stroke-width="2"/>
+<path pathLength="1" style="--i:25" d="M327 145 v9" stroke-width="2"/><circle pathLength="1" style="--i:26" cx="327" cy="136" r="9" fill="#1A1410"/><circle pathLength="1" style="--i:27" cx="327" cy="136" r="5" opacity=".18" stroke-width="2"/>
+<path pathLength="1" style="--i:28" d="M131.5 184 v9" stroke-width="2"/><circle pathLength="1" style="--i:29" cx="131.5" cy="174" r="10" fill="#1A1410"/><circle pathLength="1" style="--i:30" cx="131.5" cy="174" r="6" opacity=".18" stroke-width="2"/>
+<path pathLength="1" style="--i:31" d="M162.5 184 v9" stroke-width="2"/><circle pathLength="1" style="--i:32" cx="162.5" cy="174" r="10" fill="#1A1410"/><circle pathLength="1" style="--i:33" cx="162.5" cy="174" r="6" opacity=".18" stroke-width="2"/>
+<path pathLength="1" style="--i:34" d="M193.5 184 v9" stroke-width="2"/><circle pathLength="1" style="--i:35" cx="193.5" cy="174" r="10" fill="#1A1410"/><circle pathLength="1" style="--i:36" cx="193.5" cy="174" r="6" opacity=".18" stroke-width="2"/>
+<path pathLength="1" style="--i:37" d="M224.5 184 v9" stroke-width="2"/><circle pathLength="1" style="--i:38" cx="224.5" cy="174" r="10" fill="#1A1410"/><circle pathLength="1" style="--i:39" cx="224.5" cy="174" r="6" opacity=".18" stroke-width="2"/>
+<path pathLength="1" style="--i:40" d="M255.5 184 v9" stroke-width="2"/><circle pathLength="1" style="--i:41" cx="255.5" cy="174" r="10" fill="#1A1410"/><circle pathLength="1" style="--i:42" cx="255.5" cy="174" r="6" opacity=".18" stroke-width="2"/>
+<path pathLength="1" style="--i:43" d="M317.5 184 v9" stroke-width="2"/><circle pathLength="1" style="--i:44" cx="317.5" cy="174" r="10" fill="#1A1410"/><circle pathLength="1" style="--i:45" cx="317.5" cy="174" r="6" opacity=".18" stroke-width="2"/>
+<path pathLength="1" style="--i:46" d="M348.5 184 v9" stroke-width="2"/><circle pathLength="1" style="--i:47" cx="348.5" cy="174" r="10" fill="#1A1410"/><circle pathLength="1" style="--i:48" cx="348.5" cy="174" r="6" opacity=".18" stroke-width="2"/>
+<path pathLength="1" style="--i:49" d="M108 223 v9" stroke-width="2"/><circle pathLength="1" style="--i:50" cx="108" cy="212" r="11" fill="#1A1410"/><circle pathLength="1" style="--i:51" cx="108" cy="212" r="7" opacity=".18" stroke-width="2"/>
+<path pathLength="1" style="--i:52" d="M141 223 v9" stroke-width="2"/><circle pathLength="1" style="--i:53" cx="141" cy="212" r="11" fill="#1A1410"/><circle pathLength="1" style="--i:54" cx="141" cy="212" r="7" opacity=".18" stroke-width="2"/>
+<path pathLength="1" style="--i:55" d="M174 223 v9" stroke-width="2"/><circle pathLength="1" style="--i:56" cx="174" cy="212" r="11" fill="#1A1410"/><circle pathLength="1" style="--i:57" cx="174" cy="212" r="7" opacity=".18" stroke-width="2"/>
+<path pathLength="1" style="--i:58" d="M207 223 v9" stroke-width="2"/><circle pathLength="1" style="--i:59" cx="207" cy="212" r="11" fill="#1A1410"/><circle pathLength="1" style="--i:60" cx="207" cy="212" r="7" opacity=".18" stroke-width="2"/>
+<path pathLength="1" style="--i:61" d="M240 223 v9" stroke-width="2"/><circle pathLength="1" style="--i:62" cx="240" cy="212" r="11" fill="#1A1410"/><circle pathLength="1" style="--i:63" cx="240" cy="212" r="7" opacity=".18" stroke-width="2"/>
+<path pathLength="1" style="--i:64" d="M273 223 v9" stroke-width="2"/><circle pathLength="1" style="--i:65" cx="273" cy="212" r="11" fill="#1A1410"/><circle pathLength="1" style="--i:66" cx="273" cy="212" r="7" opacity=".18" stroke-width="2"/>
+<path pathLength="1" style="--i:67" d="M306 223 v9" stroke-width="2"/><circle pathLength="1" style="--i:68" cx="306" cy="212" r="11" fill="#1A1410"/><circle pathLength="1" style="--i:69" cx="306" cy="212" r="7" opacity=".18" stroke-width="2"/>
+<path pathLength="1" style="--i:70" d="M339 223 v9" stroke-width="2"/><circle pathLength="1" style="--i:71" cx="339" cy="212" r="11" fill="#1A1410"/><circle pathLength="1" style="--i:72" cx="339" cy="212" r="7" opacity=".18" stroke-width="2"/>
+<path pathLength="1" style="--i:73" d="M372 223 v9" stroke-width="2"/><circle pathLength="1" style="--i:74" cx="372" cy="212" r="11" fill="#1A1410"/><circle pathLength="1" style="--i:75" cx="372" cy="212" r="7" opacity=".18" stroke-width="2"/>
+<g class="till-key"><path pathLength="1" style="--i:76" d="M286.5 184 v9" stroke-width="2"/><circle pathLength="1" style="--i:77" cx="286.5" cy="174" r="10" fill="#1A1410"/><circle pathLength="1" style="--i:78" cx="286.5" cy="174" r="6" opacity=".18" stroke-width="2"/></g>
+<path pathLength="1" style="--i:79" d="M86 240 H394 V332 H86 Z" fill="url(#brass)"/>
+<path pathLength="1" style="--i:80" d="M100 252 H380 V320 H100 Z" opacity=".18" stroke-width="2"/>
+<path pathLength="1" style="--i:81" d="M319.6 282 C334 262 356.4 262 362.8 278 S348.4 300 342 286 S356.4 270 370.8 282 C377.2 290 372.4 304 364.4 304" opacity=".4" stroke-width="2"/>
+<path pathLength="1" style="--i:82" d="M160.4 282 C146 262 123.6 262 117.19999999999999 278 S131.6 300 138 286 S123.6 270 109.19999999999999 282 C102.80000000000001 290 107.6 304 115.6 304" opacity=".4" stroke-width="2"/>
+<g class="till-crank"><path pathLength="1" style="--i:83" d="M78 286 L36 250" stroke-width="5"/><rect pathLength="1" style="--i:84" x="20" y="226" width="14" height="30" rx="7" fill="url(#brass)" transform="rotate(-40 27 241)"/></g>
+<circle pathLength="1" style="--i:85" cx="80" cy="288" r="11" fill="#1A1410"/>
+<circle pathLength="1" style="--i:86" cx="80" cy="288" r="4"/>
+<path pathLength="1" style="--i:87" d="M70 392 H410 V422 H70 Z" fill="url(#brass)"/>
+<path pathLength="1" style="--i:88" d="M84 432 v-10 h26 v10 M370 432 v-10 h26 v10" />
+<g class="till-drawer">
+<path pathLength="1" style="--i:89" d="M78 336 H402 V392 H78 Z" fill="url(#drawer)"/>
+<path pathLength="1" style="--i:90" d="M92 346 H388 V382 H92 Z" opacity=".18" stroke-width="2"/>
+<circle pathLength="1" style="--i:91" cx="240" cy="364" r="8" fill="#1A1410"/>
+<circle pathLength="1" style="--i:92" cx="240" cy="364" r="3"/>
+<path pathLength="1" style="--i:93" d="M150 364 h40 M290 364 h40" opacity=".4" stroke-width="2"/>
+</g>
+<g clip-path="url(#till-window)"><g class="till-flags"><rect pathLength="1" style="--i:94" x="184" y="49" width="23" height="32" rx="2" fill="#1A1410" stroke-width="2"/><text x="195.5" y="74" text-anchor="middle" font-family="ui-serif, Georgia, serif" font-size="24" font-weight="600" fill="#F2E8DA" stroke="none">$</text><rect pathLength="1" style="--i:95" x="211" y="49" width="23" height="32" rx="2" fill="#1A1410" stroke-width="2"/><text x="222.5" y="74" text-anchor="middle" font-family="ui-serif, Georgia, serif" font-size="24" font-weight="600" fill="#F2E8DA" stroke="none">0</text><text x="240" y="74" text-anchor="middle" font-family="ui-serif, Georgia, serif" font-size="22" font-weight="600" fill="#F2E8DA" stroke="none">.</text><rect pathLength="1" style="--i:96" x="246" y="49" width="23" height="32" rx="2" fill="#1A1410" stroke-width="2"/><text x="257.5" y="74" text-anchor="middle" font-family="ui-serif, Georgia, serif" font-size="24" font-weight="600" fill="#F2E8DA" stroke="none">0</text><rect pathLength="1" style="--i:97" x="273" y="49" width="23" height="32" rx="2" fill="#1A1410" stroke-width="2"/><text x="284.5" y="74" text-anchor="middle" font-family="ui-serif, Georgia, serif" font-size="24" font-weight="600" fill="#F2E8DA" stroke="none">0</text></g></g>
+</g></svg></div>
+<!-- /TILL -->
+          <!-- a stack of to-go cups, left of the register -->
+          <div class="togo" aria-hidden="true"><svg viewBox="0 0 40 92"><g fill="#C9A77C" stroke="#F2E8DA" stroke-width="1.6" stroke-linejoin="round"><path d="M8 84L32 84L34 70L6 70Z"/><path d="M8 73L32 73L34 59L6 59Z"/><path d="M8 62L32 62L34 48L6 48Z"/><path d="M8 51L32 51L34 37L6 37Z"/><path d="M8 40L32 40L34 26L6 26Z"/><path d="M8 29L32 29L34 15L6 15Z"/><path d="M4 15H36V11Q20 3 4 11Z" fill="#EFE6D8"/></g></svg></div>
+          <!-- the receipt rises up out of the printer's slot (styles.css receipt-rise): the head + a thank you, no links -->
+          <div class="slip">
+            <div class="printer" aria-hidden="true"><i class="till-slot"></i></div>
+            <div class="paper">
+              <p class="paper-head">📍 Bay Area<br>🎓 UC Davis ’30<br>💼 Open to summer 2027 internships</p>
+              <p class="paper-foot">Thanks for stopping by!</p>
+            </div>
+          </div>
+          <div class="plane desk">
+            <nav class="links" aria-label="Ethan online">
+              <a href="https://www.linkedin.com/in/ethan-yap-827a45346/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/></svg></a>
+              <a href="https://github.com/ethankwyap-stack" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/></svg></a>
+              <a href="https://www.instagram.com/ethan.yap1" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/></svg></a>
+            </nav>
+            <a class="button" href="mailto:ethankw.yap@gmail.com?subject=Coffee%3F">Let's get coffee!</a>
+          </div>
+          </div>
+         </div>
+        </div>
+      </div>
+    </section>
+
+    </div>
+
+    <!-- THE ROOMS. With JavaScript each one is a full-screen room you enter through the mug. -->
+    <!-- The grinder walk (PLAN-bar-tabs.md part 2): the first step from Inside to the Counter per visit. Ethan's Baratza
+         Encore ESP big on a counter, a bag of beans beside it; it plays by itself (main.js "the grinder walk"): the bag
+         tips into the hopper, it grinds, the camera pushes into the grounds and the dolly to the counter starts under it.
+         Just a show: no controls, hidden from screen readers. The bag's kraft body comes from BAG_BODY. -->
+    <div class="grind" hidden aria-hidden="true">
+      <div class="grind-head">
+        <p class="eyebrow">On the way to the counter</p>
+        <p class="grind-title">Grinding a fresh batch.</p>
+      </div>
+      <div class="grind-stage">
+        <svg class="grind-art" viewBox="40 0 400 404">
+          <defs>
+            <clipPath id="hopper-clip"><path d="M277 35H403L383.5 123H296.5Z"/></clipPath>
+            <clipPath id="bin-clip"><path d="M311 317H369L365 383H315Z"/></clipPath>
+          </defs>
+          <g class="grinder">
+            <!-- body: tapers out to the base -->
+            <path class="dark" d="M300 144H380Q392 144 393 156L404 384Q405 396 392 396H288Q275 396 276 384L287 156Q288 144 300 144Z"/>
+            <path class="faint" d="M296 152L286 386M384 152L394 386"/>
+            <!-- the bay the grounds bin sits in, the chute, the stream, the bin and its grounds -->
+            <path class="bay" d="M302 384V262Q302 248 316 248H364Q378 248 378 262V384Z"/>
+            <path class="dark" d="M330 248H350V260Q340 267 330 260Z"/>
+            <path class="stream" d="M340 264V352"/>
+            <g clip-path="url(#bin-clip)"><g class="grounds-rise"><path class="grounds" d="M306 384V352Q322 340 340 342Q358 340 374 352V384Z"/></g></g>
+            <path class="bin" d="M310 316H370L366 384H314Z"/>
+            <path class="faint" d="M310 326H370"/>
+            <!-- the front button and the side switch -->
+            <circle class="pulse-ring" cx="340" cy="188" r="15"/>
+            <circle class="pulse" cx="340" cy="188" r="9"/>
+            <rect class="dark" x="397" y="226" width="7" height="24" rx="2"/>
+            <!-- the grind ring under the hopper -->
+            <rect class="dark" x="292" y="123" width="96" height="21" rx="4"/>
+            <path class="faint" d="M300 128V139M308 128V135M316 128V139M324 128V135M332 128V139M340 128V135M348 128V139M356 128V135M364 128V139M372 128V135M380 128V139"/>
+            <path class="tick" d="M340 144L336 150H344Z"/>
+            <!-- the clear hopper: beans fill it, then sink as it grinds -->
+            <g clip-path="url(#hopper-clip)"><g class="hopper-rise"><g class="hopper-sink">
+              <path class="mass" d="M270 66Q290 58 310 64T350 62T392 64T410 66V130H270Z"/>
+              <g class="bean-pile">
+                <ellipse cx="290" cy="64" rx="5" ry="3.4" transform="rotate(-20 290 64)"/><ellipse cx="303" cy="60" rx="5" ry="3.4" transform="rotate(25 303 60)"/>
+                <ellipse cx="317" cy="64" rx="5" ry="3.4" transform="rotate(-8 317 64)"/><ellipse cx="331" cy="59" rx="5" ry="3.4" transform="rotate(40 331 59)"/>
+                <ellipse cx="345" cy="63" rx="5" ry="3.4" transform="rotate(-30 345 63)"/><ellipse cx="358" cy="59" rx="5" ry="3.4" transform="rotate(10 358 59)"/>
+                <ellipse cx="372" cy="63" rx="5" ry="3.4" transform="rotate(-15 372 63)"/><ellipse cx="386" cy="60" rx="5" ry="3.4" transform="rotate(30 386 60)"/>
+                <ellipse cx="298" cy="76" rx="5" ry="3.4" transform="rotate(15 298 76)"/><ellipse cx="324" cy="78" rx="5" ry="3.4" transform="rotate(-35 324 78)"/>
+                <ellipse cx="352" cy="76" rx="5" ry="3.4" transform="rotate(20 352 76)"/><ellipse cx="378" cy="78" rx="5" ry="3.4" transform="rotate(-10 378 78)"/>
+                <ellipse cx="310" cy="92" rx="5" ry="3.4" transform="rotate(-25 310 92)"/><ellipse cx="338" cy="94" rx="5" ry="3.4" transform="rotate(5 338 94)"/>
+                <ellipse cx="365" cy="92" rx="5" ry="3.4" transform="rotate(35 365 92)"/>
+              </g>
+            </g></g></g>
+            <path class="hopper" d="M276 34H404L384 124H296Z"/>
+            <path class="glint" d="M288 42L302 116"/>
+            <!-- beans falling in from the bag -->
+            <g class="falling">
+              <ellipse style="--i:0" cx="334" cy="14" rx="5" ry="3.4"/><ellipse style="--i:1" cx="346" cy="10" rx="5" ry="3.4" transform="rotate(30 346 10)"/>
+              <ellipse style="--i:2" cx="328" cy="6" rx="5" ry="3.4" transform="rotate(-25 328 6)"/><ellipse style="--i:3" cx="342" cy="2" rx="5" ry="3.4"/>
+              <ellipse style="--i:4" cx="352" cy="12" rx="5" ry="3.4" transform="rotate(45 352 12)"/><ellipse style="--i:5" cx="336" cy="-4" rx="5" ry="3.4" transform="rotate(-10 336 -4)"/>
+              <ellipse style="--i:6" cx="324" cy="12" rx="5" ry="3.4" transform="rotate(20 324 12)"/><ellipse style="--i:7" cx="348" cy="-2" rx="5" ry="3.4"/>
+            </g>
+            <!-- the lid: it lifts off while the beans go in -->
+            <g class="lid"><rect class="dark" x="282" y="18" width="116" height="16" rx="6"/><rect class="dark" x="326" y="10" width="28" height="9" rx="3"/></g>
+            <path d="M284 396V402H300V396M380 396V402H396V396"/>
+          </g>
+        </svg>
+        <div class="beans-bag">
+          <span class="bag-label"><span class="bag-tag">Whole bean</span><span class="bag-name">House blend</span></span>
+        </div>
+      </div>
+      <div class="grind-counter" aria-hidden="true"></div>
+    </div>
+
+    <section class="room" id="specials" aria-label="House blends">
+      <div class="wrap">
+        <button class="back" type="button">&larr; Back to the bar</button>
+        <div class="room-head">
+          <div><p class="eyebrow">House blends</p><h2>My Builds</h2></div>
+        </div>
+        <!-- a roaster's shelf: one coffee bag per build (main.js fills it from content.js), the drum roaster at the end -->
+        <ul class="bags">
+          <li class="roaster-slot">
+            <div class="roaster">
+              <svg class="roaster-art" viewBox="0 -50 160 210" aria-hidden="true">
+                <defs><linearGradient id="smoke-fade" gradientUnits="userSpaceOnUse" x1="0" y1="10" x2="0" y2="-48"><stop offset="0" stop-color="#F2E8DA" stop-opacity="0.55"/><stop offset="1" stop-color="#F2E8DA" stop-opacity="0"/></linearGradient></defs>
+                <path class="smoke" d="M129 10C123 2 135-8 129-18C123-28 135-38 129-48"/>
+                <path class="smoke two" d="M130 10C136 2 124-8 130-18C136-28 124-38 130-48"/>
+                <path class="metal" d="M124 12H134V58H124Z"/>
+                <path class="metal" d="M56 14H94L83 40H67Z"/>
+                <path class="metal" d="M68 40H82V50H68Z"/>
+                <rect class="metal" x="26" y="50" width="104" height="66" rx="7"/>
+                <circle class="window" cx="74" cy="83" r="23"/>
+                <g class="drum"><circle cx="74" cy="83" r="16"/><path d="M74 63V103M54 83H94M60 69L88 97M88 69L60 97"/></g>
+                <circle cx="74" cy="83" r="23"/>
+                <circle class="knob" cx="114" cy="66" r="4"/><circle class="knob" cx="114" cy="80" r="4"/>
+                <path d="M36 116L31 154M118 116L123 154M24 154H130"/>
+                <path class="metal" d="M40 128Q74 146 108 128Q74 118 40 128Z"/>
+                <path d="M58 129h1M66 132h1M76 130h1M86 133h1M92 129h1" class="beans"/>
+              </svg>
+              <div class="roast-tag"><span class="roast-head">Now roasting</span><b class="roast-what"></b></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="room" id="shifts" aria-label="On shift">
+      <div class="wrap">
+        <button class="back" type="button">&larr; Back to the bar</button>
+        <div class="room-head">
+          <div><p class="eyebrow">On shift</p><h2>Where I work.</h2></div>
+        </div>
+        <ol class="tickets"></ol>
+      </div>
+    </section>
+
+    <section class="room" id="offclock" aria-label="Off the clock">
+      <div class="wrap">
+        <button class="back" type="button">&larr; Back to the bar</button>
+        <div class="room-head">
+          <div><p class="eyebrow">Off the clock</p><h2>About Me</h2></div>
+        </div>
+        <div class="cards"></div>
+      </div>
+    </section>
+
+    <!-- the three tabs again, on top of whichever room is open (with JS only), so you can switch without going back -->
+    <nav class="room-tabs" aria-label="The menu">
+      <a href="#specials">House blends</a>
+      <a href="#shifts">On shift</a>
+      <a href="#offclock">Off the clock</a>
+    </nav>
+
+  </main>
+
+
+  <script src="content.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
